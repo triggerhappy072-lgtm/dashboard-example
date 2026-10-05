@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171a18">
+  <title>General Settings | Next Step</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="dashboard-page" data-feature-page="General Settings">
+  <header class="topbar">
+    <a class="brand" href="home.html" aria-label="Next Step home"><span class="brand-mark" aria-hidden="true">NS</span><span class="brand-name">Next Step</span></a>
+    <div class="account-area"><button class="account-button" id="account-button" type="button" aria-label="Select Discord account" aria-expanded="false" aria-controls="account-menu"><span class="account-avatar" aria-hidden="true">?</span><span>Select Discord account</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button><div class="account-menu" id="account-menu" hidden><p>No Discord account connected.</p><a href="index.html">Go to sign in</a></div></div>
+  </header>
+  <div class="app-layout">
+    <aside class="sidebar" aria-label="Dashboard navigation">
+      <div class="sidebar-heading"><div><span class="eyebrow">CONTROL PANEL</span><h2>Workspace</h2></div></div>
+      <label class="search-box" for="feature-search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="m13.2 13.2 4 4"/></svg><input id="feature-search" type="search" placeholder="Search settings" autocomplete="off"><kbd>/</kbd></label>
+      <p class="search-hint">Search categories, tabs, and functions</p>
+      <nav class="feature-navigation" id="feature-navigation" aria-label="Features"></nav>
+      <div class="sidebar-footer"><span class="footer-dot"></span>Next Step control panel</div>
+    </aside>
+    <main class="main-content">
+      <div class="page-toolbar"><div class="breadcrumb"><a href="home.html">Next Step</a><span aria-hidden="true">/</span><strong id="breadcrumb-current">General Settings</strong></div><span class="preview-label"><span></span>Preview data</span></div>
+      <section class="page-view gs-page" id="settings-overview" aria-labelledby="settings-title">
+        <div class="gs-page-heading">
+          <div>
+            <p class="eyebrow green-eyebrow">NEXT STEP SETTINGS</p>
+            <h1 id="settings-title"><span data-i18n-key="General Settings">General Settings</span></h1>
+            <p class="gs-subtitle">Manage language, permissions, notifications, and server backups.</p>
+          </div>
+        </div>
+
+        <div class="gs-overview-grid">
+          <section class="gs-panel" aria-labelledby="language-title">
+            <div class="gs-panel-heading"><div><h2 id="language-title" data-i18n-key="Language">Language</h2><p>Choose a dashboard language or add your own translation.</p></div></div>
+            <div class="gs-control-row">
+              <label class="gs-field"><span>Dashboard language</span><select id="language-select"><option value="en">English</option><option value="nl">Nederlands</option></select></label>
+              <button class="gs-secondary-button" id="add-translation" type="button">Add translation</button>
+            </div>
+            <div class="gs-translation-editor" id="translation-editor" hidden>
+              <p class="gs-inline-note">Custom strings are saved in this browser and applied to the General Settings labels.</p>
+              <div class="gs-translation-rows" id="translation-rows"></div>
+              <button class="gs-secondary-button" id="save-translation" type="button">Save translation</button>
+            </div>
+          </section>
+
+          <section class="gs-panel" aria-labelledby="date-format-title">
+            <div class="gs-panel-heading"><div><h2 id="date-format-title" data-i18n-key="Date format">Date format</h2><p>Use DD, MM, YYYY, HH, mm, and ss as date tokens.</p></div></div>
+            <label class="gs-field"><span>Format</span><input id="date-format" type="text" value="DD/MM/YYYY - HH:mm:ss" spellcheck="false"></label>
+            <p class="gs-preview"><strong>Preview:</strong> <time id="date-format-preview"></time></p>
+          </section>
+
+          <section class="gs-panel gs-panel-wide" aria-labelledby="error-log-title">
+            <div class="gs-panel-heading"><div><h2 id="error-log-title" data-i18n-key="Error log">Error log</h2><p>Review bot error notifications and choose which events are reported.</p></div><button class="gs-text-button" type="button" data-open-settings="error-log">Open inbox <span aria-hidden="true">→</span></button></div>
+            <div class="gs-error-preview" id="error-preview"></div>
+          </section>
+
+          <section class="gs-panel" aria-labelledby="manager-roles-title">
+            <div class="gs-panel-heading"><div><h2 id="manager-roles-title" data-i18n-key="Manager roles">Manager roles</h2><p>These roles can fully manage the dashboard.</p></div></div>
+            <div class="gs-chip-list" id="manager-role-list" aria-live="polite"></div>
+            <form class="gs-inline-form" id="manager-role-form"><label class="sr-only" for="manager-role-input">Role name</label><input id="manager-role-input" type="text" placeholder="Add a role" required><button class="gs-add-button" type="submit" aria-label="Add manager role">+</button></form>
+          </section>
+
+          <button class="gs-panel gs-panel-action" type="button" data-open-settings="advanced-permissions"><span><strong data-i18n-key="Advanced dashboard permissions">Advanced dashboard permissions</strong><small>Manage access by role or user, including category-wide permissions.</small></span><span class="gs-chevron" aria-hidden="true">›</span></button>
+
+          <a class="gs-panel gs-panel-action" href="commands.html"><span><strong>Command permissions</strong><small>Configure command access in the Commands section.</small></span><span class="gs-external" aria-hidden="true">↗</span></a>
+
+          <a class="gs-panel gs-panel-action" href="backups.html"><span><strong data-i18n-key="Backups">Backups</strong><small>Set an interval, choose what to include, and manage backup files.</small></span><span class="gs-external" aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="page-view gs-page gs-subpage" id="error-log-screen" aria-labelledby="error-screen-title" hidden>
+        <button class="gs-back-button" type="button" data-back-settings><span aria-hidden="true">←</span> General Settings</button>
+        <div class="gs-page-heading"><div><p class="eyebrow green-eyebrow">INBOX</p><h1 id="error-screen-title">Error log</h1><p class="gs-subtitle">Bot error notifications for Next Step.</p></div><div class="gs-heading-actions"><button class="gs-secondary-button" type="button" id="configure-errors">Configure</button><button class="gs-danger-button" type="button" id="clear-errors">Clear all</button></div></div>
+        <div class="gs-panel gs-inbox-panel"><div class="gs-inbox-meta"><span id="error-count"></span><span>Newest first</span></div><div class="gs-inbox-list" id="error-inbox"></div></div>
+        <p class="gs-data-note">Preview notifications are examples; live errors require the bot service.</p>
+      </section>
+
+      <section class="page-view gs-page gs-subpage" id="advanced-permissions-screen" aria-labelledby="permissions-title" hidden>
+        <button class="gs-back-button" type="button" data-back-settings><span aria-hidden="true">←</span> General Settings</button>
+        <div class="gs-page-heading"><div><p class="eyebrow green-eyebrow">ACCESS CONTROL</p><h1 id="permissions-title">Advanced dashboard permissions</h1><p class="gs-subtitle">Choose a role or user, then grant full access to specific tabs or entire categories.</p></div></div>
+        <section class="gs-panel">
+          <div class="gs-panel-heading"><div><h2>People and roles</h2><p>Add a role or user to the permissions list.</p></div></div>
+          <form class="gs-inline-form gs-subject-form" id="permission-subject-form"><label class="sr-only" for="permission-subject-type">Subject type</label><select id="permission-subject-type"><option value="Role">Role</option><option value="User">User</option></select><label class="sr-only" for="permission-subject-name">Role or user name</label><input id="permission-subject-name" type="text" placeholder="Role or user name" required><button class="gs-secondary-button" type="submit">Add</button></form>
+          <div class="gs-subject-list" id="permission-subject-list"></div>
+        </section>
+        <section class="gs-panel gs-permission-editor" id="permission-editor" hidden>
+          <div class="gs-panel-heading"><div><h2 id="permission-editor-title">Tab access</h2><p>Toggle full access for an entire category or individual tabs. Deeper permissions will be added later.</p></div></div>
+          <div id="permission-groups"></div>
+        </section>
+        <p class="gs-data-note">Permission changes are saved locally in this preview and are not applied to Discord.</p>
+      </section>
+
+      <section class="page-view gs-page gs-subpage" id="backups-screen" aria-labelledby="backups-title" hidden>
+        <button class="gs-back-button" type="button" data-back-settings><span aria-hidden="true">←</span> General Settings</button>
+        <div class="gs-page-heading"><div><p class="eyebrow green-eyebrow">RESTORE POINTS</p><h1 id="backups-title">Backups</h1><p class="gs-subtitle">Create a local settings backup or configure the server backup schedule.</p></div></div>
+        <section class="gs-panel">
+          <div class="gs-panel-heading"><div><h2>Backup schedule</h2><p>Choose how often the bot should create a backup.</p></div></div>
+          <label class="gs-field gs-interval-field"><span>Interval</span><select id="backup-interval"><option value="15m">Every 15 minutes</option><option value="1h">Every hour</option><option value="6h">Every 6 hours</option><option value="12h">Every 12 hours</option><option value="24h" selected>Every 24 hours</option><option value="manual">Manual only</option></select></label>
+          <fieldset class="gs-check-grid"><legend>Include in backup</legend><label><input type="checkbox" checked data-backup-part="bot"> Bot settings</label><label><input type="checkbox" checked data-backup-part="server"> Server settings</label><label><input type="checkbox" checked data-backup-part="channels"> Channels</label><label><input type="checkbox" checked data-backup-part="roles"> Roles</label></fieldset>
+          <div class="gs-backup-actions"><button class="gs-primary-button" type="button" id="create-backup">Create backup now</button><button class="gs-secondary-button" type="button" id="export-backup">Export JSON</button><label class="gs-secondary-button gs-file-button" for="import-backup">Import JSON</label><input id="import-backup" type="file" accept="application/json,.json" hidden></div>
+        </section>
+        <section class="gs-panel"><div class="gs-panel-heading"><div><h2>Backup history</h2><p>Locally created or imported settings bundles.</p></div></div><div class="gs-backup-history" id="backup-history"></div></section>
+        <p class="gs-data-note">A browser-only backup contains dashboard preferences, not Discord server data. Server backups need the bot service.</p>
+      </section>
+
+      <dialog class="gs-dialog" id="translation-dialog">
+        <form method="dialog" id="translation-form">
+          <div class="gs-dialog-heading"><div><h2>Add a translation</h2><p>Download the JSON template, translate its English terms, then upload it here.</p></div><button class="gs-icon-button" value="cancel" aria-label="Close dialog">×</button></div>
+          <div class="gs-language-actions">
+            <button class="gs-secondary-button" id="download-language-template" type="button">Download empty JSON</button>
+            <label class="gs-secondary-button gs-file-button" for="import-language-json">Upload translation JSON</label>
+            <input id="import-language-json" type="file" accept="application/json,.json" hidden>
+          </div>
+          <p class="gs-status-message" id="translation-import-status" role="status" aria-live="polite"></p>
+          <div class="gs-dialog-actions"><button class="gs-secondary-button" value="cancel">Close</button></div>
+        </form>
+      </dialog>
+
+      <dialog class="gs-dialog gs-wide-dialog" id="error-settings-dialog">
+        <form method="dialog" id="error-settings-form">
+          <div class="gs-dialog-heading"><div><h2>Error notifications</h2><p>Select which error types appear in the inbox.</p></div><button class="gs-icon-button" value="cancel" aria-label="Close dialog">×</button></div>
+          <div class="gs-dialog-options"><label><input type="checkbox" checked data-error-type="Cannot send message to this user">Cannot send message to this user</label><label><input type="checkbox" checked data-error-type="Unknown message">Unknown message</label><label><input type="checkbox" checked data-error-type="Unknown member">Unknown member</label></div>
+          <div class="gs-dialog-actions"><button class="gs-secondary-button" value="cancel">Cancel</button><button class="gs-primary-button" id="save-error-settings" value="save">Save settings</button></div>
+        </form>
+      </dialog>
+    </main>
+  </div>
+  
+</body>
+</html>
