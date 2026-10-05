@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173c31">
+  <title>Home | Next Step</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="home.html" aria-label="Next Step home">
+      <span class="brand-mark" aria-hidden="true">NS</span>
+      <span class="brand-name">Next Step</span>
+    </a>
+
+    <div class="account-area">
+      <button class="account-button" id="account-button" type="button" aria-label="Select Discord account" aria-expanded="false" aria-controls="account-menu">
+        <span class="account-avatar" aria-hidden="true">?</span>
+        <span>Select Discord account</span>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+      </button>
+      <div class="account-menu" id="account-menu" hidden>
+        <p>No Discord account connected.</p>
+        <a href="index.html">Go to sign in</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="app-layout">
+    <aside class="sidebar" aria-label="Dashboard navigation">
+      <div class="sidebar-heading">
+        <span class="eyebrow">CONTROL PANEL</span>
+        <h2>Workspace</h2>
+      </div>
+
+      <label class="search-box" for="feature-search">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="m13.2 13.2 4 4"/></svg>
+        <input id="feature-search" type="search" placeholder="Search settings" autocomplete="off">
+        <kbd>/</kbd>
+      </label>
+      <p class="search-hint">Search categories, tabs, and functions</p>
+
+      <nav class="feature-navigation" id="feature-navigation" aria-label="Features">
+        <a class="home-nav active" href="home.html" data-view="Home" aria-current="page">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m2.5 9 7.5-6 7.5 6v8.2a.8.8 0 0 1-.8.8h-4.4v-5.2H8v5.2H3.3a.8.8 0 0 1-.8-.8Z"/></svg>
+          <span>Home</span>
+        </a>
+
+        <div class="nav-groups">
+          <section class="nav-group" data-category="General">
+            <button class="category-heading" type="button" aria-expanded="true">
+              <span>General</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+            </button>
+            <div class="nav-items">
+              <div class="feature-row"><a class="feature-link" href="general-settings.html" data-view="General Settings" data-search="language date format error log manager roles permissions backups settings">General Settings</a></div>
+              <div class="feature-row"><a class="feature-link" href="commands.html" data-view="Commands" data-search="custom slash prefix aliases cooldown commands">Commands</a></div>
+              <div class="feature-row"><a class="feature-link" href="messages.html" data-view="Messages" data-search="templates scheduled welcome automated messages">Messages</a></div>
+              <div class="feature-row"><a class="feature-link" href="appearance.html" data-view="Appearance" data-search="bot profile avatar banner status activity appearance">Appearance</a></div>
+            </div>
+          </section>
+
+          <section class="nav-group" data-category="Moderation">
+            <button class="category-heading" type="button" aria-expanded="true"><span>Moderation</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+            <div class="nav-items">
+              <div class="feature-row"><a class="feature-link" href="auto-moderation.html" data-view="Auto moderation" data-search="automod filters triggers spam links">Auto moderation</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Auto moderation" aria-label="Toggle Auto moderation"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="moderation.html" data-view="Moderation" data-search="cases bans kicks mutes warns reports">Moderation</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Moderation" aria-label="Toggle Moderation"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="raid-protection.html" data-view="Raid protection" data-search="raid join guard security protection">Raid protection</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Raid protection" aria-label="Toggle Raid protection"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="roles.html" data-view="Roles" data-search="join roles reaction roles sticky roles">Roles</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Roles" aria-label="Toggle Roles"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="logging.html" data-view="Logging" data-search="audit log channels events">Logging</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Logging" aria-label="Toggle Logging"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="backups.html" data-view="Backups" data-search="export import restore archive">Backups</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Backups" aria-label="Toggle Backups"><span></span></label></div>
+            </div>
+          </section>
+
+          <section class="nav-group" data-category="Notifications">
+            <button class="category-heading" type="button" aria-expanded="true"><span>Notifications</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+            <div class="nav-items">
+              <div class="feature-row"><a class="feature-link" href="social-notifications.html" data-view="Social Notifications" data-search="email google forms youtube integrations">Social Notifications</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Social Notifications" aria-label="Toggle Social Notifications"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="bump-reminders.html" data-view="Bump Reminders" data-search="bump reminders ranking">Bump Reminders</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Bump Reminders" aria-label="Toggle Bump Reminders"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="welcome-messages.html" data-view="Welcome Messages" data-search="join leave messages welcome">Welcome Messages</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Welcome Messages" aria-label="Toggle Welcome Messages"><span></span></label></div>
+            </div>
+          </section>
+
+          <section class="nav-group" data-category="Community">
+            <button class="category-heading" type="button" aria-expanded="true"><span>Community</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+            <div class="nav-items">
+              <div class="feature-row"><a class="feature-link" href="levels.html" data-view="Levels" data-search="xp experience ranking level rewards">Levels</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Levels" aria-label="Toggle Levels"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="anonymous-messages.html" data-view="Anonymous messages" data-search="anonymous anonymus confession messages">Anonymous messages</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Anonymous messages" aria-label="Toggle Anonymous messages"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="check-in-reminders.html" data-view="Check-in reminders" data-search="check in check-in reminders">Check-in reminders</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Check-in reminders" aria-label="Toggle Check-in reminders"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="translator.html" data-view="Translator" data-search="translation language translate">Translator</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Translator" aria-label="Toggle Translator"><span></span></label></div>
+            </div>
+          </section>
+
+          <section class="nav-group" data-category="Experimental">
+            <button class="category-heading" type="button" aria-expanded="true"><span>Experimental</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+            <div class="nav-items">
+              <div class="feature-row"><a class="feature-link" href="ai-moderation.html" data-view="AI moderation" data-search="artificial intelligence ai moderation experimental">AI moderation</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="AI moderation" aria-label="Toggle AI moderation"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="profile-checker.html" data-view="Profile checker" data-search="profile checker experimental">Profile checker</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Profile checker" aria-label="Toggle Profile checker"><span></span></label></div>
+            </div>
+          </section>
+        </div>
+        <p class="no-results" id="no-results" hidden>No matching features.</p>
+      </nav>
+      <div class="sidebar-footer"><span class="footer-dot"></span>Next Step control panel</div>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-toolbar">
+        <div class="breadcrumb"><span>Next Step</span><span aria-hidden="true">/</span><strong id="breadcrumb-current">Home</strong></div>
+        <span class="preview-label"><span></span>Preview data</span>
+      </div>
+
+      <section id="home-view" class="page-view" aria-labelledby="welcome-title">
+        <div class="welcome-row">
+          <div>
+            <p class="eyebrow green-eyebrow">SERVER OVERVIEW</p>
+            <h1 id="welcome-title">Welcome back, <span id="username">there</span></h1>
+            <p class="welcome-copy">Here’s how your Next Step community is doing.</p>
+          </div>
+          <time class="date-chip" id="current-date"></time>
+        </div>
+
+        <section class="metrics-grid" aria-label="Current server metrics">
+          <article class="metric-tile"><div class="metric-label"><span class="metric-icon icon-green">●</span>Bot status</div><div class="metric-value"><span class="status-dot"></span>Online</div><span class="metric-caption">All systems operational</span></article>
+          <article class="metric-tile"><div class="metric-label"><span class="metric-icon icon-blue">↗</span>Ping</div><div class="metric-value">42<span class="metric-unit">ms</span></div><span class="metric-caption">Last response</span></article>
+          <article class="metric-tile"><div class="metric-label"><span class="metric-icon icon-amber">◒</span>CPU</div><div class="metric-value">18<span class="metric-unit">%</span></div><span class="metric-caption">Current usage</span></article>
+          <article class="metric-tile"><div class="metric-label"><span class="metric-icon icon-purple">▤</span>Memory</div><div class="metric-value">3.2<span class="metric-unit">GB</span></div><span class="metric-caption">of 8 GB allocated</span></article>
+          <article class="metric-tile"><div class="metric-label"><span class="metric-icon icon-coral">◉</span>Disk</div><div class="metric-value">64<span class="metric-unit">%</span></div><span class="metric-caption">Storage used</span></article>
+        </section>
+
+        <section class="chart-grid" aria-label="Server and community charts">
+          <article class="chart-panel">
+            <div class="chart-heading">
+              <div><p class="eyebrow">INFRASTRUCTURE</p><h2>System health</h2><p class="chart-description">Relative trend · each metric scaled independently</p></div>
+              <label class="select-wrap"><span class="sr-only">System health time range</span><select data-chart-range="system"><option value="24h">Last 24 hours</option><option value="7d">Last 7 days</option><option value="30d">Last 30 days</option></select></label>
+            </div>
+            <div class="chart-legend" aria-label="System health series">
+              <label style="--legend-color:#62bce8"><input type="checkbox" checked data-chart="system" data-series="Ping"><span>Ping</span></label>
+              <label style="--legend-color:#f0bd62"><input type="checkbox" checked data-chart="system" data-series="CPU"><span>CPU</span></label>
+              <label style="--legend-color:#c6a0df"><input type="checkbox" checked data-chart="system" data-series="Memory"><span>Memory</span></label>
+              <label style="--legend-color:#f08379"><input type="checkbox" checked data-chart="system" data-series="Disk"><span>Disk</span></label>
+            </div>
+            <div class="canvas-wrap"><canvas id="system-chart" height="230" aria-label="System health trends" role="img"></canvas></div>
+          </article>
+
+          <article class="chart-panel">
+            <div class="chart-heading">
+              <div><p class="eyebrow">COMMUNITY</p><h2>Member activity</h2><p class="chart-description">Relative activity · each series scaled independently</p></div>
+              <label class="select-wrap"><span class="sr-only">Member activity time range</span><select data-chart-range="community"><option value="24h">Last 24 hours</option><option value="7d">Last 7 days</option><option value="30d">Last 30 days</option></select></label>
+            </div>
+            <div class="chart-legend" aria-label="Member activity series">
+              <label style="--legend-color:#45d18e"><input type="checkbox" checked data-chart="community" data-series="Members"><span>Members</span></label>
+              <label style="--legend-color:#62bce8"><input type="checkbox" checked data-chart="community" data-series="Joined"><span>Joined</span></label>
+              <label style="--legend-color:#f08379"><input type="checkbox" checked data-chart="community" data-series="Left"><span>Left</span></label>
+              <label style="--legend-color:#f0bd62"><input type="checkbox" checked data-chart="community" data-series="Messages"><span>Messages</span></label>
+            </div>
+            <div class="canvas-wrap"><canvas id="community-chart" height="230" aria-label="Member and message activity trends" role="img"></canvas></div>
+          </article>
+        </section>
+
+        <section class="error-section" aria-labelledby="error-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">ATTENTION</p><h2 id="error-title">Recent errors</h2></div>
+            <button class="text-button" id="view-errors" type="button">View error log <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="error-list">
+            <article class="error-row"><span class="severity severity-warning">!</span><div class="error-summary"><strong>Message delivery delayed</strong><span>Welcome message queue took longer than expected.</span></div><time datetime="2026-10-05T09:42:00">09:42</time><span class="error-state">Investigating</span></article>
+            <article class="error-row"><span class="severity severity-info">i</span><div class="error-summary"><strong>Unknown member reference</strong><span>A moderation action referenced a member who left the server.</span></div><time datetime="2026-10-05T08:16:00">08:16</time><span class="error-state resolved">Resolved</span></article>
+          </div>
+          <p class="data-note">Example dashboard data. Connect the bot service to display live metrics and errors.</p>
+        </section>
+      </section>
+
+      <section id="feature-view" class="page-view feature-workspace" aria-labelledby="feature-title" hidden>
+        <p class="eyebrow green-eyebrow">NEXT STEP SETTINGS</p>
+        <h1 id="feature-title">General Settings</h1>
+        <p class="feature-copy" id="feature-copy">This feature is part of the Next Step control panel.</p>
+        <div class="feature-placeholder">
+          <span class="placeholder-mark" aria-hidden="true">NS</span>
+          <h2 id="feature-placeholder-title">Connect your bot to continue</h2>
+          <p>This preview includes the dashboard layout and navigation. Live settings will appear here when the bot service is connected.</p>
+          <button type="button" class="secondary-button" id="back-home">Back to overview</button>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
