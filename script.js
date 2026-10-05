@@ -1,4 +1,75 @@
 (() => {
+  const addGroup = document.getElementById("words-add-group");
+  const builder = document.getElementById("word-group-builder");
+  const empty = document.getElementById("words-empty");
+  const closeGroup = document.getElementById("word-group-close");
+  const addAction = document.getElementById("word-action-add");
+  const menu = document.getElementById("word-action-menu");
+  if (!addGroup || !builder) return;
+  addGroup.addEventListener("click", () => {
+    builder.hidden = false;
+    if (empty) empty.hidden = true;
+    builder.querySelector(".word-group-name")?.focus();
+  });
+  closeGroup?.addEventListener("click", () => {
+    builder.hidden = true;
+    if (empty) empty.hidden = false;
+  });
+  addAction?.addEventListener("click", () => {
+    const next = menu?.hidden ?? true;
+    if (menu) menu.hidden = !next;
+    addAction.setAttribute("aria-expanded", String(next));
+  });
+  document.addEventListener("click", (event) => {
+    if (!menu || menu.hidden) return;
+    if (!event.target.closest(".word-actions-row")) {
+      menu.hidden = true;
+      addAction?.setAttribute("aria-expanded", "false");
+    }
+  });
+})();
+
+(() => {
+  const summary = document.getElementById("home-view");
+  const advanced = document.getElementById("advanced-automod-view");
+  const open = document.getElementById("advanced-automod-open");
+  const back = document.getElementById("advanced-automod-back");
+  if (!summary || !advanced || !open) return;
+  const main = document.querySelector(".main-content");
+  const showAdvanced = () => {
+    summary.hidden = true;
+    advanced.hidden = false;
+    main?.scrollTo({ top: 0, behavior: "auto" });
+    history.replaceState(null, "", "#advanced-auto-moderation");
+  };
+  const showSummary = () => {
+    advanced.hidden = true;
+    summary.hidden = false;
+    main?.scrollTo({ top: 0, behavior: "auto" });
+    history.replaceState(null, "", location.pathname + location.search);
+    open.focus();
+  };
+  open.addEventListener("click", showAdvanced);
+  back?.addEventListener("click", showSummary);
+  document.querySelectorAll('[data-advanced-home]').forEach(button=>button.addEventListener('click',showSummary));
+  if (location.hash === "#advanced-auto-moderation") showAdvanced();
+})();
+
+(() => {
+  const modal = document.getElementById("ai-setup-modal");
+  if (!modal) return;
+  const open = document.getElementById("ai-setup-open");
+  const close = document.getElementById("ai-setup-close");
+  const cancel = document.getElementById("ai-setup-cancel");
+  const hide = () => { modal.hidden = true; open?.focus(); };
+  open?.addEventListener("click", () => { modal.hidden = false; close?.focus(); });
+  close?.addEventListener("click", hide);
+  cancel?.addEventListener("click", hide);
+  modal.addEventListener("click", (event) => { if (event.target === modal) hide(); });
+  document.addEventListener("keydown", (event) => { if (event.key === "Escape" && !modal.hidden) hide(); });
+})();
+
+(() => {
   const defaultDuration = 4000;
 
   function showNotification(message, options = {}) {
@@ -264,7 +335,7 @@
 
   const pageDescriptions = {
     "General Settings": "Manage dashboard access, language, date formats, error notifications, and backups.",
-    Commands: "Manage the bot’s custom and built-in commands.",
+      Commands: "Manage the bot\u2019s custom and built-in commands.",
     Messages: "Create and organize templates, scheduled messages, and automated replies.",
     Appearance: "Manage the Next Step bot profile and presence.",
     "Auto moderation": "Review automated moderation rules and protections.",
@@ -287,6 +358,7 @@
 
   function updateDate() {
     const date = document.getElementById("current-date");
+    if (!date) return;
     date.textContent = new Intl.DateTimeFormat(undefined, {
       weekday: "short",
       month: "short",
@@ -297,7 +369,8 @@
 
   function updateWelcomeName() {
     const username = new URLSearchParams(window.location.search).get("username");
-    if (username) document.getElementById("username").textContent = username;
+    const usernameNode = document.getElementById("username");
+    if (username && usernameNode) usernameNode.textContent = username;
   }
 
   function selectView(viewName) {
@@ -369,7 +442,7 @@
       });
     });
 
-    featureSearch.addEventListener("input", () => filterFeatures(featureSearch.value));
+    featureSearch?.addEventListener("input", () => filterFeatures(featureSearch.value));
     document.addEventListener("keydown", (event) => {
       if (event.key === "/" && !["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName)) {
         event.preventDefault();
@@ -377,8 +450,8 @@
       }
     });
 
-    document.getElementById("back-home").addEventListener("click", () => selectView("Home"));
-    document.getElementById("view-errors").addEventListener("click", () => selectView("Error log"));
+    document.getElementById("back-home")?.addEventListener("click", () => selectView("Home"));
+    document.getElementById("view-errors")?.addEventListener("click", () => selectView("Error log"));
   }
 
   function readFeatureState(storageKey) {
@@ -421,6 +494,7 @@
   }
 
   function setupAccountMenu() {
+    if (!accountButton || !accountMenu) return;
     accountButton.addEventListener("click", () => {
       const isOpen = accountButton.getAttribute("aria-expanded") === "true";
       accountButton.setAttribute("aria-expanded", String(!isOpen));
@@ -473,6 +547,7 @@
 
   function drawChart(chartName, animate = false) {
     const canvas = document.getElementById(`${chartName}-chart`);
+    if (!canvas) return;
     const bounds = canvas.getBoundingClientRect();
     if (bounds.width === 0) return;
 
@@ -491,7 +566,9 @@
     const padding = { top: 10, right: 40, bottom: 27, left: 40 };
     const chartWidth = width - padding.left - padding.right;
     const chartHeight = height - padding.top - padding.bottom;
-    const range = document.querySelector(`[data-chart-range="${chartName}"]`).value;
+    const rangeControl = document.querySelector(`[data-chart-range="${chartName}"]`);
+    if (!rangeControl) return;
+    const range = rangeControl.value;
     const pointCount = range === "24h" ? 12 : range === "7d" ? 14 : 18;
     const labels = getChartLabels(range, pointCount);
     const activeNames = new Set([...document.querySelectorAll(`[data-chart="${chartName}"]:checked`)].map((input) => input.dataset.series));
@@ -616,6 +693,7 @@
   }
 
   function setupCharts() {
+    if (!document.getElementById("system-chart") && !document.getElementById("community-chart")) return;
     document.querySelectorAll("[data-chart-range], [data-chart]").forEach((control) => {
       control.addEventListener("change", () => drawChart(control.dataset.chart || control.dataset.chartRange, true));
     });
@@ -1203,4 +1281,346 @@
       event.target.value = "";
     }
   });
+})();
+
+(() => {
+  const grid = document.querySelector('.advanced-rule-grid');
+  if (!grid) return;
+  const esc = (value) => value.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const unsavedBar=document.getElementById('automod-unsaved-bar');
+  const markDirty=()=>{if(unsavedBar) unsavedBar.hidden=false;};
+  const conditionPresets = {
+    spam: { amount: 3, noun: 'messages', window: 5, unit: 'seconds' },
+    'channel-spam': { amount: 3, noun: 'channels', window: 5, unit: 'seconds' },
+    mentions: { amount: 3, noun: 'mentions', window: 5, unit: 'seconds' },
+    attachments: { amount: 3, noun: 'attachments', window: 5, unit: 'seconds' },
+    emojis: { amount: 3, noun: 'emojis', window: 5, unit: 'seconds' },
+    'message-lines': { amount: 3, noun: 'lines', window: 5, unit: 'seconds' },
+    polls: { amount: 1, noun: 'message', window: 1, unit: 'seconds' },
+    warns: { amount: 3, noun: 'warns', window: 7, unit: 'days', op: '=' }
+  };
+  const specialChannelTypes = [
+    'Normal text','Text spoilers','Default emojis','Custom emojis','Stickers','Polls','All links','Custom links',
+    'Image spoilers','GIFs','GIF spoilers','Audios','Video spoilers','Custom attachments','Other attachments','Activities'
+  ];
+  function condition(rule, label) {
+    const key=rule?.dataset?.rule || '';
+    const preset=conditionPresets[key];
+    const resolved=label || (key==='special-channels' ? 'Only Images, Videos' : key==='polls' ? '≥ 1 message (every message)' : preset ? `${preset.op || '≥'} ${preset.amount} ${preset.noun} in ${preset.window} ${preset.unit}` : '≥ 1 message (every message)');
+    const el=document.createElement('div'); el.className='condition-builder'; el.dataset.rule=key;
+    const channelClass=key==='special-channels'?' channel-required is-invalid':'';
+    const editor=preset ? `<div class="condition-editor" hidden><select data-cond-op aria-label="Comparison"><option ${preset.op==='='?'selected':''}>=</option><option ${!preset.op?'selected':''}>≥</option><option>></option><option>≤</option><option><</option></select><input data-cond-amount type="number" min="1" value="${preset.amount}" aria-label="Amount"><span>${preset.noun} in</span><input data-cond-window type="number" min="1" value="${preset.window}" aria-label="Time"><select data-cond-unit aria-label="Time unit"><option ${preset.unit==='seconds'?'selected':''}>seconds</option><option ${preset.unit==='minutes'?'selected':''}>minutes</option><option ${preset.unit==='hours'?'selected':''}>hours</option><option ${preset.unit==='days'?'selected':''}>days</option></select></div>` : key==='capitalization' ? `<div class="condition-editor capitalization-editor" hidden><input data-cap-percent type="number" min="1" max="100" value="80" aria-label="Capitalized percent"><span>% capitalized and ≥</span><input data-cap-chars type="number" min="1" value="10" aria-label="Character count"><span>characters in the message</span></div>` : '';
+    const specialEditor=key==='special-channels' ? `<div class="special-types-panel"><div class="special-types-title">ALLOWED MESSAGE CONTENT TYPES:</div><div class="special-types-box"><div class="special-type-chips"><button type="button" class="special-type-chip" data-special-type="Images">Images</button><button type="button" class="special-type-chip" data-special-type="Videos">Videos</button><button type="button" class="special-type-add" data-special-type-add aria-expanded="false">+</button></div><div class="special-type-menu" hidden><input type="search" placeholder="Type" data-special-type-search>${specialChannelTypes.map(type=>`<button type="button" data-special-type-option="${esc(type)}">${esc(type)}</button>`).join('')}</div></div></div>` : '';
+    el.dataset.specialTypes=key==='special-channels'?'Images|Videos':'';
+    el.innerHTML=`${specialEditor}<div class="condition-builder-head"><button class="builder-icon-btn">⌄</button><button class="condition-label" type="button" data-edit-condition>${esc(resolved)}</button><button class="builder-icon-btn channel-picker${channelClass}" type="button" data-channel-picker aria-label="Channels">#</button><button class="builder-icon-btn" data-remove>×</button></div>${editor}<div class="condition-actions"><span class="no-actions">No actions added</span><button class="action-add" data-action-add>+</button><div class="action-menu" hidden><input type="search" placeholder="Action"><button>Delete messages</button><button>Block messages</button><button>Send message</button><button>Report to moderators</button><button>DM user</button><button>Open moderation case</button><button>Add reactions</button><button>Add roles</button><button>Remove roles</button><button>Set roles</button></div></div>`;
+    return el;
+  }
+  function group(rule) {
+    const title=rule.dataset.rule==='invites'?'All Invites, except ...':rule.dataset.rule==='links'?'All Links, except ...':'Group 1';
+    const placeholder=rule.dataset.rule==='invites'?'New whitelisted invite':rule.dataset.rule==='links'?'New whitelisted link':'New word';
+    const el=document.createElement('section'); el.className='rule-builder';
+    const roleIcon = ['words','links','invites'].includes(rule.dataset.rule) ? '<button class="builder-icon-btn group-roles-open" type="button" aria-label="Group roles"><svg class="group-role-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 19 5v5.4c0 4.8-2.8 8.8-7 11.1-4.2-2.3-7-6.3-7-11.1V5l7-2.5Z" fill="currentColor"/><circle cx="12" cy="9" r="2.3" fill="#303934"/><path d="M8.6 15.1c.7-2 1.9-3 3.4-3s2.7 1 3.4 3c-1 .8-2.1 1.4-3.4 2.1-1.3-.7-2.4-1.3-3.4-2.1Z" fill="#303934"/></svg></button>' : '';
+    el.innerHTML=`<div class="rule-builder-head"><button class="builder-icon-btn">\u2304</button><span class="builder-title">${title}</span><span>${roleIcon}<button class="builder-icon-btn group-expand-open" type="button" aria-label="Expand group">\u2197</button></span><button class="builder-icon-btn" data-remove>\u00D7</button></div><div class="builder-body"><div class="builder-entry"><input placeholder="${placeholder}"><button data-entry-add>+</button></div><div class="builder-conditions"><div class="builder-condition-title"><span>Conditions</span><span class="builder-condition-count">+</span><button data-inner-condition>Add condition</button></div><div class="builder-empty">No conditions added</div></div></div>`;
+    return el;
+  }
+  grid.addEventListener('click', e => {
+    const rule=e.target.closest('.advanced-rule-card'); if(!rule) return;
+    if(e.target.closest('[data-add-rule]')) {
+      const host=rule.querySelector('.rule-builders');
+      host.append(rule.dataset.kind==='group'?group(rule):condition(rule, rule.dataset.rule==='capitalization'?'≥ 80 % caps and ≥ 10 chars':undefined));
+      rule.querySelector('.advanced-empty').style.display='none';
+      markDirty();
+      return;
+    }
+    if(e.target.closest('[data-inner-condition]')) {
+      const b=e.target.closest('.rule-builder'); const area=b.querySelector('.builder-conditions');
+      area.querySelector('.builder-empty')?.remove(); area.append(condition(rule));
+      const n=area.querySelectorAll('.condition-builder').length; area.querySelector('.builder-condition-count').textContent=`${n} +`; markDirty(); return;
+    }
+    if(e.target.closest('.group-roles-open')) {
+      const modal=document.getElementById('group-roles-modal');
+      if(modal){modal.hidden=false;document.getElementById('group-roles-close')?.focus();}
+      return;
+    }
+    if(e.target.closest('.group-expand-open')) {
+      const builder=e.target.closest('.rule-builder');
+      const modal=document.getElementById('group-editor-modal');
+      const title=builder?.querySelector('.builder-title')?.textContent?.trim() || 'Group';
+      const kind=rule.dataset.rule==='links'?'Links':rule.dataset.rule==='invites'?'Invites':'Words';
+      const placeholder=rule.dataset.rule==='links'?'New whitelisted link':rule.dataset.rule==='invites'?'New whitelisted invite':'New word';
+      if(modal){
+        modal.dataset.rule=rule.dataset.rule;
+        modal.dataset.sourceIndex=[...rule.querySelectorAll('.rule-builder')].indexOf(builder);
+        document.getElementById('group-editor-title').textContent=title;
+        document.getElementById('group-editor-kind').textContent=kind;
+        const input=document.getElementById('group-editor-entry'); input.placeholder=placeholder; input.value='';
+        const items=document.getElementById('group-editor-items'); items.innerHTML='';
+        builder.querySelectorAll('.builder-entry .word-chip').forEach(chip=>{const item=document.createElement('span');item.className='group-editor-item';item.textContent=chip.textContent;items.append(item);});
+        modal.hidden=false;
+        document.getElementById('group-editor-close')?.focus();
+      }
+      return;
+    }
+    const edit=e.target.closest('[data-edit-condition]');
+    if(edit) {
+      const editor=edit.closest('.condition-builder').querySelector('.condition-editor');
+      if(editor) editor.hidden=!editor.hidden;
+      return;
+    }
+    if(e.target.closest('.condition-editor')) {
+      const builder=e.target.closest('.condition-builder');
+      const preset=conditionPresets[builder.dataset.rule];
+      if(preset) {
+        const op=builder.querySelector('[data-cond-op]')?.value || preset.op || '≥';
+        const amount=builder.querySelector('[data-cond-amount]')?.value || '1';
+        const windowValue=builder.querySelector('[data-cond-window]')?.value || '5';
+        const unit=builder.querySelector('[data-cond-unit]')?.value || 'seconds';
+        builder.querySelector('.condition-label').textContent=builder.dataset.rule==='polls' && amount==='1' && windowValue==='1' && unit==='seconds'
+          ? '≥ 1 message (every message)'
+          : `${op} ${amount} ${preset.noun} in ${windowValue} ${unit}`;
+      } else if(builder.dataset.rule==='capitalization') {
+        const percent=builder.querySelector('[data-cap-percent]')?.value || '80';
+        const chars=builder.querySelector('[data-cap-chars]')?.value || '10';
+        builder.querySelector('.condition-label').textContent=`≥ ${percent} % caps and ≥ ${chars} chars`;
+      }
+      return;
+    }
+    if(e.target.closest('[data-channel-picker]')) {
+      const builder=e.target.closest('.condition-builder');
+      openChannelModal(builder);
+      return;
+    }
+    if(e.target.closest('[data-special-type-add]')) {
+      const button=e.target.closest('[data-special-type-add]');
+      const menu=e.target.closest('.special-types-box').querySelector('.special-type-menu');
+      menu.hidden=!menu.hidden;
+      button.setAttribute('aria-expanded',String(!menu.hidden));
+      if(!menu.hidden) menu.querySelector('input')?.focus();
+      return;
+    }
+    const specialOption=e.target.closest('[data-special-type-option]');
+    if(specialOption) {
+      const builder=e.target.closest('.condition-builder');
+      const type=specialOption.dataset.specialTypeOption;
+      const selected=(builder.dataset.specialTypes||'').split('|').filter(Boolean);
+      if(!selected.includes(type)) selected.push(type);
+      builder.dataset.specialTypes=selected.join('|');
+      renderSpecialTypes(builder);
+      markDirty();
+      return;
+    }
+    const specialChip=e.target.closest('[data-special-type]');
+    if(specialChip) {
+      const builder=e.target.closest('.condition-builder');
+      const selected=(builder.dataset.specialTypes||'').split('|').filter(Boolean).filter(type=>type!==specialChip.dataset.specialType);
+      builder.dataset.specialTypes=selected.join('|');
+      renderSpecialTypes(builder);
+      markDirty();
+      return;
+    }
+    if(e.target.closest('[data-entry-add]')) {
+      const row=e.target.closest('.builder-entry'), input=row.querySelector('input'); if(!input.value.trim()) return;
+      const chip=document.createElement('span'); chip.className='word-chip'; chip.textContent=input.value.trim(); row.append(chip); input.value=''; markDirty(); return;
+    }
+    if(e.target.closest('[data-action-add]')) { const menu=e.target.closest('.condition-actions').querySelector('.action-menu'); menu.hidden=!menu.hidden; return; }
+    const action=e.target.closest('.action-menu button'); if(action) { const area=action.closest('.condition-actions'); area.querySelector('.no-actions')?.remove(); const chip=document.createElement('button'); chip.className='action-chip'; chip.textContent=action.textContent+' \u2699'; area.insertBefore(chip, area.querySelector('[data-action-add]')); action.parentElement.hidden=true; markDirty(); return; }
+    if(e.target.closest('[data-remove]')) { const builder=e.target.closest('.condition-builder,.rule-builder'); const parent=builder.parentElement; builder.remove(); if(parent.classList.contains('rule-builders')) { if(!parent.children.length) rule.querySelector('.advanced-empty').style.display=''; } markDirty(); return; }
+  });
+
+  grid.addEventListener('input', e=>{
+    const builder=e.target.closest('.condition-builder');
+    if(builder && e.target.closest('.condition-editor')) {
+      const preset=conditionPresets[builder.dataset.rule];
+      if(preset) {
+        const op=builder.querySelector('[data-cond-op]')?.value || preset.op || '≥';
+        const amount=builder.querySelector('[data-cond-amount]')?.value || '1';
+        const windowValue=builder.querySelector('[data-cond-window]')?.value || '5';
+        const unit=builder.querySelector('[data-cond-unit]')?.value || 'seconds';
+        builder.querySelector('.condition-label').textContent=builder.dataset.rule==='polls' && amount==='1' && windowValue==='1' && unit==='seconds'
+          ? '≥ 1 message (every message)'
+          : `${op} ${amount} ${preset.noun} in ${windowValue} ${unit}`;
+      } else if(builder.dataset.rule==='capitalization') {
+        const percent=builder.querySelector('[data-cap-percent]')?.value || '80';
+        const chars=builder.querySelector('[data-cap-chars]')?.value || '10';
+        builder.querySelector('.condition-label').textContent=`≥ ${percent} % caps and ≥ ${chars} chars`;
+      }
+      markDirty();
+      return;
+    }
+    if(!e.target.matches('[data-special-type-search]')) return;
+    const q=e.target.value.trim().toLowerCase();
+    e.target.closest('.special-type-menu').querySelectorAll('[data-special-type-option]').forEach(button=>{
+      button.hidden=q && !button.textContent.toLowerCase().includes(q);
+    });
+  });
+
+  function renderSpecialTypes(builder){
+    const chips=builder.querySelector('.special-type-chips');
+    if(!chips) return;
+    const add=chips.querySelector('[data-special-type-add]');
+    chips.querySelectorAll('[data-special-type]').forEach(chip=>chip.remove());
+    const selected=(builder.dataset.specialTypes||'').split('|').filter(Boolean);
+    selected.forEach(type=>{
+      const chip=document.createElement('button');
+      chip.type='button';
+      chip.className='special-type-chip';
+      chip.dataset.specialType=type;
+      chip.textContent=type;
+      chips.insertBefore(chip,add);
+    });
+    builder.querySelector('.condition-label').textContent=selected.length ? `Only ${selected.join(', ')}` : 'Only selected content';
+  }
+
+  function openChannelModal(builder) {
+    let overlay=document.querySelector('.channel-modal-overlay');
+    if(overlay) overlay.remove();
+    overlay=document.createElement('div');
+    overlay.className='channel-modal-overlay';
+    overlay.innerHTML=`<section class="channel-modal" role="dialog" aria-modal="true" aria-labelledby="channel-modal-title"><button class="channel-modal-close" type="button" aria-label="Close">×</button><h2 id="channel-modal-title">Channels</h2><p>Limit this condition to certain channels.</p><strong>The following channels will be included:</strong><div class="channel-picker-box"><div class="channel-list"></div><div class="channel-add-row"><button type="button" class="channel-add-start" aria-label="Add channel">+</button><span class="channel-empty-text">No channels added</span></div><div class="channel-choice-menu" hidden><input type="search" class="channel-choice-search" placeholder="Channel"><button type="button" data-channel-choice="Preview data"># Preview data</button><button type="button" data-channel-choice="Preview data 2"># Preview data 2</button><button type="button" data-channel-choice="Preview data 3"># Preview data 3</button><button type="button" data-channel-choice="Preview data 4"># Preview data 4</button></div></div><p class="channel-error">You need to add at least one channel.</p></section>`;
+    document.body.append(overlay);
+    const isRequired=builder.dataset.rule==='special-channels';
+    const list=overlay.querySelector('.channel-list');
+    const empty=overlay.querySelector('.channel-empty-text');
+    const error=overlay.querySelector('.channel-error');
+    const stored=(builder.dataset.channels||'').split('|').filter(Boolean);
+    const render=()=>{
+      list.innerHTML='';
+      stored.forEach((name,index)=>{const chip=document.createElement('button');chip.type='button';chip.className='channel-chip';chip.textContent=`# ${name} ×`;chip.addEventListener('click',()=>{stored.splice(index,1);render();markDirty();});list.append(chip);});
+      empty.hidden=stored.length>0;
+      error.hidden=!isRequired || stored.length>0;
+      builder.dataset.channels=stored.join('|');
+      builder.querySelector('[data-channel-picker]')?.classList.toggle('is-invalid',isRequired && stored.length===0);
+      overlay.querySelector('.channel-picker-box')?.classList.toggle('is-invalid',isRequired && stored.length===0);
+    };
+    render();
+    const close=()=>overlay.remove();
+    overlay.querySelector('.channel-modal-close').addEventListener('click',close);
+    overlay.addEventListener('click',ev=>{if(ev.target===overlay) close();});
+    const menu=overlay.querySelector('.channel-choice-menu');
+    const search=overlay.querySelector('.channel-choice-search');
+    overlay.querySelector('.channel-add-start').addEventListener('click',()=>{menu.hidden=!menu.hidden;if(!menu.hidden)search.focus();});
+    overlay.querySelectorAll('[data-channel-choice]').forEach(button=>button.addEventListener('click',()=>{
+      const name=button.dataset.channelChoice;
+      if(!stored.includes(name)) stored.push(name);
+      render();
+      markDirty();
+      menu.hidden=true;
+      search.value='';
+      overlay.querySelectorAll('[data-channel-choice]').forEach(item=>item.hidden=false);
+    }));
+    search.addEventListener('input',()=>{
+      const q=search.value.trim().toLowerCase();
+      overlay.querySelectorAll('[data-channel-choice]').forEach(button=>button.hidden=q&&!button.textContent.toLowerCase().includes(q));
+    });
+  }
+
+  document.getElementById('group-roles-close')?.addEventListener('click',()=>{document.getElementById('group-roles-modal').hidden=true;});
+  document.getElementById('group-roles-modal')?.addEventListener('click',event=>{if(event.target.id==='group-roles-modal') event.currentTarget.hidden=true;});
+  document.getElementById('group-editor-close')?.addEventListener('click',()=>{document.getElementById('group-editor-modal').hidden=true;});
+  document.getElementById('group-editor-modal')?.addEventListener('click',event=>{if(event.target.id==='group-editor-modal') event.currentTarget.hidden=true;});
+  document.getElementById('group-editor-entry-add')?.addEventListener('click',()=>{
+    const modal=document.getElementById('group-editor-modal');
+    const input=document.getElementById('group-editor-entry');
+    const value=input.value.trim(); if(!value) return;
+    const item=document.createElement('span'); item.className='group-editor-item'; item.textContent=value; document.getElementById('group-editor-items').append(item);
+    const rule=document.querySelector(`.advanced-rule-card[data-rule="${modal.dataset.rule}"]`);
+    const builder=rule?.querySelectorAll('.rule-builder')?.[Number(modal.dataset.sourceIndex)];
+    const row=builder?.querySelector('.builder-entry');
+    if(row){const chip=document.createElement('span');chip.className='word-chip';chip.textContent=value;row.append(chip);}
+    input.value=''; markDirty();
+  });
+  document.getElementById('automod-reset')?.addEventListener('click',()=>location.reload());
+  document.getElementById('automod-save')?.addEventListener('click',()=>{if(unsavedBar) unsavedBar.hidden=true;});
+})();
+
+(() => {
+  const modal=document.getElementById('roles-channels-modal');
+  if(!modal) return;
+  const close=document.getElementById('roles-channels-close');
+  const tabs=[...modal.querySelectorAll('[data-rc-tab]')];
+  const panes=[...modal.querySelectorAll('[data-rc-pane]')];
+  const addChannel=modal.querySelector('[data-rc-add-channel]');
+  const menu=modal.querySelector('[data-rc-channel-menu]');
+  const search=modal.querySelector('[data-rc-channel-search]');
+  const list=modal.querySelector('.rc-channel-list');
+  const empty=modal.querySelector('.rc-channel-empty');
+  let opener=null;
+  const selected=[];
+
+  const selectTab=(name)=>{
+    tabs.forEach(tab=>{const active=tab.dataset.rcTab===name;tab.classList.toggle('active',active);tab.setAttribute('aria-selected',String(active));});
+    panes.forEach(pane=>{const active=pane.dataset.rcPane===name;pane.hidden=!active;pane.classList.toggle('active',active);});
+    if(name!=='channels') menu.hidden=true;
+  };
+  const renderChannels=()=>{
+    list.innerHTML='';
+    selected.forEach((name,index)=>{
+      const chip=document.createElement('button');
+      chip.type='button';
+      chip.className='rc-channel-chip';
+      chip.textContent=`# ${name} ×`;
+      chip.addEventListener('click',()=>{selected.splice(index,1);renderChannels();});
+      list.append(chip);
+    });
+    empty.hidden=selected.length>0;
+  };
+  const hide=()=>{modal.hidden=true;menu.hidden=true;search.value='';opener?.focus();};
+  document.querySelectorAll('[data-manage-roles-channels]').forEach(button=>button.addEventListener('click',()=>{
+    opener=button;
+    modal.hidden=false;
+    selectTab('roles');
+    close?.focus();
+  }));
+  tabs.forEach(tab=>tab.addEventListener('click',()=>selectTab(tab.dataset.rcTab)));
+  close?.addEventListener('click',hide);
+  modal.addEventListener('click',event=>{if(event.target===modal) hide();});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!modal.hidden) hide();});
+  addChannel?.addEventListener('click',()=>{menu.hidden=!menu.hidden;if(!menu.hidden)search?.focus();});
+  modal.querySelectorAll('[data-preview-channel]').forEach(button=>button.addEventListener('click',()=>{
+    const name=button.dataset.previewChannel;
+    if(!selected.includes(name)) selected.push(name);
+    renderChannels();
+    menu.hidden=true;
+  }));
+  search?.addEventListener('input',()=>{
+    const q=search.value.trim().toLowerCase();
+    modal.querySelectorAll('[data-preview-channel]').forEach(button=>button.hidden=q&&!button.textContent.toLowerCase().includes(q));
+  });
+  renderChannels();
+})();
+
+(() => {
+  const modal=document.getElementById('format-links-modal');
+  if(!modal) return;
+  const close=document.getElementById('format-links-close');
+  let opener=null;
+  const hide=()=>{modal.hidden=true;opener?.focus();};
+  document.querySelectorAll('[data-format-links-open]').forEach(button=>button.addEventListener('click',()=>{opener=button;modal.hidden=false;close?.focus();}));
+  close?.addEventListener('click',hide);
+  modal.addEventListener('click',event=>{if(event.target===modal) hide();});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!modal.hidden) hide();});
+})();
+
+(() => {
+  const modal=document.getElementById('special-help-modal');
+  if(!modal) return;
+  const close=document.getElementById('special-help-close');
+  let opener=null;
+  const hide=()=>{modal.hidden=true;opener?.focus();};
+  document.querySelectorAll('[data-special-help-open]').forEach(button=>button.addEventListener('click',()=>{opener=button;modal.hidden=false;close?.focus();}));
+  close?.addEventListener('click',hide);
+  modal.addEventListener('click',event=>{if(event.target===modal) hide();});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!modal.hidden) hide();});
+})();
+
+(() => {
+  const modal=document.getElementById('roles-modal');
+  if(!modal) return;
+  const close=document.getElementById('roles-modal-close');
+  let opener=null;
+  const hide=()=>{modal.hidden=true; opener?.focus();};
+  document.querySelectorAll('[data-manage-roles]').forEach(button=>button.addEventListener('click',()=>{opener=button; modal.hidden=false; close?.focus();}));
+  close?.addEventListener('click',hide);
+  modal.addEventListener('click',event=>{if(event.target===modal) hide();});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!modal.hidden) hide();});
 })();

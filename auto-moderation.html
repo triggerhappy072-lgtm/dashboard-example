@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173c31">
+  <title>Auto moderation | Next Step</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="home.html" aria-label="Next Step home">
+      <span class="brand-mark" aria-hidden="true">NS</span>
+      <span class="brand-name">Next Step</span>
+    </a>
+
+    <div class="account-area">
+      <button class="account-button" id="account-button" type="button" aria-label="Select Discord account" aria-expanded="false" aria-controls="account-menu">
+        <span class="account-avatar" aria-hidden="true">?</span>
+        <span>Select Discord account</span>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+      </button>
+      <div class="account-menu" id="account-menu" hidden>
+        <p>No Discord account connected.</p>
+        <a href="index.html">Go to sign in</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="app-layout">
+    <aside class="sidebar" aria-label="Dashboard navigation">
+      <div class="sidebar-heading">
+        <span class="eyebrow">CONTROL PANEL</span>
+        <h2>Workspace</h2>
+      </div>
+
+      <label class="search-box" for="feature-search">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="m13.2 13.2 4 4"/></svg>
+        <input id="feature-search" type="search" placeholder="Search settings" autocomplete="off">
+        <kbd>/</kbd>
+      </label>
+      <p class="search-hint">Search categories, tabs, and functions</p>
+
+      <nav class="feature-navigation" id="feature-navigation" aria-label="Features">
+        <a class="home-nav" href="home.html" data-view="Home" aria-current="page">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m2.5 9 7.5-6 7.5 6v8.2a.8.8 0 0 1-.8.8h-4.4v-5.2H8v5.2H3.3a.8.8 0 0 1-.8-.8Z"/></svg>
+          <span>Home</span>
+        </a>
+
+        <div class="nav-groups">
+          <section class="nav-group" data-category="General">
+            <button class="category-heading" type="button" aria-expanded="true">
+              <span>General</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+            </button>
+            <div class="nav-items">
+              <div class="feature-row"><a class="feature-link" href="general-settings.html" data-view="General Settings" data-search="language date format error log manager roles permissions backups settings">General Settings</a></div>
+              <div class="feature-row"><a class="feature-link" href="commands.html" data-view="Commands" data-search="custom slash prefix aliases cooldown commands">Commands</a></div>
+              <div class="feature-row"><a class="feature-link" href="messages.html" data-view="Messages" data-search="templates scheduled welcome automated messages">Messages</a></div>
+              <div class="feature-row"><a class="feature-link" href="appearance.html" data-view="Appearance" data-search="bot profile avatar banner status activity appearance">Appearance</a></div>
+            </div>
+          </section>
+
+          <section class="nav-group" data-category="Moderation">
+            <button class="category-heading" type="button" aria-expanded="true"><span>Moderation</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+            <div class="nav-items">
+              <div class="feature-row"><a class="feature-link active" href="auto-moderation.html" data-view="Auto moderation" data-search="automod filters triggers spam links" aria-current="page">Auto moderation</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Auto moderation" aria-label="Toggle Auto moderation"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="moderation.html" data-view="Moderation" data-search="cases bans kicks mutes warns reports">Moderation</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Moderation" aria-label="Toggle Moderation"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="raid-protection.html" data-view="Raid protection" data-search="raid join guard security protection">Raid protection</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Raid protection" aria-label="Toggle Raid protection"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="roles.html" data-view="Roles" data-search="join roles reaction roles sticky roles">Roles</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Roles" aria-label="Toggle Roles"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="logging.html" data-view="Logging" data-search="audit log channels events">Logging</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Logging" aria-label="Toggle Logging"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="backups.html" data-view="Backups" data-search="export import restore archive">Backups</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Backups" aria-label="Toggle Backups"><span></span></label></div>
+            </div>
+          </section>
+
+          <section class="nav-group" data-category="Notifications">
+            <button class="category-heading" type="button" aria-expanded="true"><span>Notifications</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+            <div class="nav-items">
+              <div class="feature-row"><a class="feature-link" href="social-notifications.html" data-view="Social Notifications" data-search="email google forms youtube integrations">Social Notifications</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Social Notifications" aria-label="Toggle Social Notifications"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="bump-reminders.html" data-view="Bump Reminders" data-search="bump reminders ranking">Bump Reminders</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Bump Reminders" aria-label="Toggle Bump Reminders"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="welcome-messages.html" data-view="Welcome Messages" data-search="join leave messages welcome">Welcome Messages</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Welcome Messages" aria-label="Toggle Welcome Messages"><span></span></label></div>
+            </div>
+          </section>
+
+          <section class="nav-group" data-category="Community">
+            <button class="category-heading" type="button" aria-expanded="true"><span>Community</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+            <div class="nav-items">
+              <div class="feature-row"><a class="feature-link" href="levels.html" data-view="Levels" data-search="xp experience ranking level rewards">Levels</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Levels" aria-label="Toggle Levels"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="anonymous-messages.html" data-view="Anonymous messages" data-search="anonymous anonymus confession messages">Anonymous messages</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Anonymous messages" aria-label="Toggle Anonymous messages"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="check-in-reminders.html" data-view="Check-in reminders" data-search="check in check-in reminders">Check-in reminders</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Check-in reminders" aria-label="Toggle Check-in reminders"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="translator.html" data-view="Translator" data-search="translation language translate">Translator</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Translator" aria-label="Toggle Translator"><span></span></label></div>
+            </div>
+          </section>
+
+          <section class="nav-group" data-category="Experimental">
+            <button class="category-heading" type="button" aria-expanded="true"><span>Experimental</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+            <div class="nav-items">
+              <div class="feature-row"><a class="feature-link" href="ai-moderation.html" data-view="AI moderation" data-search="artificial intelligence ai moderation experimental">AI moderation</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="AI moderation" aria-label="Toggle AI moderation"><span></span></label></div>
+              <div class="feature-row"><a class="feature-link" href="profile-checker.html" data-view="Profile checker" data-search="profile checker experimental">Profile checker</a><label class="feature-switch"><input type="checkbox" checked data-feature-toggle="Profile checker" aria-label="Toggle Profile checker"><span></span></label></div>
+            </div>
+          </section>
+        </div>
+        <p class="no-results" id="no-results" hidden>No matching features.</p>
+      </nav>
+      <div class="sidebar-footer"><span class="footer-dot"></span>Next Step control panel</div>
+    </aside>
+
+    <main class="main-content">
+      <section id="home-view" class="page-view automod-page" aria-labelledby="automod-title">
+<div class="sapph-page-title"><span class="sapph-title-icon" aria-hidden="true">&#9881;</span><h1 id="automod-title">Auto Moderation</h1><span class="sapph-help" aria-label="Help">?</span></div>
+        <div class="sapph-automod-list">
+          <article class="sapph-automod-row"><span class="sapph-row-icon">AI</span><div><h2>AI Moderation</h2><p>Use artificial intelligence to assist you in moderating your server.</p></div><button class="sapph-action" id="ai-setup-open" type="button">Set up</button></article>
+<article class="sapph-automod-row"><span class="sapph-row-icon">&#9670;</span><div><h2>Discord&rsquo;s built-in auto moderation</h2><p>Specify additional actions for Discord&rsquo;s built-in auto moderation.</p></div><button class="sapph-chevron" type="button" aria-label="Open Discord auto moderation">&rsaquo;</button></article>
+<article class="sapph-automod-row"><span class="sapph-row-icon">&#9783;</span><div><h2>Advanced auto moderation</h2><p>Prevent spam, sending invites or other types of messages using Next Step&rsquo;s advanced auto moderation.</p></div><button class="sapph-chevron" id="advanced-automod-open" type="button" aria-label="Open advanced auto moderation">&rsaquo;</button></article>
+<article class="sapph-automod-row"><span class="sapph-row-icon">&#9671;</span><div><h2>Join Guard</h2><p>Protect your server against new accounts or bots.</p></div><button class="sapph-action" type="button">Set up</button></article>
+<article class="sapph-automod-row"><span class="sapph-row-icon">&#9656;</span><div><h2>Auto-delete thread creation system message</h2><p>If enabled, automatically deletes the system message which indicates that someone opened a thread below a message in selected channels.</p></div><button class="sapph-action" type="button">Set up</button></article>
+        </div>
+      </section>
+      <section id="advanced-automod-view" class="page-view automod-page advanced-automod-page" aria-labelledby="advanced-automod-title" hidden>
+        <div class="sapph-page-title advanced-page-title">
+<button class="advanced-back" id="advanced-automod-back" type="button" aria-label="Back to Auto Moderation">&lsaquo;</button>
+<button class="advanced-title-home" type="button" data-advanced-home aria-label="Back to Auto Moderation"><span class="sapph-title-icon" aria-hidden="true">&#9881;</span><span>Auto Moderation</span></button>
+<h1 id="advanced-automod-title"><span class="advanced-title-chevron">&rsaquo;</span> <span>Advanced auto moderation</span></h1>
+          <span class="sapph-help" aria-label="Help">?</span>
+        </div>
+        <div class="advanced-rule-grid">
+<article class="advanced-rule-card" data-rule="spam" data-kind="condition"><h2>Spam</h2><p>Take actions when a user sends messages too fast.</p><div class="advanced-rule-actions"><button type="button" class="advanced-secondary" data-manage-roles>Manage roles</button><button type="button" class="advanced-primary" data-add-rule>Add condition</button></div><div class="advanced-empty"><strong>No actions set</strong><span>Start by adding a condition</span></div><div class="rule-builders"></div></article>
+<article class="advanced-rule-card" data-rule="channel-spam" data-kind="condition"><h2>Channel spam</h2><p>Take actions when a user sends messages across multiple channels too fast.</p><div class="advanced-rule-actions"><button type="button" class="advanced-secondary" data-manage-roles>Manage roles</button><button type="button" class="advanced-primary" data-add-rule>Add condition</button></div><div class="advanced-empty"><strong>No actions set</strong><span>Start by adding a condition</span></div><div class="rule-builders"></div></article>
+<article class="advanced-rule-card" data-rule="mentions" data-kind="condition"><h2>Mentions</h2><p>Take actions when a user mentions too many users in a short time.</p><div class="advanced-rule-actions"><button type="button" class="advanced-secondary" data-manage-roles>Manage roles</button><button type="button" class="advanced-primary" data-add-rule>Add condition</button></div><div class="advanced-empty"><strong>No actions set</strong><span>Start by adding a condition</span></div><div class="rule-builders"></div></article>
+<article class="advanced-rule-card" data-rule="attachments" data-kind="condition"><h2>Attachments</h2><p>Take actions when a user sends too many attachments in a short time.</p><div class="advanced-rule-actions"><button type="button" class="advanced-secondary" data-manage-roles>Manage roles</button><button type="button" class="advanced-primary" data-add-rule>Add condition</button></div><div class="advanced-empty"><strong>No actions set</strong><span>Start by adding a condition</span></div><div class="rule-builders"></div></article>
+<article class="advanced-rule-card" data-rule="emojis" data-kind="condition"><h2>Emojis</h2><p>Take actions when a user sends too many emojis in a short time.</p><div class="advanced-rule-actions"><button type="button" class="advanced-secondary" data-manage-roles>Manage roles</button><button type="button" class="advanced-primary" data-add-rule>Add condition</button></div><div class="advanced-empty"><strong>No actions set</strong><span>Start by adding a condition</span></div><div class="rule-builders"></div></article>
+<article class="advanced-rule-card" data-rule="message-lines" data-kind="condition"><h2>Message lines</h2><p>Take actions when a user sends too many message lines (large messages) in a short time.</p><div class="advanced-rule-actions"><button type="button" class="advanced-secondary" data-manage-roles>Manage roles</button><button type="button" class="advanced-primary" data-add-rule>Add condition</button></div><div class="advanced-empty"><strong>No actions set</strong><span>Start by adding a condition</span></div><div class="rule-builders"></div></article>
+<article class="advanced-rule-card" data-rule="capitalization" data-kind="condition"><h2>Capitalization</h2><p>Take actions when a user's message has too many capitalized letters.</p><div class="advanced-rule-actions"><button type="button" class="advanced-secondary" data-manage-roles>Manage roles</button><button type="button" class="advanced-primary" data-add-rule>Add condition</button></div><div class="advanced-empty"><strong>No actions set</strong><span>Start by adding a condition</span></div><div class="rule-builders"></div></article>
+<article class="advanced-rule-card" data-rule="words" data-kind="group"><h2>Words</h2><p>Take actions when a user's message includes certain words.</p><div class="advanced-rule-actions"><button type="button" class="advanced-secondary" data-manage-roles-channels>Manage roles and channels</button><button type="button" class="advanced-primary" data-add-rule>Add group</button></div><div class="advanced-empty"><strong>No words set</strong><span>Start by adding a group</span></div><div class="rule-builders"></div></article>
+<article class="advanced-rule-card" data-rule="links" data-kind="group"><h2>Links</h2><p>Take actions when a user's message includes links.</p><button type="button" class="advanced-help-button" data-format-links-open>How to format links</button><div class="advanced-rule-actions"><button type="button" class="advanced-secondary" data-manage-roles-channels>Manage roles and channels</button><button type="button" class="advanced-primary" data-add-rule>Add group</button></div><div class="advanced-empty"><strong>No links set</strong><span>Start by adding a group</span></div><div class="rule-builders"></div></article>
+<article class="advanced-rule-card" data-rule="invites" data-kind="group"><h2>Invites</h2><p>Take actions when a user's message includes a Discord invite.</p><div class="advanced-rule-actions"><button type="button" class="advanced-secondary" data-manage-roles-channels>Manage roles and channels</button><button type="button" class="advanced-primary" data-add-rule>Add group</button></div><div class="advanced-empty"><strong>No invites set</strong><span>Start by adding a group</span></div><div class="rule-builders"></div></article>
+<article class="advanced-rule-card" data-rule="polls" data-kind="condition"><h2>Polls</h2><p>Take actions when a user's message includes a native Discord poll.</p><div class="advanced-rule-actions"><button type="button" class="advanced-secondary" data-manage-roles>Manage roles</button><button type="button" class="advanced-primary" data-add-rule>Add condition</button></div><div class="advanced-empty"><strong>No actions set</strong><span>Start by adding a condition</span></div><div class="rule-builders"></div></article>
+<div class="advanced-divider" aria-hidden="true"></div>
+<article class="advanced-rule-card" data-rule="warns" data-kind="condition"><h2>Warns</h2><p>Take actions when a user gets warned too often</p><div class="advanced-rule-actions"><button type="button" class="advanced-secondary" data-manage-roles>Manage roles</button><button type="button" class="advanced-primary" data-add-rule>Add condition</button></div><div class="advanced-empty"><strong>No actions set</strong><span>Start by adding a condition</span></div><div class="rule-builders"></div></article>
+<article class="advanced-rule-card" data-rule="special-channels" data-kind="condition"><h2>Special channels</h2><p>Limit certain channels to specific message contents (e. g. only images, videos, emojis, ...).</p><button type="button" class="advanced-help-button" data-special-help-open>How to use this module</button><div class="advanced-rule-actions"><button type="button" class="advanced-secondary" data-manage-roles>Manage roles</button><button type="button" class="advanced-primary" data-add-rule>Add condition</button></div><div class="advanced-empty"><strong>No actions set</strong><span>Start by adding a condition</span></div><div class="rule-builders"></div></article>
+        </div>
+      </section>
+      <div class="sapph-modal-backdrop" id="roles-channels-modal" hidden>
+        <section class="roles-channels-modal" role="dialog" aria-modal="true" aria-labelledby="roles-channels-title">
+          <button class="roles-channels-close" id="roles-channels-close" type="button" aria-label="Close">&times;</button>
+          <div class="roles-channels-tabs" role="tablist" aria-label="Roles and channels">
+            <button type="button" class="roles-channels-tab active" data-rc-tab="roles" role="tab" aria-selected="true">Roles</button>
+            <button type="button" class="roles-channels-tab" data-rc-tab="channels" role="tab" aria-selected="false">Channels</button>
+          </div>
+          <div class="roles-channels-pane active" data-rc-pane="roles">
+            <p>Set roles which won't be punished or only be punished.</p>
+            <div class="roles-mode-row"><strong>The following roles will be</strong><select><option selected>excluded</option><option>included</option></select><strong>:</strong></div>
+            <button class="roles-empty" type="button"><span>+</span> No roles added</button>
+          </div>
+          <div class="roles-channels-pane" data-rc-pane="channels" hidden>
+            <p>Set channels which ignore specific words/groups or exclude/include roles</p>
+            <div class="rc-channel-actions"><button type="button" class="rc-add-channel" data-rc-add-channel>Add channel</button></div>
+            <div class="rc-channel-panel"><div class="rc-channel-list"></div><div class="rc-channel-empty">No channels added</div></div>
+            <div class="rc-channel-menu" data-rc-channel-menu hidden>
+              <input type="search" placeholder="Channel" data-rc-channel-search>
+              <div class="rc-channel-group"><strong>Preview data</strong><button type="button" data-preview-channel="preview-data-1"># Preview data</button><button type="button" data-preview-channel="preview-data-2"># Preview data 2</button></div>
+              <div class="rc-channel-group"><strong>Preview data</strong><button type="button" data-preview-channel="preview-data-3"># Preview data 3</button><button type="button" data-preview-channel="preview-data-4"># Preview data 4</button></div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="sapph-modal-backdrop" id="format-links-modal" hidden>
+        <section class="format-links-modal" role="dialog" aria-modal="true" aria-labelledby="format-links-title">
+          <button class="format-links-close" id="format-links-close" type="button" aria-label="Close">&times;</button>
+          <h2 id="format-links-title">How to format links</h2>
+          <p class="format-links-intro">Use the following formatting guidelines to white-/blacklist links properly.</p>
+          <p class="format-links-note">Note: if the group is as a blacklist, the allowed and blocked work in reverse.</p>
+          <div class="format-links-list">
+            <details open>
+              <summary>Just domain</summary>
+              <p>Matches all links with that domain or specific sub domain ignoring the path.</p>
+            </details>
+            <details open>
+              <summary>Ending with <code>/</code></summary>
+              <p>Matches exact domain (or sub domain) with no or exact path.</p>
+            </details>
+            <details open>
+              <summary>Ending with a specific path or <code>/*</code></summary>
+              <p>Matches domain (or sub domain) and path.</p>
+            </details>
+          </div>
+        </section>
+      </div>
+      <div class="sapph-modal-backdrop" id="special-help-modal" hidden>
+        <section class="special-help-modal" role="dialog" aria-modal="true" aria-labelledby="special-help-title">
+          <button class="special-help-close" id="special-help-close" type="button" aria-label="Close">&times;</button>
+          <h2 id="special-help-title">Special channels</h2>
+          <p class="special-help-intro">Use this module to create media only, emoji only, etc. channels.</p>
+          <ul class="special-help-list">
+            <li>Start by <span>adding a condition</span>.</li>
+            <li>Select <span>at least one channel</span> this condition should be active in by clicking on the hashtag.</li>
+            <li>Click on the box which says "Only ..." to set which <span>content types</span> should be allowed in the just selected channels.</li>
+            <li>The actions of a condition will be executed, if a message includes a <span>not-selected</span> content type.</li>
+          </ul>
+        </section>
+      </div>
+      <div class="sapph-modal-backdrop" id="roles-modal" hidden>
+        <section class="sapph-modal roles-modal" role="dialog" aria-modal="true" aria-labelledby="roles-modal-title">
+          <button class="sapph-modal-close" id="roles-modal-close" type="button" aria-label="Close">&times;</button>
+          <h2 id="roles-modal-title">Roles</h2>
+          <p class="roles-modal-copy">Set roles which won't be punished or only be punished.</p>
+          <div class="roles-mode-row"><strong>The following roles will be</strong><select id="roles-mode"><option selected>excluded</option><option>included</option></select><strong>:</strong></div>
+          <button class="roles-empty" type="button"><span>+</span> No roles added</button>
+        </section>
+      </div>
+      <div class="sapph-modal-backdrop" id="group-roles-modal" hidden>
+        <section class="sapph-modal roles-modal" role="dialog" aria-modal="true" aria-labelledby="group-roles-title">
+          <button class="sapph-modal-close" id="group-roles-close" type="button" aria-label="Close">&times;</button>
+          <h2 id="group-roles-title">Group Roles</h2>
+          <p class="roles-modal-copy">Set roles which won't be punished or only be punished for this group.</p>
+          <div class="roles-mode-row"><strong>The following roles will be</strong><select><option selected>excluded</option><option>included</option></select><strong>:</strong></div>
+          <button class="roles-empty" type="button"><span>+</span> No roles added</button>
+        </section>
+      </div>
+      <div class="sapph-modal-backdrop" id="group-editor-modal" hidden>
+        <section class="group-editor-modal" role="dialog" aria-modal="true" aria-labelledby="group-editor-title">
+          <button class="group-editor-close" id="group-editor-close" type="button" aria-label="Close">&times;</button>
+          <h2 id="group-editor-title">Group</h2>
+          <div class="group-editor-toolbar">
+            <strong id="group-editor-kind">Items</strong>
+            <span class="group-editor-tools" aria-hidden="true">↥ &nbsp; ↧ &nbsp; ⊘ &nbsp; A≠ &nbsp; ☷</span>
+          </div>
+          <div class="group-editor-area">
+            <div class="group-editor-entry-row"><input id="group-editor-entry" type="text" placeholder="New item"><button id="group-editor-entry-add" type="button">+</button></div>
+            <div id="group-editor-items" class="group-editor-items"></div>
+          </div>
+        </section>
+      </div>
+      <div class="automod-unsaved-bar" id="automod-unsaved-bar" hidden>
+        <strong>Careful — you have unsaved changes!</strong>
+        <div><button type="button" id="automod-reset">Reset</button><button type="button" id="automod-save">Save changes</button></div>
+      </div>
+      <div class="sapph-modal-backdrop" id="ai-setup-modal" hidden>
+        <section class="sapph-modal" role="dialog" aria-modal="true" aria-labelledby="ai-setup-title">
+          <button class="sapph-modal-close" id="ai-setup-close" type="button" aria-label="Close">&times;</button>
+          <h2 id="ai-setup-title">Set up AI Moderation</h2>
+          <ul class="sapph-check-list"><li>Auto-Detect inappropriate content</li><li>Report detected content to moderators</li><li>Automatically take action on detected content</li></ul>
+          <div class="sapph-modal-note"><p>10 messages per minute are scanned (increasable).<br>This might change in the future.</p><p>Your data will not be used to train AI models.</p></div>
+          <div class="sapph-modal-actions"><button class="sapph-cancel" id="ai-setup-cancel" type="button">Never mind</button><button class="sapph-action" type="button">Start setup</button></div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
