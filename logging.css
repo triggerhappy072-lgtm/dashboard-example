@@ -1,0 +1,722 @@
+.logging-main {
+  overflow:auto
+}
+
+.logging-page {
+  max-width:1120px;
+  padding:26px 0 52px;
+  color:var(--ink)
+}
+
+.logging-heading-row {
+  min-height:76px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:26px;
+  margin-bottom:16px
+}
+
+.logging-title-wrap {
+  display:flex;
+  align-items:center;
+  gap:16px
+}
+
+.logging-title-wrap h1 {
+  margin:0;
+  font:800 36px/1 Manrope,"Segoe UI",sans-serif
+}
+
+.logging-title-icon {
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center
+}
+
+.logging-title-icon svg {
+  width:38px;
+  height:38px;
+  fill:none;
+  stroke:#f1f5f2;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round
+}
+
+.logging-help {
+  width:30px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  border:2px solid #e9efeb;
+  border-radius:5px;
+  background:transparent;
+  color:#e9efeb;
+  font-size:20px;
+  font-weight:800;
+  cursor:pointer
+}
+
+.logging-tabs {
+  align-self:end;
+  display:flex;
+  gap:0;
+  border-bottom:1px solid #3c4540;
+  width:max-content
+}
+
+.logging-tab {
+  min-width:92px;
+  height:42px;
+  padding:0 14px;
+  border:0;
+  border-bottom:2px solid transparent;
+  background:transparent;
+  color:#a8b1ab;
+  font-weight:800;
+  cursor:pointer
+}
+
+.logging-tab.active {
+  border-bottom-color:var(--green-bright);
+  color:#fff
+}
+
+.logging-intro {
+  margin:4px 0 28px;
+  padding:0 0 0 14px;
+  border-left:3px solid #dfe8e2
+}
+
+.logging-intro p {
+  margin:0;
+  color:#eef3ef;
+  font-size:16px;
+  line-height:1.3
+}
+
+.logging-search {
+  height:46px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:0 13px;
+  margin-bottom:22px;
+  border:1px solid #303933;
+  border-radius:7px;
+  background:#1b211e
+}
+
+.logging-search input {
+  flex:1;
+  min-width:0;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:#fff;
+  font-size:15px
+}
+
+.logging-search input::placeholder {
+  color:#7f8a83
+}
+
+.logging-search svg {
+  width:20px;
+  height:20px;
+  fill:none;
+  stroke:#eff4f1;
+  stroke-width:2
+}
+
+.logging-toolbar {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  padding-bottom:10px
+}
+
+.logging-toolbar button,.logging-mass-bar button {
+  min-height:42px;
+  padding:0 14px;
+  border:1px solid #303833;
+  border-radius:7px;
+  background:#151a17;
+  color:#fff;
+  font-weight:800;
+  cursor:pointer
+}
+
+.logging-toolbar button:hover,.logging-mass-bar button:hover {
+  background:#202823
+}
+
+.logging-mass-bar {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:0 0 12px;
+  border-bottom:1px solid #303833
+}
+
+.logging-mass-bar[hidden] {
+  display:none
+}
+
+.logging-mass-divider {
+  width:1px;
+  height:24px;
+  background:#657169
+}
+
+.logging-mass-bar strong {
+  font-size:14px
+}
+
+.logging-toolbar button.active {
+  background:var(--green);
+  border-color:var(--green)
+}
+
+.logging-toolbar button:disabled,.logging-set-category:disabled,.logging-add-channel:disabled {
+  opacity:.42;
+  cursor:not-allowed
+}
+
+.logging-toolbar button:disabled:hover,.logging-set-category:disabled:hover {
+  background:inherit
+}
+
+.logging-categories {
+  display:grid
+}
+
+.logging-category {
+  border-bottom:1px solid #303833
+}
+
+.logging-category-row {
+  min-height:78px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px
+}
+
+.logging-category-check,.logging-type-check {
+  display:none
+}
+
+.mass-editing .logging-category-row {
+  grid-template-columns:auto minmax(0,1fr) auto
+}
+
+.mass-editing .logging-category-check,.mass-editing .logging-type-check {
+  display:block
+}
+
+.logging-category-toggle {
+  display:flex;
+  align-items:center;
+  gap:11px;
+  border:0;
+  background:transparent;
+  color:#fff;
+  font:750 21px Manrope,"Segoe UI",sans-serif;
+  cursor:pointer;
+  text-align:left;
+  padding:0
+}
+
+.logging-category-toggle svg {
+  width:16px;
+  height:16px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  transition:transform .15s ease
+}
+
+.logging-category[aria-expanded="true"] .logging-category-toggle svg {
+  transform:rotate(180deg)
+}
+
+.logging-set-category {
+  justify-self:end;
+  width:max-content;
+  min-height:42px;
+  padding:0 14px;
+  border:1px solid #343e38;
+  border-radius:7px;
+  background:transparent;
+  color:#fff;
+  font-weight:750;
+  cursor:pointer
+}
+
+.logging-set-category:hover {
+  background:#202823
+}
+
+.logging-category-body {
+  display:grid;
+  gap:8px;
+  padding:0 0 16px 34px
+}
+
+.logging-category-body[hidden] {
+  display:none
+}
+
+.logging-type-row {
+  min-height:56px;
+  padding:9px 10px;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) minmax(220px,auto);
+  align-items:center;
+  gap:10px;
+  border:1px solid #333d37;
+  border-radius:7px;
+  background:#171d19
+}
+
+.logging-type-name {
+  font-weight:700
+}
+
+.logging-type-channels {
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:6px;
+  flex-wrap:wrap
+}
+
+.logging-channel-chip {
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:4px 6px;
+  border:1px solid #416451;
+  border-radius:5px;
+  background:#234c3a;
+  color:#e8f7ef;
+  font-size:12px;
+  font-weight:800
+}
+
+.logging-channel-chip button {
+  border:0;
+  background:transparent;
+  color:#fff;
+  cursor:pointer;
+  line-height:1
+}
+
+.logging-channel-label {
+  padding:2px 3px!important;
+  font-size:12px;
+  font-weight:800
+}
+
+.logging-channel-chip>[data-remove-channel] {
+  font-size:15px
+}
+
+.logging-add-channel {
+  min-width:100px;
+  height:34px;
+  padding:0 11px;
+  display:grid;
+  place-items:center;
+  border:1px solid #3b463f;
+  border-radius:5px;
+  background:#252d28;
+  color:#fff;
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer
+}
+
+.logging-add-channel.compact {
+  min-width:31px;
+  width:31px;
+  padding:0;
+  font-size:21px
+}
+
+.logging-type-row.hidden-by-search,.logging-category.hidden-by-search {
+  display:none
+}
+
+.logging-settings-list {
+  display:grid;
+  gap:10px
+}
+
+.logging-setting-card,.logging-ignore-card {
+  min-height:82px;
+  padding:16px 18px;
+  border:1px solid #303833;
+  border-radius:8px;
+  background:#1b211e
+}
+
+.logging-setting-card {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px
+}
+
+.logging-setting-card>span:first-child {
+  display:grid;
+  gap:4px
+}
+
+.logging-setting-card strong,.logging-ignore-card h2 {
+  font:750 20px Manrope,"Segoe UI",sans-serif;
+  color:#fff
+}
+
+.logging-setting-card small,.logging-ignore-card p {
+  color:#b3bdb6;
+  font-size:14px;
+  line-height:1.35
+}
+
+.logging-setting-card small a {
+  color:var(--green-bright);
+  font-weight:700;
+  text-decoration:none
+}
+
+.logging-setting-card small a:hover {
+  text-decoration:underline
+}
+
+.logging-ignore-card h2 {
+  margin:0 0 4px
+}
+
+.logging-ignore-card p {
+  margin:0 0 12px
+}
+
+.logging-inline-picker {
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap
+}
+
+.logging-inline-picker>div:not(.logging-inline-menu) {
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap
+}
+
+.logging-inline-picker [data-inline-add] {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border:0;
+  background:transparent;
+  color:#bac5be;
+  font-weight:700;
+  cursor:pointer
+}
+
+.logging-inline-picker [data-inline-add]>span {
+  display:grid;
+  place-items:center;
+  width:29px;
+  height:29px;
+  border-radius:5px;
+  background:#35413a;
+  color:#fff;
+  font-size:21px
+}
+
+.logging-inline-menu {
+  position:absolute;
+  left:0;
+  top:38px;
+  z-index:50;
+  width:250px;
+  padding:8px;
+  border:1px solid #354139;
+  border-radius:7px;
+  background:#151a17;
+  box-shadow:0 16px 36px rgba(0,0,0,.5)
+}
+
+.logging-inline-menu input {
+  width:100%;
+  height:36px;
+  margin-bottom:6px;
+  border:1px solid #3a463f;
+  border-radius:5px;
+  background:#1b211e;
+  color:#fff;
+  padding:0 9px
+}
+
+.logging-inline-menu button {
+  display:block;
+  width:100%;
+  padding:8px;
+  border:0;
+  border-radius:5px;
+  background:transparent;
+  color:#fff;
+  text-align:left;
+  cursor:pointer
+}
+
+.logging-inline-menu button:hover {
+  background:#253129
+}
+
+.logging-user-form {
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px
+}
+
+.logging-user-form input {
+  height:40px;
+  border:1px solid #354139;
+  border-radius:6px;
+  background:#171d19;
+  color:#fff;
+  padding:0 11px
+}
+
+.logging-user-form button {
+  min-width:72px;
+  border:1px solid var(--green);
+  border-radius:6px;
+  background:var(--green);
+  color:#fff;
+  font-weight:800;
+  cursor:pointer
+}
+
+.logging-user-list {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:8px
+}
+
+.logging-user-chip {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 9px;
+  border:1px solid #3d5f4e;
+  border-radius:5px;
+  background:#234c3a;
+  font-weight:700
+}
+
+.logging-user-chip button {
+  border:0;
+  background:transparent;
+  color:#fff;
+  cursor:pointer
+}
+
+.logging-modal-overlay {
+  position:fixed;
+  inset:0;
+  z-index:1500;
+  display:grid;
+  place-items:center;
+  background:rgba(0,0,0,.76)
+}
+
+.logging-modal {
+  position:relative;
+  width:min(420px,calc(100vw - 28px));
+  max-height:calc(100vh - 40px);
+  overflow:auto;
+  padding:20px;
+  border:1px solid #303833;
+  border-radius:9px;
+  background:#1b211e;
+  box-shadow:0 26px 80px rgba(0,0,0,.6)
+}
+
+.logging-modal h2 {
+  margin:0 34px 16px 0;
+  font:800 25px Manrope,"Segoe UI",sans-serif;
+  text-align:center
+}
+
+.logging-modal-close {
+  position:absolute;
+  right:10px;
+  top:6px;
+  border:0;
+  background:transparent;
+  color:#fff;
+  font-size:28px;
+  cursor:pointer
+}
+
+.logging-modal-copy {
+  text-align:center;
+  color:#e9efeb;
+  font-size:16px
+}
+
+.logging-channel-search {
+  height:40px;
+  width:100%;
+  margin-bottom:8px;
+  border:1px solid #3b4740;
+  border-radius:6px;
+  background:#171d19;
+  color:#fff;
+  padding:0 10px
+}
+
+.logging-channel-options {
+  max-height:260px;
+  overflow:auto;
+  padding:6px;
+  border:1px solid #313c35;
+  border-radius:6px;
+  background:#131815
+}
+
+.logging-channel-group {
+  padding:7px 8px;
+  color:#97a49c;
+  font-size:11px;
+  font-weight:800
+}
+
+.logging-channel-option {
+  display:block;
+  width:100%;
+  padding:8px;
+  border:0;
+  border-radius:5px;
+  background:transparent;
+  color:#fff;
+  text-align:left;
+  font-weight:750;
+  cursor:pointer
+}
+
+.logging-channel-option:hover {
+  background:#253129
+}
+
+.logging-modal-note {
+  margin:12px 0 0;
+  color:#aab5ae;
+  text-align:center
+}
+
+.logging-modal-secondary {
+  display:block;
+  margin:8px auto 0;
+  min-height:36px;
+  padding:0 12px;
+  border:1px solid #3a443e;
+  border-radius:6px;
+  background:#252d28;
+  color:#fff;
+  font-weight:750;
+  cursor:pointer
+}
+
+.logging-copy-code {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:9px;
+  border:1px solid #354139;
+  border-radius:6px;
+  background:#131815
+}
+
+.logging-copy-code code {
+  min-width:0;
+  flex:1;
+  overflow-wrap:anywhere;
+  color:var(--green-bright)
+}
+
+.logging-copy-code button {
+  min-height:32px;
+  padding:0 10px;
+  border:1px solid #3b4840;
+  border-radius:5px;
+  background:#252d28;
+  color:#fff;
+  font-weight:800;
+  cursor:pointer
+}
+
+.logging-waiting {
+  margin:16px 0 2px;
+  color:#b8c3bc;
+  text-align:center;
+  font-weight:700
+}
+
+@media(max-width:760px) {
+  .logging-page {
+    padding-top:16px
+  }
+
+  .logging-heading-row {
+    grid-template-columns:1fr auto;
+    gap:12px
+  }
+
+  .logging-title-wrap h1 {
+    font-size:28px
+  }
+
+  .logging-tabs {
+    grid-column:1/-1;
+    grid-row:2
+  }
+
+  .logging-category-row {
+    grid-template-columns:auto 1fr
+  }
+
+  .logging-set-category {
+    grid-column:2;
+    justify-self:start;
+    margin-bottom:12px
+  }
+
+  .logging-category-body {
+    padding-left:0
+  }
+
+  .logging-type-row {
+    grid-template-columns:auto 1fr
+  }
+
+  .logging-type-channels {
+    grid-column:2;
+    justify-content:flex-start
+  }
+
+  .logging-setting-card {
+    align-items:flex-start
+  }
+
+}

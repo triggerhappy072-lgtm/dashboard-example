@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173c31">
+  <title>Logging | Next Step</title>
+  <link rel="stylesheet" href="style.css?v=logging-1">
+  <link rel="stylesheet" href="logging.css?v=6">
+  <script src="script.js" defer></script>
+  <script src="logging.js?v=5" defer></script>
+</head>
+<body class="dashboard-page" data-feature-page="Logging">
+  <header class="topbar">
+    <a class="brand" href="home.html" aria-label="Next Step home">
+      <span class="brand-mark" aria-hidden="true">NS</span>
+      <span class="brand-name">Next Step</span>
+    </a>
+    <div class="account-area">
+      <button class="account-button" id="account-button" type="button" aria-label="Select Discord account" aria-expanded="false" aria-controls="account-menu">
+        <span class="account-avatar" aria-hidden="true">?</span>
+        <span>Select Discord account</span>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+      </button>
+      <div class="account-menu" id="account-menu" hidden><p>No Discord account connected.</p><a href="index.html">Go to sign in</a></div>
+    </div>
+  </header>
+
+  <div class="app-layout">
+    <aside class="sidebar" aria-label="Dashboard navigation">
+      <div class="sidebar-heading"><div><span class="eyebrow">CONTROL PANEL</span><h2>Workspace</h2></div></div>
+      <label class="search-box" for="feature-search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="m13.2 13.2 4 4"/></svg><input id="feature-search" type="search" placeholder="Search settings" autocomplete="off"><kbd>/</kbd></label>
+      <p class="search-hint">Search categories, tabs, and functions</p>
+      <nav class="feature-navigation" id="feature-navigation" aria-label="Features"></nav>
+      <div class="sidebar-footer"><span class="footer-dot"></span>Next Step control panel</div>
+    </aside>
+
+    <main class="main-content logging-main">
+      <section class="logging-page" aria-labelledby="logging-title">
+        <div class="logging-heading-row">
+          <div class="logging-title-wrap">
+            <span class="logging-title-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="5" y="5" width="22" height="19" rx="2.5"/><path d="M9 12h14M9 17h9M7 27h18"/></svg></span>
+            <h1 id="logging-title">Logging</h1>
+          </div>
+          <div class="logging-tabs" role="tablist" aria-label="Logging sections">
+            <button class="logging-tab active" type="button" role="tab" aria-selected="true" data-log-tab="types">Types</button>
+            <button class="logging-tab" type="button" role="tab" aria-selected="false" data-log-tab="settings">Settings</button>
+          </div>
+          <button class="logging-help" type="button" aria-label="Logging help">?</button>
+        </div>
+
+        <div class="logging-view" id="logging-types-view">
+          <div class="logging-intro"><p>Log all actions happening in this server.<br>Click on a category's name to see all its log types.</p></div>
+          <label class="logging-search"><input id="logging-type-search" type="search" placeholder="Search for types" autocomplete="off"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m12.5 12.5 4 4"/></svg></label>
+          <div class="logging-toolbar">
+            <button type="button" data-set-all>Set channel for all types</button>
+            <button type="button" data-remove-all>Remove channel for all types</button>
+            <button type="button" data-mass-edit>Mass edit</button>
+          </div>
+          <div class="logging-mass-bar" data-mass-bar hidden>
+            <strong data-selected-label>0 types selected</strong>
+            <span class="logging-mass-divider" aria-hidden="true"></span>
+            <button type="button" data-mass-set>Set channel</button>
+            <button type="button" data-mass-remove>Remove channel</button>
+          </div>
+          <div class="logging-categories" id="logging-categories"></div>
+        </div>
+
+        <div class="logging-view" id="logging-settings-view" hidden>
+          <div class="logging-settings-list">
+            <label class="logging-setting-card"><span><strong>Use webhooks</strong><small>If enabled, Next Step creates a webhook per channel to send log messages.</small></span><span class="moderation-toggle"><input type="checkbox" checked><span></span></span></label>
+            <label class="logging-setting-card"><span><strong>Ignore embeds</strong><small>If enabled, messages including embeds are ignored from Logging.</small></span><span class="moderation-toggle"><input type="checkbox"><span></span></span></label>
+            <label class="logging-setting-card"><span><strong>Apply ignore to users in voice</strong><small>If enabled, voice log messages are not being sent when the user in the voice channel is ignored from Logging.</small></span><span class="moderation-toggle"><input type="checkbox"><span></span></span></label>
+            <label class="logging-setting-card"><span><strong>Log deleted polls with Message Delete</strong><small>Poll deletions are logged by two types: Poll Delete and Message Delete.<br>If disabled, only logs deleted polls with Poll Delete.</small></span><span class="moderation-toggle"><input type="checkbox" checked><span></span></span></label>
+            <label class="logging-setting-card"><span><strong>Log deleted sticky messages</strong><small><a href="messages.html">Templates</a> can be sticky messages. They are frequently deleted and sent again.<br>Disable this option to disable delete logging for sticky messages.</small></span><span class="moderation-toggle"><input type="checkbox" checked><span></span></span></label>
+            <label class="logging-setting-card"><span><strong>Log deleted forwarded messages</strong><small>If disabled, forwarded messages are not logged by Message Delete.</small></span><span class="moderation-toggle"><input type="checkbox" checked><span></span></span></label>
+            <label class="logging-setting-card"><span><strong>Log unrecognizable message deletions</strong><small>If enabled, Next Step will log deleted messages that are more than a year old and don't have a known executor.<br>These logs are usually not very useful as they contain no real data and can be very noisy.</small></span><span class="moderation-toggle"><input type="checkbox"><span></span></span></label>
+
+            <section class="logging-ignore-card"><h2>Ignore channels</h2><p>All actions that involve channels listed below are ignored from Logging.</p><div class="logging-inline-picker" data-inline-picker data-kind="Channel"><div data-inline-chips></div><button type="button" data-inline-add><span>+</span> No channels added</button></div></section>
+            <section class="logging-ignore-card"><h2>Ignore roles</h2><p>All actions from users with the roles listed below are ignored from Logging.</p><div class="logging-inline-picker" data-inline-picker data-kind="Role"><div data-inline-chips></div><button type="button" data-inline-add><span>+</span> No roles added</button></div></section>
+            <section class="logging-ignore-card"><h2>Ignore users</h2><p>All actions from users listed below are ignored from Logging.</p><form class="logging-user-form" id="logging-user-form"><input id="logging-user-id" type="text" placeholder="User ID"><button type="submit">Add</button></form><div class="logging-user-list" id="logging-user-list"></div></section>
+          </div>
+        </div>
+
+      </section>
+    </main>
+  </div>
+</body>
+</html>

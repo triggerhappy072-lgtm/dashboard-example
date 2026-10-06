@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173c31">
+  <title>Moderation | Next Step</title>
+  <link rel="stylesheet" href="style.css?v=moderation-1">
+  <link rel="stylesheet" href="moderation.css?v=3">
+  <script src="script.js" defer></script>
+  <script src="moderation.js?v=4" defer></script>
+</head>
+<body class="dashboard-page" data-feature-page="Moderation">
+  <header class="topbar">
+    <a class="brand" href="home.html" aria-label="Next Step home">
+      <span class="brand-mark" aria-hidden="true">NS</span>
+      <span class="brand-name">Next Step</span>
+    </a>
+    <div class="account-area">
+      <button class="account-button" id="account-button" type="button" aria-label="Select Discord account" aria-expanded="false" aria-controls="account-menu">
+        <span class="account-avatar" aria-hidden="true">?</span>
+        <span>Select Discord account</span>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+      </button>
+      <div class="account-menu" id="account-menu" hidden><p>No Discord account connected.</p><a href="index.html">Go to sign in</a></div>
+    </div>
+  </header>
+
+  <div class="app-layout">
+    <aside class="sidebar" aria-label="Dashboard navigation">
+      <div class="sidebar-heading"><div><span class="eyebrow">CONTROL PANEL</span><h2>Workspace</h2></div></div>
+      <label class="search-box" for="feature-search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="m13.2 13.2 4 4"/></svg><input id="feature-search" type="search" placeholder="Search settings" autocomplete="off"><kbd>/</kbd></label>
+      <p class="search-hint">Search categories, tabs, and functions</p>
+      <nav class="feature-navigation" id="feature-navigation" aria-label="Features"></nav>
+      <div class="sidebar-footer"><span class="footer-dot"></span>Next Step control panel</div>
+    </aside>
+
+    <main class="main-content">
+      <section class="page-view moderation-page" id="moderation-home-view" aria-labelledby="moderation-title">
+        <div class="moderation-page-title">
+          <span class="moderation-title-shield" aria-hidden="true"><svg viewBox="0 0 24 28"><path d="M12 1.5 21 4.6v7.2c0 6.6-3.6 11.8-9 14.7-5.4-2.9-9-8.1-9-14.7V4.6L12 1.5Z"/></svg></span>
+          <h1 id="moderation-title">Moderation</h1>
+          <button class="moderation-help" type="button" aria-label="Moderation help">?</button>
+        </div>
+
+        <div class="moderation-feature-grid">
+          <article class="moderation-feature-card moderation-feature-card-large">
+            <span class="moderation-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6.5h18v13H3z"/><path d="M7 6.5V4h6l2 2.5M7 11h10M7 15h7"/></svg></span>
+            <div class="moderation-card-copy"><h2>Cases</h2><p>Manage all ban, kick, mute and warn cases.</p></div>
+            <button class="moderation-card-action moderation-card-action-muted" type="button" data-moderation-route="cases">View cases</button>
+          </article>
+          <article class="moderation-feature-card moderation-feature-card-large">
+            <span class="moderation-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 20V4h3l1.3 2H19v8H9.3L8 12H5"/></svg></span>
+            <div class="moderation-card-copy"><h2>User reports</h2><p>Update this server's user report config.</p></div>
+            <button class="moderation-card-action moderation-card-action-primary" type="button" data-moderation-route="user-reports">Set up</button>
+          </article>
+        </div>
+
+        <div class="moderation-list" aria-label="Moderation settings">
+          <button class="moderation-list-row" type="button" data-moderation-route="staff-limitations"><span class="moderation-list-icon" aria-hidden="true">&#128737;</span><span class="moderation-list-copy"><strong>Staff limitations</strong><small>Configure permission limitations and review member permissions.</small></span><span class="moderation-chevron" aria-hidden="true">&rsaquo;</span></button>
+          <button class="moderation-list-row" type="button" data-moderation-route="tickets"><span class="moderation-list-icon" aria-hidden="true">&#127915;</span><span class="moderation-list-copy"><strong>Tickets</strong><small>Manage tickets.</small></span><span class="moderation-chevron" aria-hidden="true">&rsaquo;</span></button>
+          <button class="moderation-list-row" type="button" data-moderation-route="deletion-log"><span class="moderation-list-icon" aria-hidden="true">&#128465;</span><span class="moderation-list-copy"><strong>Deletion log</strong><small>View the deletion log.</small></span><span class="moderation-chevron" aria-hidden="true">&rsaquo;</span></button>
+          <button class="moderation-list-row" type="button" data-moderation-route="punish-settings"><span class="moderation-list-icon" aria-hidden="true">&#128296;</span><span class="moderation-list-copy"><strong>Punish settings</strong><small>Edit ban, kick, mute, warn and risk actions, default values and more.</small></span><span class="moderation-chevron" aria-hidden="true">&rsaquo;</span></button>
+          <button class="moderation-list-row" type="button" data-moderation-route="pending-punishments"><span class="moderation-list-icon" aria-hidden="true">&#9203;</span><span class="moderation-list-copy"><strong>Pending punishments</strong><small>Manage punishments waiting for members who left the server.</small></span><span class="moderation-chevron" aria-hidden="true">&rsaquo;</span></button>
+          <button class="moderation-list-row" type="button" data-moderation-route="immune-roles"><span class="moderation-list-icon" aria-hidden="true">&#128101;</span><span class="moderation-list-copy"><strong>Immune roles</strong><small>Set roles and members that are immune to moderation actions.</small></span><span class="moderation-chevron" aria-hidden="true">&rsaquo;</span></button>
+          <div class="moderation-list-row moderation-list-row-toggle"><span class="moderation-list-icon" aria-hidden="true">&#128276;</span><span class="moderation-list-copy"><strong>User notifications</strong><small>Toggle direct messages on punishments.</small></span><label class="moderation-toggle" aria-label="User notifications"><input type="checkbox" checked><span></span></label><button class="moderation-chevron-button" type="button" aria-label="Open User notifications" data-moderation-route="user-notifications">&rsaquo;</button></div>
+          <button class="moderation-list-row" type="button" data-moderation-route="predefined-reasons"><span class="moderation-list-icon" aria-hidden="true">&#128203;</span><span class="moderation-list-copy"><strong>Predefined reasons</strong><small>Define reason aliases for punishments.</small></span><span class="moderation-chevron" aria-hidden="true">&rsaquo;</span></button>
+          <button class="moderation-list-row" type="button" data-moderation-route="channel-locking"><span class="moderation-list-icon" aria-hidden="true">&#128274;</span><span class="moderation-list-copy"><strong>Channel locking</strong><small>Lock channels to prevent users from sending messages or joining voice channels.</small></span><span class="moderation-chevron" aria-hidden="true">&rsaquo;</span></button>
+          <button class="moderation-list-row" type="button" data-moderation-route="privacy"><span class="moderation-list-icon" aria-hidden="true">&#128065;</span><span class="moderation-list-copy"><strong>Privacy</strong><small>Decide what case information is shown to users.</small></span><span class="moderation-chevron" aria-hidden="true">&rsaquo;</span></button>
+          <div class="moderation-list-row moderation-list-row-toggle moderation-list-row-compact"><span class="moderation-list-copy moderation-list-copy-wide"><strong>Purge pinned messages <span class="moderation-inline-help" aria-label="Help">?</span></strong></span><label class="moderation-toggle" aria-label="Purge pinned messages"><input type="checkbox" checked><span></span></label></div>
+        </div>
+      </section>
+      <section class="page-view moderation-detail-view" id="moderation-detail-view" hidden aria-live="polite"></section>
+    </main>
+  </div>
+</body>
+</html>

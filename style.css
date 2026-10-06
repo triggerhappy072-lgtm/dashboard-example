@@ -834,3 +834,41 @@ body:has(.automod-page) .main-content {
 
 /* Group role/expand dialogs and unsaved state. */
 .group-expand-open{display:inline-grid;place-items:center;width:24px;height:24px;padding:0;margin-left:3px}.group-editor-modal{position:relative;width:min(520px,calc(100vw - 32px));padding:20px 16px 18px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);box-shadow:0 24px 80px rgba(0,0,0,.55)}.group-editor-modal h2{margin:0 40px 28px;text-align:center;font:800 28px Manrope,"Segoe UI",sans-serif}.group-editor-close{position:absolute;right:12px;top:10px;border:0;background:transparent;color:#fff;font-size:28px;cursor:pointer}.group-editor-toolbar{display:flex;justify-content:space-between;align-items:center;margin:0 2px 8px;font-size:15px}.group-editor-tools{color:#dce4df;letter-spacing:.05em}.group-editor-area{min-height:340px;padding:10px;border:1px solid #3b4740;border-radius:6px;background:#202622}.group-editor-entry-row{display:flex;align-items:center;gap:5px}.group-editor-entry-row input{width:160px;height:32px;border:1px solid #48554e;border-radius:5px;background:#2d3631;color:#fff;padding:0 8px}.group-editor-entry-row button{width:32px;height:32px;border:0;border-radius:5px;background:#48554e;color:#fff;font-size:22px;cursor:pointer}.group-editor-items{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.group-editor-item{padding:5px 8px;border-radius:5px;background:#465049;color:#fff;font-weight:700;font-size:13px}.automod-unsaved-bar{position:fixed;left:calc(var(--sidebar-width,280px) + 24px);right:24px;bottom:14px;z-index:1100;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:10px 12px;border:1px solid var(--line);border-radius:7px;background:#151a17;box-shadow:0 10px 30px rgba(0,0,0,.4);color:#fff}.automod-unsaved-bar[hidden]{display:none}.automod-unsaved-bar>div{display:flex;gap:8px}.automod-unsaved-bar button{min-height:34px;padding:0 14px;border:1px solid #3b4740;border-radius:5px;background:#222a25;color:#fff;font-weight:700;cursor:pointer}.automod-unsaved-bar #automod-save{border-color:var(--green);background:var(--green)}.automod-unsaved-bar #automod-save:hover{background:var(--green-bright)}@media(max-width:900px){.automod-unsaved-bar{left:16px;right:16px}}
+
+/* Moderation landing page — Sapphire layout, Next Step branding. */
+.moderation-page{max-width:1120px;padding-top:24px;padding-bottom:44px}
+.moderation-page-title{min-height:76px;display:flex;align-items:center;gap:18px;margin-bottom:20px}
+.moderation-page-title h1{margin:0;font-family:Manrope,"Segoe UI",sans-serif;font-size:36px;line-height:1;font-weight:800;color:var(--ink)}
+.moderation-title-shield{width:54px;height:54px;display:grid;place-items:center;color:#f4f6f5}
+.moderation-title-shield svg{width:46px;height:52px;fill:currentColor}
+.moderation-help{width:30px;height:30px;margin-left:auto;display:grid;place-items:center;border:2px solid #e9efeb;border-radius:5px;background:transparent;color:#e9efeb;font-size:20px;font-weight:800;cursor:pointer}
+.moderation-feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.moderation-feature-card{min-height:186px;padding:20px 18px 17px;display:grid;grid-template-columns:34px minmax(0,1fr);grid-template-rows:auto 1fr auto;column-gap:14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.moderation-card-icon{grid-row:1/span 2;width:32px;height:32px;display:grid;place-items:center;color:#eef4f0}
+.moderation-card-icon svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.moderation-card-copy h2{margin:0;font-family:Manrope,"Segoe UI",sans-serif;font-size:20px;font-weight:700;line-height:1.2}
+.moderation-card-copy p{margin:10px 0 0;color:var(--muted);font-size:14px;line-height:1.45}
+.moderation-card-action{grid-column:1/-1;justify-self:start;min-height:42px;margin-top:18px;padding:0 14px;border:0;border-radius:6px;color:#fff;font-weight:700;cursor:pointer}
+.moderation-card-action-muted{background:#262d29}.moderation-card-action-muted:hover{background:#303933}
+.moderation-card-action-primary{background:var(--green)}.moderation-card-action-primary:hover{background:var(--green-bright)}
+.moderation-list{display:grid;gap:10px}
+.moderation-list-row{width:100%;min-height:80px;padding:14px 18px;display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:center;gap:14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);text-align:left;cursor:pointer}
+.moderation-list-row:hover{border-color:#455049;background:#202723}
+.moderation-list-icon{width:30px;display:grid;place-items:center;color:#eef4f0;font-size:19px}
+.moderation-list-copy{min-width:0;display:grid;gap:4px}
+.moderation-list-copy strong{color:var(--ink);font-family:Manrope,"Segoe UI",sans-serif;font-size:20px;font-weight:700;line-height:1.15}
+.moderation-list-copy small{color:var(--muted);font-size:14px;line-height:1.35}
+.moderation-chevron{color:#f3f6f4;font-size:36px;line-height:1}
+.moderation-list-row-toggle{grid-template-columns:30px minmax(0,1fr) auto auto;cursor:default}
+.moderation-list-row-toggle:hover{border-color:var(--line);background:var(--surface)}
+.moderation-chevron-button{width:32px;height:36px;border:0;background:transparent;color:#f3f6f4;font-size:34px;line-height:1;cursor:pointer}
+.moderation-toggle{position:relative;width:45px;height:26px;display:inline-flex;align-items:center;cursor:pointer}
+.moderation-toggle input{position:absolute;opacity:0;pointer-events:none}
+.moderation-toggle span{width:45px;height:26px;border-radius:999px;background:#39413c;box-shadow:inset 0 0 0 1px #48524c;transition:.18s ease}
+.moderation-toggle span:after{content:"";position:absolute;top:4px;left:4px;width:18px;height:18px;border-radius:50%;background:#e9efeb;box-shadow:0 1px 4px rgba(0,0,0,.4);transition:.18s ease}
+.moderation-toggle input:checked+span{background:var(--green);box-shadow:inset 0 0 0 1px var(--green-bright)}
+.moderation-toggle input:checked+span:after{transform:translateX(19px);background:#fff}
+.moderation-list-row-compact{min-height:60px;grid-template-columns:minmax(0,1fr) auto}
+.moderation-list-copy-wide strong{font-size:18px}
+.moderation-inline-help{display:inline-grid;place-items:center;width:19px;height:19px;margin-left:4px;border-radius:50%;background:#8d9690;color:#1a201d;font-family:"DM Sans",sans-serif;font-size:12px;font-weight:800;vertical-align:2px}
+@media(max-width:760px){.moderation-page-title h1{font-size:27px}.moderation-title-shield{width:45px;height:45px}.moderation-feature-grid{grid-template-columns:1fr}.moderation-feature-card{min-height:160px}.moderation-list-row{grid-template-columns:27px minmax(0,1fr) auto;padding:13px 14px}.moderation-list-copy strong{font-size:17px}.moderation-list-copy small{font-size:12px}.moderation-list-row-toggle{grid-template-columns:27px minmax(0,1fr) auto auto}.moderation-list-row-compact{grid-template-columns:minmax(0,1fr) auto}.moderation-list-icon{font-size:17px}}
