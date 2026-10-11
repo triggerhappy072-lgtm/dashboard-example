@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173c31">
+  <title>Roles | Next Step</title>
+  <link rel="stylesheet" href="style.css?v=roles-1">
+  <link rel="stylesheet" href="roles.css?v=1">
+  <script src="script.js" defer></script>
+  <script src="roles.js?v=1" defer></script>
+</head>
+<body class="dashboard-page" data-feature-page="Roles">
+  <header class="topbar">
+    <a class="brand" href="home.html" aria-label="Next Step home">
+      <span class="brand-mark" aria-hidden="true">NS</span>
+      <span class="brand-name">Next Step</span>
+    </a>
+    <div class="account-area">
+      <button class="account-button" id="account-button" type="button" aria-label="Select Discord account" aria-expanded="false" aria-controls="account-menu">
+        <span class="account-avatar" aria-hidden="true">?</span>
+        <span>Select Discord account</span>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+      </button>
+      <div class="account-menu" id="account-menu" hidden><p>No Discord account connected.</p><a href="index.html">Go to sign in</a></div>
+    </div>
+  </header>
+
+  <div class="app-layout">
+    <aside class="sidebar" aria-label="Dashboard navigation">
+      <div class="sidebar-heading"><div><span class="eyebrow">CONTROL PANEL</span><h2>Workspace</h2></div></div>
+      <label class="search-box" for="feature-search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="m13.2 13.2 4 4"/></svg><input id="feature-search" type="search" placeholder="Search settings" autocomplete="off"><kbd>/</kbd></label>
+      <p class="search-hint">Search categories, tabs, and functions</p>
+      <nav class="feature-navigation" id="feature-navigation" aria-label="Features"></nav>
+      <div class="sidebar-footer"><span class="footer-dot"></span>Next Step control panel</div>
+    </aside>
+
+    <main class="main-content roles-main">
+      <section class="page-view roles-page" aria-labelledby="roles-title">
+        <div class="roles-heading-row">
+          <div class="roles-title-wrap">
+            <span class="roles-title-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><circle cx="11" cy="12" r="4"/><circle cx="22" cy="10" r="3.3"/><path d="M4.5 25c.7-5 3.1-7.5 6.5-7.5S16.8 20 17.5 25M17.2 18.5c1.1-2.8 2.8-4.2 5.2-4.2 2.7 0 4.6 2 5.1 5.9"/></svg>
+            </span>
+            <div>
+              <h1 id="roles-title">Roles</h1>
+              <p>Automate role assignment, self roles, role logic, and returning-member roles.</p>
+            </div>
+          </div>
+          <button class="roles-help" type="button" id="roles-help" aria-label="Roles help">?</button>
+        </div>
+
+        <div class="roles-tabs" role="tablist" aria-label="Role sections">
+          <button class="roles-tab active" type="button" role="tab" aria-selected="true" aria-controls="roles-join-view" data-role-tab="join">Join Roles</button>
+          <button class="roles-tab" type="button" role="tab" aria-selected="false" aria-controls="roles-reaction-view" data-role-tab="reaction">Reaction Roles</button>
+          <button class="roles-tab" type="button" role="tab" aria-selected="false" aria-controls="roles-connections-view" data-role-tab="connections">Role Connections</button>
+          <button class="roles-tab" type="button" role="tab" aria-selected="false" aria-controls="roles-sticky-view" data-role-tab="sticky">Sticky Roles</button>
+        </div>
+
+        <section class="roles-view active" id="roles-join-view" data-role-view="join" role="tabpanel">
+          <div class="roles-intro">
+            <h2>Join Roles</h2>
+            <p>Automatically give roles when a member joins. Add a delay, wait for Discord rules screening, target a specific user, or sync a role to members already in the server.</p>
+          </div>
+
+          <section class="roles-settings-card" aria-labelledby="join-behavior-title">
+            <div class="roles-setting-copy"><h3 id="join-behavior-title">Join role behavior</h3><p>These defaults apply to new join-role entries unless you override the delay on an individual role.</p></div>
+            <label class="roles-compact-field"><span>Default delay</span><span class="roles-input-suffix"><input id="join-default-delay" type="number" min="0" max="604800" value="0"><small>seconds</small></span></label>
+            <label class="roles-toggle-row"><span><strong>Wait for rules screening</strong><small>Assign join roles after a member passes Discord membership screening.</small></span><span class="moderation-toggle"><input id="join-wait-screening" type="checkbox" checked><span></span></span></label>
+          </section>
+
+          <div class="roles-toolbar">
+            <div><strong id="join-count">0 join roles</strong><span>Roles assigned automatically to new members.</span></div>
+            <div class="roles-toolbar-actions">
+              <button class="roles-secondary" type="button" id="join-sync-all">Sync all</button>
+              <button class="roles-primary" type="button" id="join-add">+ Add join role</button>
+            </div>
+          </div>
+          <div class="roles-card-list" id="join-list"></div>
+        </section>
+
+        <section class="roles-view" id="roles-reaction-view" data-role-view="reaction" role="tabpanel" hidden>
+          <div class="roles-intro">
+            <h2>Reaction Roles</h2>
+            <p>Create self-role messages where an emoji controls a Discord role. A message can contain multiple emoji-to-role mappings and can remove the role again when the reaction is removed.</p>
+          </div>
+          <div class="roles-toolbar">
+            <div><strong id="reaction-count">0 reaction role messages</strong><span>Up to 15 message configurations in this preview.</span></div>
+            <button class="roles-primary" type="button" id="reaction-add">+ Create message</button>
+          </div>
+          <div class="roles-card-list" id="reaction-list"></div>
+        </section>
+
+        <section class="roles-view" id="roles-connections-view" data-role-view="connections" role="tabpanel" hidden>
+          <div class="roles-intro">
+            <h2>Role Connections</h2>
+            <p>Give or remove a target role based on other roles a member has. Combine requirements with AND or OR logic, then sync to apply the rule to existing members.</p>
+          </div>
+          <div class="roles-toolbar">
+            <div><strong id="connection-count">0 role connections</strong><span>Connect parent roles to one or more role conditions.</span></div>
+            <div class="roles-toolbar-actions">
+              <button class="roles-secondary" type="button" id="connection-sync-all">Sync all</button>
+              <button class="roles-primary" type="button" id="connection-add">+ Add connection</button>
+            </div>
+          </div>
+          <div class="roles-card-list" id="connection-list"></div>
+        </section>
+
+        <section class="roles-view" id="roles-sticky-view" data-role-view="sticky" role="tabpanel" hidden>
+          <div class="roles-intro">
+            <h2>Sticky Roles</h2>
+            <p>Remember selected roles when a member leaves and restore them when they return. Restores can wait until membership screening is complete.</p>
+          </div>
+          <section class="roles-settings-card roles-settings-card-single">
+            <label class="roles-toggle-row"><span><strong>Restore sticky roles</strong><small>Enable automatic restoration for the roles listed below.</small></span><span class="moderation-toggle"><input id="sticky-enabled" type="checkbox" checked><span></span></span></label>
+          </section>
+          <div class="roles-toolbar">
+            <div><strong id="sticky-count">0 sticky roles</strong><span>Roles remembered for returning members.</span></div>
+            <button class="roles-primary" type="button" id="sticky-add">+ Add sticky role</button>
+          </div>
+          <div class="roles-card-list" id="sticky-list"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div class="roles-modal-overlay" id="roles-modal-overlay" hidden>
+    <section class="roles-modal" role="dialog" aria-modal="true" aria-labelledby="roles-modal-title">
+      <button class="roles-modal-close" type="button" id="roles-modal-close" aria-label="Close">&times;</button>
+      <div id="roles-modal-content"></div>
+    </section>
+  </div>
+
+  <datalist id="role-options">
+    <option value="@Member"></option>
+    <option value="@Verified"></option>
+    <option value="@Announcements"></option>
+    <option value="@Giveaways"></option>
+    <option value="@Returning Member"></option>
+    <option value="@Staff"></option>
+    <option value="@Bots"></option>
+  </datalist>
+  <datalist id="channel-options">
+    <option value="#roles"></option>
+    <option value="#welcome"></option>
+    <option value="#general"></option>
+    <option value="#announcements"></option>
+  </datalist>
+
+  <div class="roles-toast" id="roles-toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

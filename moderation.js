@@ -308,7 +308,7 @@
 
     'punish-settings': () => header('Punish settings') + `<div class="mod-list-stack">${['Ban|Default reason and duration, actions and more','Kick|Default reason and duration, actions and more','Mute|Default reason and duration, actions, timeouts and more','Warn|Default reason and duration, actions and more','Risk|Default reason and duration, actions and more'].map((item) => { const [name, copy] = item.split('|'); return `<button class="mod-nav-row" type="button" data-punishment="${name.toLowerCase()}"><span><strong>${name}</strong><small>${copy}</small></span><b>&rsaquo;</b></button>`; }).join('')}</div><div class="mod-settings-list">${toggle('Reply to message to punish', true)}${toggle('Confirm punishment when recent case exists', true)}<label class="mod-inline-setting">Confirm when case created within the last <input type="number" value="5" min="1"> minutes</label>${toggle('Log expired punishments if user is not in guild', true, false)}${toggle('Cache deleted messages', false)}</div>${dirtyBar()}`,
 
-    'pending-punishments': () => header('Pending punishments', 'Members who left before receiving a punishment are listed here and receive it when they return.') + `<div class="mod-preview-note">Preview data</div><div class="mod-table-wrap"><table class="mod-table"><thead><tr><th>User</th><th>Type</th><th>Reason</th><th>Duration</th><th>Created</th><th></th></tr></thead><tbody><tr><td>Preview member</td><td>Mute</td><td>Preview reason</td><td>1 day</td><td>Preview date</td><td><button class="mod-link-button" type="button" data-edit-pending>Edit</button> <button class="mod-link-button mod-danger-text" type="button" data-delete-pending>Delete</button></td></tr></tbody></table></div>${dirtyBar()}`,
+    'pending-punishments': () => header('Pending punishments', 'Members who left before receiving a punishment are listed here and receive it when they return.') + `<div class="mod-preview-note">Preview data</div><div class="mod-table-wrap"><table class="mod-table"><thead><tr><th>User</th><th>Type</th><th>Reason</th><th>Duration</th><th>Created</th><th></th></tr></thead><tbody>${pendingPunishments.map((item, index) => `<tr><td>${esc(item.user)}</td><td>${esc(item.type)}</td><td>${esc(item.reason)}</td><td>${esc(item.duration)}</td><td>${esc(item.created)}</td><td><button class="mod-link-button" type="button" data-edit-pending="${index}">Edit</button> <button class="mod-link-button mod-danger-text" type="button" data-delete-pending="${index}">Delete</button></td></tr>`).join('')}</tbody></table></div>${dirtyBar()}`,
 
     'immune-roles': () => header('Immune roles', 'Configure roles and members that are immune to moderation actions.') + `<div class="mod-choice-row"><label><input type="radio" name="immune-mode" value="custom" checked> Custom settings</label><label><input type="radio" name="immune-mode" value="hierarchy"> Use role hierarchy</label></div><div data-immune-hierarchy-note hidden class="mod-empty-inline">Role hierarchy is enabled. Users can only punish members below their highest role.</div><div data-immune-custom>${['Global','Bans','Kicks','Mutes','Warns','Risk'].map((name) => section(name, name === 'Global' ? 'The following roles and members are immune to every punishment.' : `The following roles and members are immune to ${name.toLowerCase()}.`, picker('Role or member', 'No roles or members added', ['Preview Role 1','Preview Role 2','Preview Member 1','Preview Member 2']))).join('')}</div>${dirtyBar()}`,
 
@@ -328,6 +328,16 @@
     warn: { title: 'Warn', removal: true, extra: '' },
     risk: { title: 'Risk', removal: true, extra: '' }
   };
+  const punishmentStorageKey = 'next-step-moderation-punishments-v1';
+  let punishmentSettings = {};
+  try { punishmentSettings = JSON.parse(localStorage.getItem(punishmentStorageKey) || '{}') || {}; } catch { punishmentSettings = {}; }
+  const pendingStorageKey = 'next-step-moderation-pending-v1';
+  let pendingPunishments = [{ user: 'Preview member', type: 'Mute', reason: 'Preview reason', duration: '1 day', created: 'Preview date' }];
+  try {
+    const stored = JSON.parse(localStorage.getItem(pendingStorageKey) || 'null');
+    if (Array.isArray(stored)) pendingPunishments = stored;
+  } catch {}
+  const persistPending = () => localStorage.setItem(pendingStorageKey, JSON.stringify(pendingPunishments));
 
   function openModal(content, extraClass = '') {
     const overlay = document.createElement('div');
@@ -410,23 +420,60 @@
     const cfg = punishments[name];
     if (!cfg) return;
     const { modal } = openModal(`<div class="mod-modal-tabs"><button class="active" type="button" data-punish-tab="punish">${cfg.title}</button>${cfg.removal ? `<button type="button" data-punish-tab="unpunish">Un${cfg.title.toLowerCase()}</button>` : ''}</div><div data-punish-pane></div>`);
+    const saveMode = (mode) => {
+      const pane = modal.querySelector('[data-punish-pane]');
+      if (!pane) return;
+      const inputs = [...pane.querySelectorAll('input,select,textarea')];
+      punishmentSettings[`${name}:${mode}`] = {
+        fields: inputs.map((input) => input.type === 'checkbox' ? input.checked : input.value),
+        actions: [...pane.querySelectorAll('[data-punish-action-list] .mod-action-chip')].map((chip) => chip.textContent)
+      };
+      localStorage.setItem(punishmentStorageKey, JSON.stringify(punishmentSettings));
+      markDirty();
+    };
+    let activeMode = 'punish';
     const render = (mode) => {
       const removal = mode === 'unpunish';
-      modal.querySelector('[data-punish-pane]').innerHTML = `<label>Default reason<input type="text" placeholder="No reason provided"></label><label>Internal reason <b class="mod-help">?</b><input type="text" placeholder="Internal reason"></label>${removal ? '' : '<label>Default duration <b class="mod-help">?</b><input type="text" placeholder="Permanent"></label>'}${removal ? '' : '<div class="mod-action-box"><strong>Actions on punish</strong><div data-punish-action-list></div><button type="button" data-add-punish-action>+ No actions added</button></div>'}${toggle('Force reason', false)}${!removal ? cfg.extra : ''}${toggle('Always review', false)}${toggle('Delete proof message', false)}`;
+      const pane = modal.querySelector('[data-punish-pane]');
+      pane.innerHTML = `<label>Default reason<input type="text" placeholder="No reason provided"></label><label>Internal reason <b class="mod-help">?</b><input type="text" placeholder="Internal reason"></label>${removal ? '' : '<label>Default duration <b class="mod-help">?</b><input type="text" placeholder="Permanent"></label>'}${removal ? '' : '<div class="mod-action-box"><strong>Actions on punish</strong><div data-punish-action-list></div><button type="button" data-add-punish-action>+ No actions added</button></div>'}${toggle('Force reason', false)}${!removal ? cfg.extra : ''}${toggle('Always review', false)}${toggle('Delete proof message', false)}`;
+      const saved = punishmentSettings[`${name}:${mode}`];
+      if (saved) {
+        pane.querySelectorAll('input,select,textarea').forEach((input, index) => {
+          if (index >= saved.fields.length) return;
+          if (input.type === 'checkbox') input.checked = Boolean(saved.fields[index]);
+          else input.value = saved.fields[index];
+        });
+        const list = pane.querySelector('[data-punish-action-list]');
+        if (list) (saved.actions || []).forEach((action) => {
+          const chip = document.createElement('button');
+          chip.type = 'button'; chip.className = 'mod-action-chip'; chip.textContent = action;
+          chip.title = 'Remove action';
+          chip.addEventListener('click', () => { chip.remove(); saveMode(mode); });
+          list.append(chip);
+        });
+      }
       modal.querySelector('[data-add-punish-action]')?.addEventListener('click', () => openActionEditor('Delete messages', ({ type }) => {
         const chip = document.createElement('button');
         chip.type = 'button';
         chip.className = 'mod-action-chip';
         chip.textContent = type;
+        chip.title = 'Remove action';
+        chip.addEventListener('click', () => { chip.remove(); saveMode(mode); });
         modal.querySelector('[data-punish-action-list]').append(chip);
         modal.querySelector('[data-add-punish-action]').textContent = '+ Add action';
+        saveMode(mode);
       }));
-      modal.querySelectorAll('input,select').forEach((input) => input.addEventListener('change', markDirty));
+      pane.querySelectorAll('input,select,textarea').forEach((input) => {
+        input.addEventListener('input', () => saveMode(mode));
+        input.addEventListener('change', () => saveMode(mode));
+      });
     };
     render('punish');
     modal.querySelectorAll('[data-punish-tab]').forEach((button) => button.addEventListener('click', () => {
       modal.querySelectorAll('[data-punish-tab]').forEach((tab) => tab.classList.toggle('active', tab === button));
-      render(button.dataset.punishTab);
+      saveMode(activeMode);
+      activeMode = button.dataset.punishTab;
+      render(activeMode);
     }));
   }
 
@@ -801,11 +848,34 @@
     if (route === 'tickets') bindTickets();
     detail.querySelector('[data-add-limitation]')?.addEventListener('click', openLimitationEditor);
     detail.querySelectorAll('[data-permission-member]').forEach((button) => button.addEventListener('click', () => openPermissionOverview(button.dataset.permissionMember)));
-    detail.querySelector('[data-edit-pending]')?.addEventListener('click', () => {
+    detail.querySelectorAll('[data-edit-pending]').forEach((button) => button.addEventListener('click', () => {
+      const index = Number(button.dataset.editPending);
+      const item = pendingPunishments[index];
+      if (!item) return;
       const { modal, close } = openModal('<h2>Edit pending punishment</h2><div class="mod-case-detail-grid"><div class="mod-case-field"><span>Message history</span><strong>Preview history</strong></div><div class="mod-case-field"><span>Number</span><strong>Pending preview</strong></div><div class="mod-case-field"><span>State</span><strong>Pending</strong></div><div class="mod-case-field"><span>Type</span><select><option>Mute</option><option>Warn</option><option>Kick</option><option>Ban</option><option>Risk</option></select></div><div class="mod-case-field"><span>User</span><strong>Preview member</strong></div><div class="mod-case-field"><span>Reason</span><input value="Preview reason"></div><div class="mod-case-field"><span>Duration</span><input value="1 day"></div><div class="mod-case-field"><span>Created</span><strong>Preview date</strong></div><div class="mod-case-field"><span>Author</span><strong>Preview moderator</strong></div><div class="mod-case-field"><span>Proof</span><textarea placeholder="Proof"></textarea></div><div class="mod-case-field"><span>Log message</span><strong>Preview log message</strong></div><div class="mod-case-field"><span>Closed</span><strong>—</strong></div><div class="mod-case-field"><span>Closed by</span><strong>—</strong></div><div class="mod-case-field"><span>User notify message</span><textarea placeholder="User notification"></textarea></div><div class="mod-case-field wide"><span>Moderator notes</span><textarea placeholder="Moderator notes"></textarea></div><div class="mod-case-field wide"><span>Edit history</span><div class="mod-history-box">No edits in preview data</div></div></div><div class="mod-modal-footer"><button class="mod-primary" type="button" data-pending-save>Save</button></div>');
-      modal.querySelector('[data-pending-save]')?.addEventListener('click', () => { markDirty(); close(); });
-    });
-    detail.querySelector('[data-delete-pending]')?.addEventListener('click', (event) => { event.currentTarget.closest('tr').remove(); markDirty(); });
+      const fields = modal.querySelectorAll('.mod-case-field');
+      const typeInput = fields[3]?.querySelector('select');
+      const reasonInput = fields[5]?.querySelector('input');
+      const durationInput = fields[6]?.querySelector('input');
+      if (typeInput) typeInput.value = item.type;
+      if (reasonInput) reasonInput.value = item.reason;
+      if (durationInput) durationInput.value = item.duration;
+      if (fields[4]) fields[4].querySelector('strong').textContent = item.user;
+      if (fields[7]) fields[7].querySelector('strong').textContent = item.created;
+      modal.querySelector('[data-pending-save]')?.addEventListener('click', () => {
+        item.type = typeInput.value;
+        item.reason = reasonInput.value;
+        item.duration = durationInput.value;
+        persistPending();
+        close();
+        showRoute('pending-punishments', false);
+      });
+    }));
+    detail.querySelectorAll('[data-delete-pending]').forEach((button) => button.addEventListener('click', () => {
+      pendingPunishments.splice(Number(button.dataset.deletePending), 1);
+      persistPending();
+      showRoute('pending-punishments', false);
+    }));
     detail.querySelectorAll('input[name="immune-mode"]').forEach((input) => input.addEventListener('change', () => {
       const custom = detail.querySelector('[data-immune-custom]');
       const note = detail.querySelector('[data-immune-hierarchy-note]');
