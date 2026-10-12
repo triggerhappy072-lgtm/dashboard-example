@@ -1,0 +1,557 @@
+/* Discord-style AutoMod nested within the Next Step dashboard shell. */
+.discord-automod-page{max-width:1120px;padding-bottom:110px}
+.discord-page-title{margin-bottom:14px}
+.discord-page-title h1{font-size:24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.discord-page-title h1 span:last-child{font-size:19px;font-weight:600;color:#bfc7c1}
+.discord-automod-shell{max-width:860px;margin:0 auto;color:#edf0f6;font-family:Inter,"Segoe UI",sans-serif;font-size:14px}
+.dam-back{display:flex;align-items:center;gap:10px;margin:4px 0 30px;border:0;background:transparent;color:#c7c9d5;cursor:pointer;text-transform:uppercase;font-size:13px}
+.dam-back:hover{color:#fff}
+.dam-intro{margin-bottom:30px}
+.dam-intro h2{font-size:25px;font-weight:750;letter-spacing:-.3px;margin:0 0 8px;color:#f6f7fb}
+.dam-intro p{margin:5px 0;line-height:1.5;color:#e1e2e8}
+.dam-intro .dam-preview-note{font-size:12px;color:#9ea5b3;margin-top:10px}
+.dam-section{margin-top:26px}
+.dam-section>h3,.dam-sensitive>h3{color:#f4f5f9;font-weight:650;font-size:20px;margin:0 0 13px}
+.dam-rule-card{background:#18191c;border:1px solid #3a3b44;border-radius:9px;margin-bottom:10px;overflow:visible}
+.dam-rule-card.is-expanded{background:#202127;border-color:#4c4e5b;padding:18px}
+.dam-rule-summary{display:flex;align-items:center;gap:16px;padding:19px 18px;min-height:92px}
+.dam-rule-summary{cursor:pointer}
+.dam-rule-summary:hover{background:#222329;border-radius:8px}
+.dam-rule-icon{width:42px;height:42px;flex:none;display:grid;place-items:center;background:#303137;border-radius:50%;color:#f5f5f9;font-size:24px;font-weight:700}
+.dam-rule-copy{flex:1;min-width:0}
+.dam-rule-title{display:block;text-align:left;padding:0;border:0;background:transparent;color:#f7f7fb;font-weight:650;font-size:16px;cursor:pointer}
+.dam-rule-title:hover{text-decoration:underline}
+.dam-rule-copy p{font-size:13px;color:#b9bac4;line-height:1.4;margin:4px 0}
+.dam-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.dam-chip{border-radius:14px;background:#36373d;color:#b9bac5;font-size:11px;padding:3px 8px}
+.dam-rule-controls{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.dam-primary,.dam-another{font:650 13px Inter,"Segoe UI",sans-serif;background:#5865f2;color:white;border:0;border-radius:5px;cursor:pointer;min-height:34px;padding:0 15px}
+.dam-primary:hover,.dam-another:hover{background:#4752c4}
+.dam-more{font-size:26px;color:#bfc0cc;background:transparent;border:0;cursor:pointer;padding:0 4px}
+.dam-switch{display:inline-flex;position:relative;align-items:center;width:44px;height:25px;flex:none;cursor:pointer}
+.dam-switch input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.dam-switch>span{width:44px;height:25px;background:#71717f;border-radius:20px;transition:background .15s;display:block;position:relative}
+.dam-switch>span:after{content:"";position:absolute;top:4px;left:4px;height:17px;width:17px;background:white;border-radius:50%;transition:transform .15s}
+.dam-switch input:checked+span{background:#5865f2}
+.dam-switch input:checked+span:after{transform:translateX(19px)}
+.dam-switch input:focus-visible+span{outline:2px solid white;outline-offset:3px}
+.dam-editor{position:relative;display:grid;gap:11px}
+.dam-editor-top{display:flex;align-items:center;gap:16px}
+.dam-editor-name{display:grid;gap:8px;flex:1;color:#f4f5fb;font-size:15px;font-weight:650}
+.dam-editor-name input{font-size:15px;font-weight:500}
+.dam-editor input:not([type="checkbox"]):not([type="radio"]),.dam-editor textarea,.dam-editor select,
+.dam-sensitive-options select{width:100%;min-width:0;min-height:39px;padding:8px 11px;border:1px solid #494b56;border-radius:5px;background:#15161a;color:#f0f0f5;font-family:inherit;font-size:14px}
+.dam-editor input:focus-visible,.dam-editor select:focus-visible,.dam-editor textarea:focus-visible{outline:2px solid #8690ff;outline-offset:1px}
+.dam-editor textarea{resize:vertical;line-height:1.5}
+.dam-editor input[type="checkbox"],.dam-sensitive-options input{accent-color:#5865f2;cursor:pointer;width:18px;height:18px;flex:none}
+.dam-step{display:grid;grid-template-columns:31px minmax(0,1fr);gap:11px;align-items:start}
+.dam-step-number{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#31333c;color:#edf0f7;font-size:16px;font-weight:750}
+.dam-step-panel{min-width:0;border:1px solid #444550;border-radius:7px;padding:13px}
+.dam-step-panel>h3{margin:0 0 13px;font-size:15px;font-weight:650;color:#f6f7fa}
+.dam-step-arrow{text-align:center;color:#626470;font-size:20px;height:19px;line-height:19px;margin-left:42px}
+.dam-field label,.dam-editor label:not(.dam-switch):not(.dam-response-row){color:#eef0f7}
+.dam-field{display:grid;gap:9px}
+.dam-word-foot{display:flex;justify-content:space-between;gap:12px;font-size:11px;color:#adb0bd;line-height:1.4}
+.dam-word-foot span:last-child{white-space:nowrap}
+.dam-item-counter{display:block;text-align:right;font-size:11px;color:#9b9da9}
+.dam-accordion textarea{display:block;width:100%;margin-top:10px;min-height:56px}
+.dam-accordion p a,.dam-link{font-weight:650;color:#5aa9ff}
+.dam-accordion p{font-size:11px;line-height:1.5}
+.dam-accordion{margin-top:10px;border-radius:6px;background:#16171c;border:1px solid #383944;padding:11px 13px}
+.dam-accordion>summary{cursor:pointer;font-weight:650}
+.dam-accordion label{display:grid;gap:8px;margin-top:13px}
+.dam-accordion p{font-size:12px;color:#a9acb7}
+.dam-inline-field{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-weight:600}
+.dam-inline-field input{max-width:95px}
+.dam-small{margin:9px 0 0;font-size:12px;color:#aaaebc}
+.dam-static-condition{margin:0;color:#d7d8e1}
+.dam-field-title{font-weight:650;margin:0 0 11px}
+.dam-categories{display:grid;gap:10px}
+.dam-categories label{display:flex;align-items:flex-start;gap:10px}
+.dam-categories label span{display:grid;gap:4px}
+.dam-categories label strong{font-size:13px;font-weight:600}
+.dam-categories label small{color:#9294a2;font-size:11px}
+.dam-mention-limit,.dam-mention-raid{display:flex;align-items:center;gap:12px;background:#2b2c33;border-radius:5px;padding:11px;margin-top:5px}
+.dam-mention-raid{cursor:pointer}
+.dam-mention-limit .dam-response-copy,.dam-mention-raid .dam-response-copy{flex:1}
+.dam-mention-raid input{width:17px;height:17px;accent-color:#5865f2}
+.dam-number-stepper{display:flex;align-items:center;gap:5px}
+.dam-number-stepper button{border:0;background:transparent;color:#c1c2d1;font-size:19px;cursor:pointer}
+.dam-number-stepper input{width:45px!important;min-height:33px!important;text-align:center;padding:3px!important;background:#1c1d24!important}
+.dam-response-list{display:grid;gap:5px}
+.dam-response{border-radius:5px;background:#2e3038;overflow:hidden}
+.dam-response-row{display:flex;gap:12px;align-items:center;min-height:62px;padding:10px 12px;cursor:pointer;width:100%;border:0;background:transparent;color:inherit;text-align:left;font:inherit}
+.dam-response-row:hover{background:#373943}
+.dam-response-icon{display:grid;place-items:center;font-size:23px;width:28px;color:#b6bbc7}
+.dam-response-copy{display:grid;gap:3px;flex:1;min-width:0}
+.dam-response-copy strong{font-weight:650;font-size:14px;color:#eeeef3}
+.dam-response-copy small{font-size:12px;line-height:1.35;color:#bdc0ca}
+.dam-response-row input{margin-left:auto}
+.dam-action-box{width:18px;height:18px;display:grid;place-items:center;border:1px solid #737581;border-radius:4px;font-size:13px;color:white;flex:none}
+.dam-action-box.is-on{background:#5865f2;border-color:#5865f2}
+.dam-action-links{padding:0 12px 9px 52px;margin-top:-5px;font-size:11px}
+.dam-action-links:empty{display:none}
+.dam-link{border:0;background:none;cursor:pointer;padding:0;color:#5ca7ff;font-size:11px}
+.dam-link:hover{text-decoration:underline}
+.dam-response-extra{border-top:1px solid #4d4f59;padding:12px 14px}
+.dam-response-extra label{display:grid;gap:7px;font-size:12px;font-weight:600}
+.dam-duration{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dam-exempt-picker{position:relative;display:grid;gap:8px}
+.dam-exempt-picker>label{font-size:14px;font-weight:650}
+.dam-exempt-picker small{font-size:11px;color:#aaaebd;line-height:1.4}
+.dam-picked{display:flex;flex-wrap:wrap;gap:6px}
+.dam-picked:empty{display:none}
+.dam-selected-chip{display:inline-flex;align-items:center;gap:7px;background:#3a3c46;border-radius:5px;padding:4px 6px;font-size:12px}
+.dam-selected-chip button{color:#ebdce3;border:0;background:transparent;cursor:pointer;font-size:17px}
+.dam-picker-options{position:absolute;top:68px;left:0;right:0;z-index:40;max-height:205px;overflow:auto;background:#25262e;border:1px solid #5b5c69;border-radius:6px;padding:5px;box-shadow:0 16px 32px #0008}
+.dam-picker-options[hidden]{display:none}
+.dam-picker-options button{display:flex;justify-content:space-between;width:100%;padding:9px;border:0;border-radius:4px;background:transparent;color:#fff;text-align:left;cursor:pointer}
+.dam-picker-options button:hover,.dam-picker-options button:focus-visible{background:#434653}
+.dam-picker-options button[hidden]{display:none}
+.dam-rule-card{position:relative}
+.dam-rule-menu{position:absolute;right:-117px;top:42px;width:160px;padding:5px;background:#18191f;border:1px solid #32343e;border-radius:6px;box-shadow:0 10px 25px #000a;z-index:40;display:grid}
+.dam-rule-menu button{border:0;border-radius:4px;padding:10px 8px;background:transparent;color:#dddfe8;cursor:pointer;text-align:left;font-size:12px}
+.dam-rule-menu button:hover{background:#32343d}
+.dam-rule-menu [data-dam-remove-rule]{color:#f3acb3}
+.dam-rule-menu [data-dam-copy-id]{border-top:1px solid #3a3b43;border-radius:0;margin-top:3px}
+.dam-another{margin-top:9px;width:100%;min-height:47px;background:transparent;border:1px dashed #4d4e59;border-radius:5px;color:#63a9ff;font-size:13px}
+.dam-another:hover{border-color:#66b4ff;background:#191c23}
+.dam-word-total{color:#b5b4bf;margin-left:4px}
+.dam-sensitive{margin-top:33px}
+.dam-sensitive>p{font-size:13px;line-height:1.5;color:#c8c9d1;margin:0 0 13px}
+.dam-sensitive-current{display:flex;align-items:center;gap:15px;justify-content:space-between;border:1px solid #4a4954;border-left:4px solid #dd5864;border-radius:6px;background:#23242a;padding:14px}
+.dam-sensitive-current>div{display:grid;gap:4px}
+.dam-sensitive-current strong{font-size:14px}
+.dam-sensitive-current small{color:#b4b6c1;line-height:1.4}
+.dam-sensitive-current button{flex:none;border:0;background:transparent;color:#8798ff;font-weight:750;cursor:pointer}
+.dam-sensitive-options{border:1px solid #464754;border-radius:7px;display:grid;gap:12px;padding:14px;margin-top:12px}
+.dam-sensitive-options label{display:flex;justify-content:space-between;gap:10px;align-items:center;cursor:pointer;padding:7px;border-radius:5px}
+.dam-sensitive-options label span{display:grid;gap:4px}
+.dam-sensitive-options label strong{font-weight:600;font-size:13px}
+.dam-sensitive-options label small{font-size:11px;color:#b4b7c2}
+.dam-sensitive-options label.dam-disabled{opacity:.4;cursor:not-allowed}
+.dam-sensitive-options label.dam-disabled input{cursor:not-allowed}
+.dam-sensitive-options label:not(.dam-disabled):hover{background:#353740}
+.dam-unsaved-bar{position:sticky;bottom:8px;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:16px;background:#26272e;color:#f7f7fa;border:1px solid #4b4b56;border-radius:8px;margin:18px auto 0;max-width:860px;padding:12px 15px;box-shadow:0 8px 30px #0008}
+.dam-unsaved-bar[hidden]{display:none}
+.dam-unsaved-bar strong{font-size:13px}
+.dam-unsaved-bar>div{display:flex;gap:9px}
+.dam-unsaved-bar button{cursor:pointer;border:0;background:transparent;color:#eceef4;border-radius:4px;padding:9px 13px;white-space:nowrap}
+.dam-unsaved-bar [data-dam-save]{background:#27834c;font-weight:750}
+.dam-unsaved-bar [data-dam-save]:hover{background:#329e5e}
+
+/* Inspected Discord Safety Setup / AutoMod: denser cards and modal response flow. */
+.discord-automod-shell{max-width:560px;font-size:13px}
+.discord-automod-page{color:#f2f3f5}
+.discord-automod-page .dam-intro{margin-bottom:20px}
+.discord-automod-page .dam-intro h2{font-size:20px}
+.discord-automod-page .dam-intro p{font-size:13px;line-height:1.42}
+.discord-automod-page .dam-section{margin-top:18px}
+.discord-automod-page .dam-section>h3,.discord-automod-page .dam-sensitive>h3{font-size:16px;margin-bottom:9px}
+.discord-automod-page .dam-rule-card{background:#111216;border:1px solid #303138;border-radius:8px;margin-bottom:7px}
+.discord-automod-page .dam-rule-card.is-expanded{padding:12px;border-color:#383943}
+.discord-automod-page .dam-rule-summary{min-height:62px;gap:11px;padding:12px}
+.discord-automod-page .dam-rule-icon{width:32px;height:32px;font-size:18px}
+.discord-automod-page .dam-rule-icon svg{display:block;width:19px;height:19px}
+.discord-automod-page .dam-rule-title{font-size:13px;font-weight:700}
+.discord-automod-page .dam-rule-copy p{font-size:11px;line-height:1.25}
+.discord-automod-page .dam-chip{font-size:10px;padding:2px 7px;background:#303138}
+.discord-automod-page .dam-primary{min-height:29px;font-size:12px;padding:0 12px}
+.discord-automod-page .dam-editor{gap:8px}
+.discord-automod-page .dam-editor-top{gap:8px;align-items:center;margin-bottom:3px}
+.discord-automod-page .dam-editor-name{font-size:12px;gap:7px}
+.discord-automod-page .dam-editor input:not([type="checkbox"]):not([type="radio"]),
+.discord-automod-page .dam-editor select,
+.discord-automod-page .dam-editor textarea{min-height:31px;padding:8px;border:1px solid #373842;border-radius:4px;background:#0b0c10;color:#f4f4f6;font-size:12px}
+.discord-automod-page .dam-step{grid-template-columns:26px minmax(0,1fr);gap:8px}
+.discord-automod-page .dam-step-number{width:25px;height:25px;font-size:12px;background:#292b33}
+.discord-automod-page .dam-step-panel{padding:10px;border-color:#30323a;border-radius:6px}
+.discord-automod-page .dam-step-panel>h3{font-size:12px;font-weight:600;margin-bottom:9px}
+.discord-automod-page .dam-step-arrow{margin-left:33px;font-size:17px;height:14px;line-height:14px}
+.discord-automod-page .dam-word-foot,.discord-automod-page .dam-exempt-picker small{font-size:10px}
+.discord-automod-page .dam-accordion{background:#08090b;border:none;padding:10px;margin-top:8px}
+.discord-automod-page .dam-accordion>summary{font-size:11px;font-weight:700;list-style:none;cursor:pointer}
+.discord-automod-page .dam-accordion>summary::after{content:'⌄';float:right;font-size:16px;line-height:12px}
+.discord-automod-page .dam-accordion[open]>summary::after{content:'⌃'}
+.discord-automod-page .dam-accordion p{font-size:10px;line-height:1.4}
+.dam-item-counter{font-size:10px;display:block;text-align:right;color:#a4a5ae;margin-top:3px}
+.discord-automod-page .dam-response-list{gap:3px}
+.discord-automod-page .dam-response{background:#292a30;border-radius:5px}
+.discord-automod-page .dam-response-row{width:100%;border:0;color:inherit;background:transparent;text-align:left;display:flex;gap:9px;align-items:center;min-height:48px;padding:8px;cursor:pointer}
+.discord-automod-page .dam-response-row:hover{background:#33343b}
+.discord-automod-page .dam-response-icon{font-size:17px;width:20px;flex:none}
+.discord-automod-page .dam-response-copy strong{font-size:11px}
+.discord-automod-page .dam-response-copy small{font-size:10px;line-height:1.32}
+.dam-action-box{width:14px;height:14px;flex:none;border:1px solid #747581;border-radius:3px;margin-left:auto;display:grid;place-items:center;color:white;font-size:11px}
+.dam-action-box.is-on{background:#5865f2;border-color:#5865f2}
+.dam-action-links{padding:0 8px 7px 37px;margin-top:-4px}
+.dam-link{border:0;background:transparent;padding:0;color:#4eafff;cursor:pointer;font-size:10px;font-weight:700}
+.dam-link:hover{text-decoration:underline}
+.dam-response-extra{display:none}
+.dam-mention-limit,.dam-mention-raid{display:flex!important;align-items:center;gap:9px;padding:8px;border-radius:5px;background:#292a30;margin-bottom:4px}
+.dam-mention-limit>.dam-response-copy,.dam-mention-raid>.dam-response-copy{flex:1}
+.dam-number-stepper{display:flex;align-items:center;gap:3px;flex:none}
+.dam-number-stepper button{background:none;color:#c4c5d0;border:0;padding:4px 6px;cursor:pointer}
+.discord-automod-page .dam-number-stepper input{width:42px!important;min-height:28px!important;text-align:center;padding:3px!important}
+.discord-automod-page .dam-mention-raid input[type="checkbox"]{margin-left:auto;flex:none}
+.discord-automod-page .dam-categories{gap:12px}
+.discord-automod-page .dam-categories label{display:flex;align-items:flex-start;gap:9px;font-size:12px}
+.dam-categories label span{display:grid;gap:3px}
+.dam-categories label strong{font-size:12px}
+.dam-categories label small{color:#999ba7;font-size:10px}
+.dam-word-total{font-size:10px;color:#a6a7b1}
+.dam-exempt-picker{gap:5px}
+.dam-exempt-picker>label{font-size:12px}
+.discord-automod-page .dam-picked{gap:4px}
+.discord-automod-page .dam-selected-chip{font-size:10px}
+.discord-automod-page .dam-sensitive{margin-top:27px}
+.discord-automod-page .dam-sensitive>p{font-size:11px}
+.discord-automod-page .dam-sensitive-current{padding:10px;background:#1b1c20}
+.discord-automod-page .dam-sensitive-current strong{font-size:11px}
+.discord-automod-page .dam-sensitive-current small{font-size:10px}
+.discord-automod-page .dam-sensitive-options{background:#1b1c20;border:none;padding:8px;margin-top:7px}
+.discord-automod-page .dam-sensitive-options label{display:flex;justify-content:space-between;padding:9px;gap:9px;background:#212227;border-radius:4px}
+.dam-sensitive-options label>span{display:grid;gap:4px}
+.dam-sensitive-options label strong{font-size:11px}
+.dam-sensitive-options label small{font-size:10px;color:#b1b2bb}
+.dam-sensitive-options .dam-disabled{opacity:.45;cursor:not-allowed}
+.discord-automod-page .dam-rule-menu{position:absolute;right:-92px;top:33px;display:grid;z-index:70;min-width:120px;background:#18191e;border:1px solid #373842;border-radius:5px;padding:5px;box-shadow:0 8px 24px #0008}
+.dam-rule-card{position:relative}
+.discord-automod-page .dam-rule-menu button{background:none;border:0;text-align:left;font-size:11px;padding:7px}
+.discord-automod-page .dam-rule-menu button:hover{background:#303139}
+.discord-automod-page .dam-unsaved-bar{max-width:560px;padding:9px 12px;background:#222329;border-color:#303138;margin-top:14px}
+.discord-automod-page .dam-unsaved-bar strong{font-size:11px}
+.discord-automod-page .dam-unsaved-bar button{font-size:11px;padding:7px 10px}
+.dam-modal-backdrop{position:fixed;inset:0;z-index:2500;display:grid;place-items:center;background:rgba(0,0,0,.78);padding:20px}
+.dam-modal{width:min(320px,100%);background:#111217;color:#eef0f7;border:1px solid #252630;border-radius:8px;padding:16px;box-shadow:0 14px 55px #000b;position:relative;font-family:Inter,"Segoe UI",sans-serif}
+.dam-modal h2{font-size:14px;margin:0 0 9px}
+.dam-modal p{font-size:12px;line-height:1.4;color:#a7a8b4;margin:0 0 14px}
+.dam-modal-close{position:absolute;right:12px;top:9px;font-size:20px;color:#b9bbc5;background:none;border:0;cursor:pointer}
+.dam-modal input,.dam-modal select,.dam-modal textarea{width:100%;box-sizing:border-box;background:#0a0b0e;color:#f2f2f7;border:1px solid #444650;border-radius:5px;padding:9px;font-size:12px;font-family:inherit}
+.dam-modal textarea{resize:vertical;min-height:57px}
+.dam-modal-footer{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:14px}
+.dam-modal-footer button{border:0;border-radius:5px;background:#25262b;color:#edf0f4;padding:9px;cursor:pointer;font-size:12px}
+.dam-modal-footer [data-dam-dialog-save]{background:#5865f2;color:white;font-weight:700}
+.dam-modal-footer [data-dam-dialog-save].danger{background:#c94952}
+.dam-modal-error{color:#f16d74;font-size:11px;margin-top:7px}
+.dam-modal-error[hidden]{display:none}
+.dam-modal-channel{position:relative}
+.dam-channel-options{position:absolute;left:0;right:0;top:calc(100% + 3px);background:#17181d;border:1px solid #444652;border-radius:5px;max-height:170px;overflow-y:auto;z-index:10;padding:3px}
+.dam-channel-options[hidden]{display:none}
+.dam-channel-options button{width:100%;background:none;border:0;color:#e7e8ef;text-align:left;font-size:12px;padding:9px;cursor:pointer}
+.dam-channel-options button:hover{background:#30313a}
+.dam-channel-options button[hidden]{display:none}
+.dam-select-arrow{position:absolute;right:8px;top:8px;color:#c6c8d2;pointer-events:none}
+.dam-modal :focus-visible{outline:2px solid #5865f2;outline-offset:1px}
+.dam-modal-backdrop{position:fixed;inset:0;display:grid;place-items:center;padding:14px;background:rgba(0,0,0,.78);z-index:3000}
+.dam-modal{position:relative;width:min(320px,100%);box-sizing:border-box;padding:16px;background:#111217;border:1px solid #33343c;border-radius:8px;box-shadow:0 16px 50px #000c;color:#eeeef4}
+.dam-modal h2{margin:0 25px 8px 0;color:#e9e9f0;font-size:14px;font-weight:700}
+.dam-modal p{margin:0 0 16px;color:#b0b0bb;font-size:11px;line-height:1.45}
+.dam-modal-close{position:absolute;top:13px;right:16px;border:0;background:transparent;color:#bdbec6;font-size:22px;cursor:pointer}
+.dam-modal input,.dam-modal select,.dam-modal textarea{width:100%;min-height:38px;border:1px solid #4e505c;border-radius:5px;background:#0e0f14;color:white;padding:9px 10px;font:inherit;font-size:12px}
+.dam-modal textarea{resize:vertical}
+.dam-modal input:focus-visible,.dam-modal select:focus-visible{outline:2px solid #5865f2}
+.dam-modal-footer{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:19px}
+.dam-modal-footer button{border:0;background:#303138;border-radius:5px;min-height:30px;color:#f1f1f6;cursor:pointer;font-size:11px;font-weight:650}
+.dam-modal-footer [data-dam-dialog-save]{background:#5865f2;color:#fff}
+.dam-modal-footer [data-dam-dialog-save].danger{background:#da3542}
+.dam-modal-error{margin-top:8px;color:#f66c79;font-size:12px}
+.dam-modal-error[hidden]{display:none}
+.dam-modal-channel{position:relative}
+.dam-channel-options{position:absolute;top:43px;left:0;right:0;max-height:175px;overflow-y:auto;background:#18191f;border:1px solid #525562;border-radius:6px;padding:4px;z-index:4;box-shadow:0 12px 30px #000b}
+.dam-channel-options[hidden],.dam-channel-options button[hidden]{display:none}
+.dam-channel-options button{display:block;text-align:left;width:100%;padding:9px;border:0;border-radius:3px;background:transparent;color:#e3e4ee;cursor:pointer;font-size:12px}
+.dam-channel-options button:hover{background:#383946}
+.dam-select-arrow{position:absolute;right:12px;top:8px;pointer-events:none;color:#c5c5d0}
+.dam-unsaved-bar [data-dam-save]{background:#23814a}
+
+/* Measured against the live Discord app's compact 440px rule column. */
+.discord-automod-shell{max-width:440px}
+.discord-automod-page .dam-rule-card.is-expanded{padding:10px}
+.discord-automod-page .dam-rule-summary{min-height:54px}
+.discord-automod-page .dam-locked-action{cursor:default}
+.discord-automod-page .dam-locked-action .dam-action-box{opacity:.55}
+.discord-automod-page .dam-unsaved-bar{max-width:440px}
+/* Discord's unsaved changes prompt stays on screen while the editor scrolls. */
+#discord-automod-unsaved{
+  position:fixed;
+  bottom:14px;
+  left:calc(50% + 90px);
+  transform:translateX(-50%);
+  width:min(440px,calc(100vw - 230px));
+  box-sizing:border-box;
+  margin:0;
+  z-index:1100;
+  box-shadow:0 6px 30px #000b
+}
+#discord-automod-unsaved[hidden]{display:none}
+@media(max-width:900px){
+  #discord-automod-unsaved{left:50%;width:min(440px,calc(100vw - 36px))}
+}
+@media(max-width:900px){
+  .discord-page-title h1{font-size:19px}
+  .dam-rule-summary{gap:10px}
+  .dam-rule-copy p{font-size:12px}
+}
+@media(max-width:650px){
+  .discord-automod-page{padding-left:0;padding-right:0}
+  .discord-page-title h1{width:100%}
+  .dam-rule-summary{flex-wrap:wrap;gap:9px;padding:14px 12px}
+  .dam-rule-copy{flex:1 1 calc(100% - 58px)}
+  .dam-rule-controls{margin-left:48px}
+  .dam-rule-card.is-expanded{padding:12px 9px}
+  .dam-editor-top{gap:7px}
+  .dam-editor-name input{max-width:100%}
+  .dam-step{grid-template-columns:23px minmax(0,1fr);gap:7px}
+  .dam-step-number{width:23px;height:23px;font-size:13px}
+  .dam-step-arrow{margin-left:30px}
+  .dam-step-panel{padding:11px 8px}
+  .dam-unsaved-bar{flex-wrap:wrap}
+  .dam-word-foot{display:grid}
+}
+
+/* Next Step visual integration
+   Discord supplies the interaction model; Next Step supplies the palette,
+   typography and the dashboard shell. Keep the reference's proportions
+   at both a 1280px window and a 1920px window captured at 1280px. */
+.discord-automod-page {
+  --dam-accent: var(--green, #39b878);
+  --dam-accent-bright: var(--green-bright, #45d18e);
+  --dam-panel: var(--forest-deep, #101311);
+  --dam-raised: var(--surface, #1b201d);
+  --dam-elevated: #242d27;
+  --dam-border: var(--line, #303632);
+  --dam-muted: var(--muted, #a9b1ac);
+}
+.discord-automod-shell {
+  width: clamp(440px,34.375vw,660px);
+  max-width: 100%;
+  font-family: "DM Sans", "Segoe UI", sans-serif;
+  font-size: 16px;
+  color: var(--ink);
+}
+.discord-automod-page .dam-intro h2,
+.discord-automod-page .dam-section > h3,
+.discord-automod-page .dam-sensitive > h3 {
+  font-family: Manrope, "Segoe UI", sans-serif;
+}
+.discord-automod-page .dam-intro h2 { font-size: 26px; }
+.discord-automod-page .dam-intro p { font-size: 16px; }
+.discord-automod-page .dam-intro .dam-preview-note {
+  font-size: 12px;
+  color: var(--dam-muted);
+}
+.discord-automod-page .dam-section > h3,
+.discord-automod-page .dam-sensitive > h3 { font-size: 19px; }
+.discord-automod-page .dam-back,
+.discord-automod-page .dam-link,
+.discord-automod-page .dam-sensitive-current button {
+  color: var(--dam-accent-bright);
+}
+.discord-automod-page .dam-rule-card {
+  background: var(--dam-panel);
+  border-color: var(--dam-border);
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.discord-automod-page .dam-rule-card.is-expanded {
+  background: var(--dam-raised);
+  border-color: #3e5346;
+  padding: 16px;
+}
+.discord-automod-page .dam-rule-summary {
+  min-height: 73px;
+  padding: 14px 16px;
+  gap: 13px;
+}
+.discord-automod-page .dam-rule-summary:hover {
+  background: #202b24;
+}
+.discord-automod-page .dam-rule-icon {
+  width: 40px;
+  height: 40px;
+  background: #293a31;
+  color: #cfefdc;
+  font-size: 23px;
+}
+.discord-automod-page .dam-rule-icon svg { width: 24px; height: 24px; }
+.discord-automod-page .dam-rule-title {
+  font-family: Manrope, "Segoe UI", sans-serif;
+  font-size: 15px;
+  color: var(--ink);
+}
+.discord-automod-page .dam-rule-copy p {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--dam-muted);
+}
+.discord-automod-page .dam-chip {
+  font-size: 12px;
+  color: #d3dfd7;
+  background: #2c3630;
+}
+.discord-automod-page .dam-primary,
+.discord-automod-page .dam-another,
+.discord-automod-page .dam-modal-footer [data-dam-dialog-save] {
+  background: var(--dam-accent);
+  color: #0b1b12;
+  border-color: var(--dam-accent);
+}
+.discord-automod-page .dam-primary { min-height: 35px; font-size: 14px; }
+.discord-automod-page .dam-primary:hover,
+.discord-automod-page .dam-another:hover,
+.discord-automod-page .dam-modal-footer [data-dam-dialog-save]:hover {
+  background: var(--dam-accent-bright);
+}
+.discord-automod-page .dam-switch input:checked+span,
+.discord-automod-page .dam-action-box.is-on {
+  background: var(--dam-accent);
+  border-color: var(--dam-accent);
+}
+.discord-automod-page .dam-switch input:focus-visible+span {
+  outline-color: var(--dam-accent-bright);
+}
+.discord-automod-page .dam-editor-name { font-size: 15px; }
+.discord-automod-page .dam-editor input:not([type="checkbox"]):not([type="radio"]),
+.discord-automod-page .dam-editor textarea,
+.discord-automod-page .dam-editor select {
+  min-height: 39px;
+  background: #101813;
+  border-color: #415247;
+  font-size: 14px;
+}
+.discord-automod-page .dam-step {
+  grid-template-columns: 33px minmax(0,1fr);
+  gap: 10px;
+}
+.discord-automod-page .dam-step-number {
+  width: 31px;
+  height: 31px;
+  font-size: 15px;
+  background: #2c3e32;
+}
+.discord-automod-page .dam-step-panel {
+  background: #19221c;
+  border-color: #405045;
+  padding: 14px;
+}
+.discord-automod-page .dam-step-panel > h3 {
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+.discord-automod-page .dam-field { gap: 7px; }
+.discord-automod-page .dam-word-foot,
+.discord-automod-page .dam-exempt-picker small,
+.discord-automod-page .dam-item-counter { font-size: 12px; }
+.discord-automod-page .dam-step-arrow { margin-left: 42px; }
+.discord-automod-page .dam-accordion {
+  background: #101813;
+  border: 1px solid #2f4035;
+  padding: 12px;
+}
+.discord-automod-page .dam-accordion > summary { font-size: 13px; }
+.discord-automod-page .dam-accordion p { font-size: 12px; color: var(--dam-muted); }
+.discord-automod-page .dam-response { background: var(--dam-elevated); }
+.discord-automod-page .dam-response-row { min-height: 65px; padding: 12px; }
+.discord-automod-page .dam-response-row:hover { background: #304036; }
+.discord-automod-page .dam-response-copy strong { font-size: 14px; }
+.discord-automod-page .dam-response-copy small { font-size: 12px; color: #afc0b4; }
+.discord-automod-page .dam-response-icon { font-size: 21px; width: 27px; }
+.discord-automod-page .dam-response-row .dam-action-box { width: 19px; height: 19px; }
+.discord-automod-page .dam-link { font-size: 13px; }
+.discord-automod-page .dam-exempt-picker > label { font-size: 15px; }
+.discord-automod-page .dam-sensitive > p { font-size: 14px; }
+.discord-automod-page .dam-sensitive-current,
+.discord-automod-page .dam-sensitive-options {
+  background: var(--dam-raised);
+  border-color: #3b4c41;
+}
+.discord-automod-page .dam-sensitive-current {
+  border-left-color: var(--dam-accent);
+  padding: 14px;
+}
+.discord-automod-page .dam-sensitive-current strong { font-size: 14px; }
+.discord-automod-page .dam-sensitive-current small { font-size: 13px; }
+.discord-automod-page .dam-sensitive-options label { background: #232d26; }
+.discord-automod-page .dam-sensitive-options label strong { font-size: 14px; }
+.discord-automod-page .dam-sensitive-options label small { font-size: 12px; }
+.discord-automod-page .dam-rule-menu,
+.discord-automod-page .dam-channel-options {
+  background: #19221c;
+  border-color: #405146;
+}
+.discord-automod-page .dam-rule-menu button { font-size: 14px; }
+.discord-automod-page .dam-rule-menu button:hover,
+.discord-automod-page .dam-channel-options button:hover { background: #304236; }
+.discord-automod-page .dam-modal-backdrop {
+  background: rgba(3,10,5,.78);
+}
+.discord-automod-page .dam-modal {
+  width: min(480px,calc(100vw - 40px));
+  max-width: 100%;
+  background: #19221c;
+  border-color: #395043;
+  color: var(--ink);
+  font-family: "DM Sans", "Segoe UI", sans-serif;
+  padding: 23px;
+}
+.discord-automod-page .dam-modal h2 {
+  font: 800 20px Manrope, "Segoe UI", sans-serif;
+  color: var(--ink);
+}
+.discord-automod-page .dam-modal p {
+  font-size: 15px;
+  color: var(--dam-muted);
+}
+.discord-automod-page .dam-modal .dam-channel-note {
+  margin: 10px 0 0;
+  font-size: 13px;
+}
+.discord-automod-page .dam-modal input,
+.discord-automod-page .dam-modal select,
+.discord-automod-page .dam-modal textarea {
+  background: #101813;
+  border-color: #465a4b;
+  font-size: 15px;
+  min-height: 46px;
+}
+.discord-automod-page .dam-modal-footer button {
+  min-height: 41px;
+  font-size: 14px;
+  background: #293a30;
+}
+.discord-automod-page .dam-modal-footer [data-dam-dialog-save].danger {
+  background: #b54d49;
+  color: white;
+  border-color: #b54d49;
+}
+.discord-automod-page .dam-editor :is(input,textarea,select):focus-visible,
+.discord-automod-page .dam-modal :is(input,textarea,select):focus-visible,
+.discord-automod-page button:focus-visible {
+  outline: 2px solid var(--dam-accent-bright);
+  outline-offset: 2px;
+}
+#discord-automod-unsaved {
+  background: #17231a;
+  border-color: #405a47;
+  max-width: none;
+}
+#discord-automod-unsaved strong { font-size: 14px; }
+#discord-automod-unsaved [data-dam-save] {
+  background: var(--green);
+  color: #08170f;
+  font-weight: 750;
+}
+#discord-automod-unsaved [data-dam-save]:hover { background: var(--green-bright); }
+@media(max-width:900px) {
+  .discord-automod-shell { width: min(440px,100%); font-size: 14px; }
+  .discord-automod-page .dam-modal { width:min(360px,calc(100vw - 32px)); padding:16px; }
+  .discord-automod-page .dam-rule-title { font-size: 14px; }
+  .discord-automod-page .dam-rule-summary { min-height:62px; }
+  .discord-automod-page .dam-rule-copy p { font-size:12px; }
+  .discord-automod-page .dam-response-copy strong { font-size:12px; }
+  .discord-automod-page .dam-response-copy small { font-size:11px; }
+  .discord-automod-page .dam-step { grid-template-columns:27px minmax(0,1fr); gap:7px; }
+  .discord-automod-page .dam-step-number { width:26px;height:26px;font-size:13px; }
+  .discord-automod-page .dam-step-panel { padding:10px; }
+}

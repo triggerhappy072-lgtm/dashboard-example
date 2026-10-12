@@ -1,0 +1,26 @@
+.sapph-automod-row[data-automod-setup], .sapph-automod-row:has(#advanced-automod-open) { cursor: pointer; }
+.sapph-automod-row[data-automod-setup]:hover, .sapph-automod-row:has(#advanced-automod-open):hover { background: rgba(255,255,255,.035); }
+.feedback-overlay { position:fixed; inset:0; z-index:1200; background:rgba(0,0,0,.76); display:grid; place-items:center; padding:18px; }
+.feedback-overlay[hidden] { display:none; }
+.feedback-dialog { width:min(560px,100%); max-height:85vh; overflow:auto; background:#222923; border:1px solid #435246; color:#f2f5f2; border-radius:14px; padding:24px; box-shadow:0 15px 55px #0008; }
+.feedback-dialog h2 { margin:0 0 12px; font-size:21px; }
+.feedback-dialog p { color:#bdc7c0; line-height:1.5; }
+.feedback-dialog label { display:grid; gap:6px; margin:12px 0; color:#e3ede5; }
+.feedback-dialog input:not([type="checkbox"]), .feedback-dialog select, .feedback-dialog textarea { width:100%; border:1px solid #49584d; background:#171d19; color:white; border-radius:7px; padding:10px; }
+.feedback-dialog input[type="checkbox"] { accent-color:#49c882; }
+.feedback-dialog .feedback-check { display:flex; flex-direction:row; align-items:center; gap:10px; }
+.feedback-dialog .feedback-controls { display:flex; justify-content:flex-end; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.feedback-dialog button { border:1px solid #4b6454; background:#303e34; color:#fff; border-radius:7px; padding:9px 14px; cursor:pointer; }
+.feedback-dialog button[data-feedback-save] { background:#278b56; border-color:#278b56; }
+.feedback-dialog button[data-feedback-remove] { margin-right:auto; border-color:#965552; color:#ffd4d2; }
+.feedback-dialog fieldset { border:1px solid #445247; border-radius:8px; padding:10px 14px; margin:12px 0; }
+.feedback-dialog legend { color:#d9e5db; padding:0 5px; }
+.feedback-dialog .feedback-options { display:grid; grid-template-columns:1fr 1fr; gap:4px 12px; }
+.feedback-dialog .feedback-options label { margin:4px 0; }
+.feedback-toolbar { display:flex; flex-wrap:wrap; gap:4px; }
+.feedback-toolbar button { border:1px solid #49614f; background:#233428; border-radius:5px; padding:4px 8px; cursor:pointer; }
+.advanced-rule-card [data-condition-scope] { color:#9fe4bb; }
+.advanced-rule-card .action-chip { cursor:pointer; }
+.advanced-rule-card .action-remove-button { border:0; background:transparent; color:#ffa0a0; cursor:pointer; font-size:20px; padding:2px 6px; }
+.advanced-rule-card .action-remove-button:hover { color:#fff; }
+.feedback-scope-indicator { display:inline-block; font-size:12px; margin:5px 0; color:#acd9b9; }

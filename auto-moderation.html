@@ -6,7 +6,11 @@
   <meta name="theme-color" content="#173c31">
   <title>Auto moderation | Next Step</title>
   <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="automod-feedback.css?v=1">
+  <link rel="stylesheet" href="discord-automod.css?v=9">
+  <script src="script.js?v=feedback-1" defer></script>
+  <script src="automod-feedback.js?v=2" defer></script>
+  <script src="discord-automod.js?v=10" defer></script>
 </head>
 <body>
   <header class="topbar">
@@ -109,11 +113,29 @@
       <section id="home-view" class="page-view automod-page" aria-labelledby="automod-title">
 <div class="sapph-page-title"><span class="sapph-title-icon" aria-hidden="true">&#9881;</span><h1 id="automod-title">Auto Moderation</h1><span class="sapph-help" aria-label="Help">?</span></div>
         <div class="sapph-automod-list">
-          <article class="sapph-automod-row"><span class="sapph-row-icon">AI</span><div><h2>AI Moderation</h2><p>Use artificial intelligence to assist you in moderating your server.</p></div><button class="sapph-action" id="ai-setup-open" type="button">Set up</button></article>
-<article class="sapph-automod-row"><span class="sapph-row-icon">&#9670;</span><div><h2>Discord&rsquo;s built-in auto moderation</h2><p>Specify additional actions for Discord&rsquo;s built-in auto moderation.</p></div><button class="sapph-chevron" type="button" aria-label="Open Discord auto moderation">&rsaquo;</button></article>
+<article class="sapph-automod-row" data-automod-setup="discord"><span class="sapph-row-icon">&#9670;</span><div><h2>Discord&rsquo;s built-in auto moderation</h2><p>Specify additional actions for Discord&rsquo;s built-in auto moderation.</p></div><button class="sapph-chevron" type="button" aria-label="Open Discord auto moderation">&rsaquo;</button></article>
 <article class="sapph-automod-row"><span class="sapph-row-icon">&#9783;</span><div><h2>Advanced auto moderation</h2><p>Prevent spam, sending invites or other types of messages using Next Step&rsquo;s advanced auto moderation.</p></div><button class="sapph-chevron" id="advanced-automod-open" type="button" aria-label="Open advanced auto moderation">&rsaquo;</button></article>
-<article class="sapph-automod-row"><span class="sapph-row-icon">&#9671;</span><div><h2>Join Guard</h2><p>Protect your server against new accounts or bots.</p></div><button class="sapph-action" type="button">Set up</button></article>
-<article class="sapph-automod-row"><span class="sapph-row-icon">&#9656;</span><div><h2>Auto-delete thread creation system message</h2><p>If enabled, automatically deletes the system message which indicates that someone opened a thread below a message in selected channels.</p></div><button class="sapph-action" type="button">Set up</button></article>
+<article class="sapph-automod-row" data-automod-setup="join"><span class="sapph-row-icon">&#9671;</span><div><h2>Join Guard</h2><p>Protect your server against new accounts or bots.</p></div><button class="sapph-action" type="button">Set up</button></article>
+<article class="sapph-automod-row" data-automod-setup="threads"><span class="sapph-row-icon">&#9656;</span><div><h2>Auto-delete thread creation system message</h2><p>If enabled, automatically deletes the system message which indicates that someone opened a thread below a message in selected channels.</p></div><button class="sapph-action" type="button">Set up</button></article>
+        </div>
+      </section>
+      <section id="discord-automod-view" class="page-view automod-page discord-automod-page" aria-labelledby="discord-automod-title" hidden>
+        <div class="sapph-page-title advanced-page-title discord-page-title">
+          <button class="advanced-title-home" type="button" data-discord-back aria-label="Back to Auto Moderation"><span class="sapph-title-icon" aria-hidden="true">&#9881;</span><span>Auto Moderation</span></button>
+          <h1 id="discord-automod-title"><span class="advanced-title-chevron">&rsaquo;</span> <span>Discord's built-in auto moderation</span></h1>
+          <span class="sapph-help" aria-label="Discord AutoMod frontend preview">?</span>
+        </div>
+        <div class="discord-automod-shell">
+          <button type="button" class="dam-back" data-discord-back><span aria-hidden="true">&larr;</span> Back</button>
+          <div class="dam-intro">
+            <h2>AutoMod</h2>
+            <p>Give your mods a break while keeping your server safe! Set up filters to moderate content and automate a custom response when they're found.</p>
+          </div>
+          <div id="discord-automod-content" aria-live="polite"></div>
+        </div>
+        <div class="dam-unsaved-bar" id="discord-automod-unsaved" hidden>
+          <strong id="discord-automod-unsaved-label">Careful — you have unsaved changes!</strong>
+          <div><button type="button" data-dam-cancel>Cancel</button><button type="button" data-dam-save>Save Changes</button></div>
         </div>
       </section>
       <section id="advanced-automod-view" class="page-view automod-page advanced-automod-page" aria-labelledby="advanced-automod-title" hidden>

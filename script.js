@@ -1296,6 +1296,13 @@
     attachments: { amount: 3, noun: 'attachments', window: 5, unit: 'seconds' },
     emojis: { amount: 3, noun: 'emojis', window: 5, unit: 'seconds' },
     'message-lines': { amount: 3, noun: 'lines', window: 5, unit: 'seconds' },
+    'repeated-messages': { amount: 3, noun: 'repeated messages', window: 10, unit: 'seconds' },
+    characters: { amount: 500, noun: 'characters', window: 5, unit: 'seconds' },
+    zalgo: { amount: 5, noun: 'Zalgo characters', window: 5, unit: 'seconds' },
+    risks: { amount: 3, noun: 'risk points', window: 7, unit: 'days' },
+    words: { amount: 1, noun: 'matching messages', window: 5, unit: 'seconds' },
+    links: { amount: 1, noun: 'matching links', window: 5, unit: 'seconds' },
+    invites: { amount: 1, noun: 'invites', window: 5, unit: 'seconds' },
     polls: { amount: 1, noun: 'message', window: 1, unit: 'seconds' },
     warns: { amount: 3, noun: 'warns', window: 7, unit: 'days', op: '=' }
   };
@@ -1312,7 +1319,7 @@
     const editor=preset ? `<div class="condition-editor" hidden><select data-cond-op aria-label="Comparison"><option ${preset.op==='='?'selected':''}>=</option><option ${!preset.op?'selected':''}>≥</option><option>></option><option>≤</option><option><</option></select><input data-cond-amount type="number" min="1" value="${preset.amount}" aria-label="Amount"><span>${preset.noun} in</span><input data-cond-window type="number" min="1" value="${preset.window}" aria-label="Time"><select data-cond-unit aria-label="Time unit"><option ${preset.unit==='seconds'?'selected':''}>seconds</option><option ${preset.unit==='minutes'?'selected':''}>minutes</option><option ${preset.unit==='hours'?'selected':''}>hours</option><option ${preset.unit==='days'?'selected':''}>days</option></select></div>` : key==='capitalization' ? `<div class="condition-editor capitalization-editor" hidden><input data-cap-percent type="number" min="1" max="100" value="80" aria-label="Capitalized percent"><span>% capitalized and ≥</span><input data-cap-chars type="number" min="1" value="10" aria-label="Character count"><span>characters in the message</span></div>` : '';
     const specialEditor=key==='special-channels' ? `<div class="special-types-panel"><div class="special-types-title">ALLOWED MESSAGE CONTENT TYPES:</div><div class="special-types-box"><div class="special-type-chips"><button type="button" class="special-type-chip" data-special-type="Images">Images</button><button type="button" class="special-type-chip" data-special-type="Videos">Videos</button><button type="button" class="special-type-add" data-special-type-add aria-expanded="false">+</button></div><div class="special-type-menu" hidden><input type="search" placeholder="Type" data-special-type-search>${specialChannelTypes.map(type=>`<button type="button" data-special-type-option="${esc(type)}">${esc(type)}</button>`).join('')}</div></div></div>` : '';
     el.dataset.specialTypes=key==='special-channels'?'Images|Videos':'';
-    el.innerHTML=`${specialEditor}<div class="condition-builder-head"><button class="builder-icon-btn">⌄</button><button class="condition-label" type="button" data-edit-condition>${esc(resolved)}</button><button class="builder-icon-btn channel-picker${channelClass}" type="button" data-channel-picker aria-label="Channels">#</button><button class="builder-icon-btn" data-remove>×</button></div>${editor}<div class="condition-actions"><span class="no-actions">No actions added</span><button class="action-add" data-action-add>+</button><div class="action-menu" hidden><input type="search" placeholder="Action"><button>Delete messages</button><button>Block messages</button><button>Send message</button><button>Report to moderators</button><button>DM user</button><button>Open moderation case</button><button>Add reactions</button><button>Add roles</button><button>Remove roles</button><button>Set roles</button></div></div>`;
+    el.innerHTML=`${specialEditor}<div class="condition-builder-head"><button class="builder-icon-btn" type="button" data-collapse-condition aria-label="Collapse condition">⌄</button><button class="condition-label" type="button" data-edit-condition>${esc(resolved)}</button><button class="builder-icon-btn channel-picker${channelClass}" type="button" data-channel-picker aria-label="Channels">#</button><button class="builder-icon-btn" type="button" data-condition-scope aria-label="Condition roles and channels">♢</button><button class="builder-icon-btn" type="button" data-remove aria-label="Remove condition">×</button></div>${editor}<div class="condition-actions"><span class="no-actions">No actions added</span><button class="action-add" type="button" data-action-add>+</button><div class="action-menu" hidden><input type="search" placeholder="Action" aria-label="Search actions"><button type="button">Delete messages</button><button type="button">Send message</button><button type="button">Report to moderators</button><button type="button">DM user</button><button type="button">Open moderation case</button><button type="button">Add reactions</button><button type="button">Add roles</button><button type="button">Remove roles</button><button type="button">Set roles</button><button type="button">Manage levels</button></div></div>`;
     return el;
   }
   function group(rule) {
@@ -1422,12 +1429,17 @@
       const row=e.target.closest('.builder-entry'), input=row.querySelector('input'); if(!input.value.trim()) return;
       const chip=document.createElement('span'); chip.className='word-chip'; chip.textContent=input.value.trim(); row.append(chip); input.value=''; markDirty(); return;
     }
-    if(e.target.closest('[data-action-add]')) { const menu=e.target.closest('.condition-actions').querySelector('.action-menu'); menu.hidden=!menu.hidden; return; }
+    if(e.target.closest('[data-action-add]')) { const menu=e.target.closest('.condition-actions').querySelector('.action-menu'); menu.hidden=!menu.hidden; menu.querySelector('input')?.focus(); return; }
     const action=e.target.closest('.action-menu button'); if(action) { const area=action.closest('.condition-actions'); area.querySelector('.no-actions')?.remove(); const chip=document.createElement('button'); chip.className='action-chip'; chip.textContent=action.textContent+' \u2699'; area.insertBefore(chip, area.querySelector('[data-action-add]')); action.parentElement.hidden=true; markDirty(); return; }
     if(e.target.closest('[data-remove]')) { const builder=e.target.closest('.condition-builder,.rule-builder'); const parent=builder.parentElement; builder.remove(); if(parent.classList.contains('rule-builders')) { if(!parent.children.length) rule.querySelector('.advanced-empty').style.display=''; } markDirty(); return; }
   });
 
   grid.addEventListener('input', e=>{
+    if(e.target.matches('.action-menu input[type="search"]')) {
+      const query=e.target.value.trim().toLowerCase();
+      e.target.closest('.action-menu').querySelectorAll('button').forEach(button=>{button.hidden=!!query&&!button.textContent.toLowerCase().includes(query);});
+      return;
+    }
     const builder=e.target.closest('.condition-builder');
     if(builder && e.target.closest('.condition-editor')) {
       const preset=conditionPresets[builder.dataset.rule];
