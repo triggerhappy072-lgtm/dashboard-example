@@ -14,13 +14,23 @@
   };
   const section = (title, copy, body) => `<section class="mod-section"><h2>${title}</h2>${copy ? `<p>${copy}</p>` : ''}${body}</section>`;
   const dirtyBar = () => `<div class="mod-unsaved" data-mod-unsaved hidden><strong>Careful — you have unsaved changes!</strong><div><button type="button" data-mod-reset>Reset</button><button type="button" class="mod-primary" data-mod-save>Save changes</button></div></div>`;
-  const reportState = { reasons: ['Harassment', 'Spam'], conditions: [] };
+  const reportStorageKey = 'next-step-user-reports-v2';
+  let reportState = { reasons: ['Harassment', 'Spam'], conditions: [], settings: {} };
+  try {
+    const saved = JSON.parse(localStorage.getItem(reportStorageKey) || 'null');
+    if (saved && Array.isArray(saved.reasons) && Array.isArray(saved.conditions)) reportState = { ...reportState, ...saved, settings: saved.settings || {} };
+  } catch {}
+  const saveReportState = () => localStorage.setItem(reportStorageKey, JSON.stringify(reportState));
   const staffLimitations = [];
   const casePreview = [
     { id:'P-001', state:'Open', type:'Ban', user:'Preview member 1', reason:'Preview reason', duration:'Permanent', created:'Preview date', ageDays:0, author:'Preview moderator', confession:false },
     { id:'P-002', state:'Closed', type:'Warn', user:'Preview member 2', reason:'Preview reason 2', duration:'7 days', created:'Preview date', ageDays:3, author:'Preview moderator', confession:false },
     { id:'P-003', state:'Open', type:'Confession ban', user:'Hidden identity', reason:'Preview confession case', duration:'Permanent', created:'Preview date', ageDays:12, author:'Preview moderator', confession:true }
   ];
+  casePreview.forEach(item => {
+    item.createdAt = new Date(Date.now() - item.ageDays * 86400000).toISOString().slice(0, 10);
+    item.created = item.createdAt;
+  });
   const actionLabels = ['Delete messages','Send message','Report to moderators','DM user','Open moderation case','Add reactions','Add roles','Remove roles','Set roles','Remove levels'];
   const markDirty = () => detail.querySelector('[data-mod-unsaved]')?.removeAttribute('hidden');
 
@@ -281,10 +291,10 @@
 
   const screens = {
     cases: () => header('Cases') + `
-      <div class="mod-toolbar"><label class="mod-search"><input type="search" data-case-search placeholder="Case ID / User ID / Reason"><button type="button">Search</button></label><button class="mod-secondary" type="button" data-mod-toggle-panel="case-filters">Filters</button><button class="mod-secondary" type="button" data-mod-toggle-panel="case-mass">Mass edit</button></div>
-      <div class="mod-panel" id="case-filters" hidden><div class="mod-filter-grid"><label><input type="checkbox" data-case-type="Ban" checked> Bans</label><label><input type="checkbox" data-case-type="Kick" checked> Kicks</label><label><input type="checkbox" data-case-type="Mute" checked> Mutes</label><label><input type="checkbox" data-case-type="Warn" checked> Warns</label><label><input type="checkbox" data-case-state="Open" checked> Open</label><label><input type="checkbox" data-case-state="Closed" checked> Closed</label><label>Created <select data-case-created><option value="all">All time</option><option value="1">24 hours</option><option value="7">7 days</option><option value="30">30 days</option></select></label></div></div>
+      <div class="mod-toolbar"><label class="mod-search"><input type="search" data-case-search placeholder="Case ID / User ID / Reason" aria-label="Search cases"></label><button class="mod-secondary" type="button" data-mod-toggle-panel="case-filters">Filters</button><button class="mod-secondary" type="button" data-mod-toggle-panel="case-mass">Mass edit</button></div>
+      <div class="mod-panel" id="case-filters" hidden><div class="mod-filter-grid"><label><input type="checkbox" data-case-type="Ban" checked> Bans</label><label><input type="checkbox" data-case-type="Kick" checked> Kicks</label><label><input type="checkbox" data-case-type="Mute" checked> Mutes</label><label><input type="checkbox" data-case-type="Warn" checked> Warns</label><label><input type="checkbox" data-case-state="Open" checked> Open</label><label><input type="checkbox" data-case-state="Closed" checked> Closed</label><label>Created <select data-case-created><option value="all">All time</option><option value="1">24 hours</option><option value="7">7 days</option><option value="30">30 days</option><option value="between">Between dates</option></select></label><label data-case-between hidden>From <input type="date" data-case-from></label><label data-case-between hidden>To <input type="date" data-case-to></label></div></div>
       <div class="mod-panel" id="case-mass" hidden><div class="mod-mass-actions"><strong data-case-count>Selected 0 cases</strong><button type="button" data-select-page>Select page</button><button type="button" data-select-all>Select all cases</button><button type="button" data-mass-edit>Edit</button><button type="button" data-mass-close>Close</button><button type="button" class="mod-danger" data-mass-delete>Delete</button></div></div>
-      <div class="mod-preview-note">Preview data</div><div class="mod-table-wrap"><table class="mod-table mod-case-table"><thead><tr><th></th><th>Number</th><th>State</th><th>Type</th><th>User</th><th>Reason</th><th>Duration</th><th>Created</th><th>Author</th></tr></thead><tbody>${casePreview.map((item) => `<tr data-case-row data-case-id="${item.id}" data-case-kind="${item.type}" data-case-status="${item.state}" data-case-age="${item.ageDays}" data-case-text="${esc((item.id+' '+item.state+' '+item.type+' '+item.user+' '+item.reason+' '+item.duration+' '+item.author).toLowerCase())}"><td><input type="checkbox" data-case-select></td><td><button class="mod-link-button" type="button" data-open-case="${item.id}">${item.id}</button></td><td>${item.state}</td><td>${item.type}</td><td>${item.confession ? '<span class="mod-hidden-user">Hidden identity</span>' : esc(item.user)}</td><td>${esc(item.reason)}</td><td>${item.duration}</td><td>${item.created}</td><td>${item.author}</td></tr>`).join('')}</tbody></table></div>${dirtyBar()}`,
+      <div class="mod-preview-note">Preview data</div><div class="mod-table-wrap"><table class="mod-table mod-case-table"><thead><tr><th></th><th>Number</th><th>State</th><th>Type</th><th>User</th><th>Reason</th><th>Duration</th><th>Created</th><th>Author</th><th></th></tr></thead><tbody>${casePreview.map((item) => `<tr data-case-row data-case-id="${item.id}" data-case-kind="${item.type}" data-case-status="${item.state}" data-case-age="${item.ageDays}" data-case-created-at="${item.createdAt}" data-case-text="${esc((item.id+' '+item.state+' '+item.type+' '+item.user+' '+item.reason+' '+item.duration+' '+item.author).toLowerCase())}"><td><input type="checkbox" data-case-select></td><td><button class="mod-link-button" type="button" data-open-case="${item.id}">${item.id}</button></td><td>${item.state}</td><td>${item.type}</td><td>${item.confession ? '<span class="mod-hidden-user">Hidden identity</span>' : esc(item.user)}</td><td>${esc(item.reason)}</td><td>${item.duration}</td><td>${item.created}</td><td>${item.author}</td><td><button class="mod-secondary" type="button" data-open-case="${item.id}">Open</button></td></tr>`).join('')}</tbody></table></div>${dirtyBar()}`,
 
     'user-reports': () => header('User reports', 'Configure how members report users and how those reports are handled.') + `
       ${section('Report channel', 'Choose where new reports are sent.', picker('Channel', 'No channel added'))}
@@ -294,10 +304,10 @@
       ${section('Advanced actions', 'Build conditions and actions for report automation.', '<div data-report-conditions></div><button class="mod-primary" type="button" data-add-report-condition>+ Add condition</button>')}
       ${section('Custom messages', 'Edit messages used during reporting.', '<div class="mod-list-stack"><button class="mod-nav-row" type="button" data-edit-template="Report created"><span><strong>Report created</strong><small>Edit message template</small></span><b>&rsaquo;</b></button><button class="mod-nav-row" type="button" data-edit-template="Report accepted"><span><strong>Report accepted</strong><small>Edit message template</small></span><b>&rsaquo;</b></button><button class="mod-nav-row" type="button" data-edit-template="Report denied"><span><strong>Report denied</strong><small>Edit message template</small></span><b>&rsaquo;</b></button></div>')}
       ${section('Ping roles', 'Roles pinged for reports.', picker('Role', 'No ping roles added'))}
-      ${section('Only roles able to report', 'Use the list as a whitelist or blacklist.', '<label class="mod-select-line">Mode<select><option>Whitelist</option><option>Blacklist</option></select></label>'+picker('Role', 'No report roles added'))}
-      ${section('Roles immune to reports', 'Use the list as a whitelist or blacklist.', '<label class="mod-select-line">Mode<select><option>Whitelist</option><option>Blacklist</option></select></label>'+picker('Role', 'No immune roles added'))}
+      ${section('Only roles able to report', 'Use the list as a whitelist or blacklist.', '<label class="mod-select-line">Mode<select data-report-mode="reporters"><option>Whitelist</option><option>Blacklist</option></select></label>'+picker('Role', 'No report roles added'))}
+      ${section('Roles immune to reports', 'Use the list as a whitelist or blacklist.', '<label class="mod-select-line">Mode<select data-report-mode="immune"><option>Whitelist</option><option>Blacklist</option></select></label>'+picker('Role', 'No immune roles added'))}
       ${section('Automation log channel', 'Choose where report automation actions are logged.', picker('Channel', 'No log channel added'))}
-      ${section('Requirements and limits', '', toggle('Force reason', false) + toggle('Force comment', false) + toggle('Force attachment', false) + '<div class="mod-form-grid"><label>Cooldown<input type="text" value="0 seconds"></label><label>Max open reports in this server<input type="text" value="Unlimited"></label><label>Max reports a user can receive at a time<input type="text" value="Unlimited"></label></div>' + toggle('Notify on report creation', true) + toggle('Notify on report update', true))}${dirtyBar()}`,
+      ${section('Requirements and limits', '', toggle('Force reason', false) + toggle('Force comment', false) + toggle('Force attachment', false) + '<div class="mod-form-grid"><label>Cooldown<input data-report-setting="cooldown" type="text" value="0 seconds"></label><label>Maximum open reports in server<input data-report-setting="maxOpen" type="number" min="0" placeholder="Unlimited"></label><label>Maximum active reports received per user<input data-report-setting="maxReceived" type="number" min="0" placeholder="Unlimited"></label></div>' + toggle('Notify on report creation', true) + toggle('Notify on report update', true))}<p class="mod-preview-note">Report settings in this frontend preview are saved in this browser automatically.</p>`,
 
     'staff-limitations': () => header('Staff limitations', 'Limit sensitive staff actions and review effective permissions.') + `
       <div class="mod-two-grid"><section class="mod-tile"><h2>Permission Limitations</h2><p>Add roles or members and define how often they may perform sensitive actions.</p><button class="mod-primary" type="button" data-add-limitation>+ Add role or member</button><div class="mod-example-list" data-limitation-list>${staffLimitations.length ? staffLimitations.map((l)=>`<div>${esc(l.subject)} can ${esc(l.action)} a maximum of <strong>${l.limit}</strong> ${esc(l.target)} per ${esc(l.period)}.</div>`).join('') : '<div class="mod-empty-inline">No limitations configured</div>'}</div></section><section class="mod-tile"><h2>Permission Overview</h2><p>Members are ordered from highest permission level to lowest. Dangerous permissions are counted separately.</p><button class="mod-member-row" type="button" data-permission-member="Preview Administrator"><span>Preview Administrator</span><b class="mod-risk-count">5</b></button><button class="mod-member-row" type="button" data-permission-member="Preview Moderator"><span>Preview Moderator</span><b class="mod-risk-count">2</b></button><button class="mod-member-row" type="button" data-permission-member="Preview Helper"><span>Preview Helper</span><b class="mod-risk-count low">0</b></button></section></div>${dirtyBar()}`,
@@ -379,8 +389,8 @@
     });
   }
 
-  function openActionMenu(onPick) {
-    const { modal, close } = openModal(`<h2>Add action</h2><div class="mod-action-menu">${actionLabels.map((label) => `<button type="button" data-action-type="${esc(label)}">${esc(label)}</button>`).join('')}</div>`, 'mod-action-menu-modal');
+  function openActionMenu(onPick, allowed = actionLabels) {
+    const { modal, close } = openModal(`<h2>Add action</h2><div class="mod-action-menu">${allowed.map((label) => `<button type="button" data-action-type="${esc(label)}">${esc(label)}</button>`).join('')}</div>`, 'mod-action-menu-modal');
     modal.querySelectorAll('[data-action-type]').forEach((button) => button.addEventListener('click', () => {
       const type = button.dataset.actionType;
       close();
@@ -388,7 +398,7 @@
     }));
   }
 
-  function openActionEditor(type, onSave) {
+  function openActionEditor(type, onSave, initial = null) {
     let fields = '';
     if (type === 'Delete messages') fields = '<label>Delete mode<select><option>Delete all</option><option>Delete overflow</option></select></label><label>Delay<input type="text" value="0 seconds"></label>';
     else if (type === 'Send message') fields = '<label>Template<input type="text" placeholder="Template or template list"></label>' + toggle('Reply to message', false, false) + toggle('Delete after', false, false) + '<label>Delete after time<input type="text" value="0 seconds"></label><label>Delay<input type="text" value="0 seconds"></label>';
@@ -412,8 +422,19 @@
       select.addEventListener('change', renderCaseFields);
       renderCaseFields();
     }
+    if (initial?.fields) {
+      modal.querySelectorAll('.mod-modal-form input,.mod-modal-form select,.mod-modal-form textarea').forEach((input,index) => {
+        if (index >= initial.fields.length) return;
+        if (input.type === 'checkbox') input.checked = !!initial.fields[index];
+        else input.value = initial.fields[index];
+      });
+    }
     modal.querySelector('[data-action-cancel]')?.addEventListener('click', close);
-    modal.querySelector('[data-action-save]')?.addEventListener('click', () => { onSave?.({ type }); markDirty(); close(); });
+    modal.querySelector('[data-action-save]')?.addEventListener('click', () => {
+      const values = [...modal.querySelectorAll('.mod-modal-form input,.mod-modal-form select,.mod-modal-form textarea')].map(input => input.type === 'checkbox' ? input.checked : input.value);
+      onSave?.({ type, fields: values });
+      markDirty(); close();
+    });
   }
 
   function openPunishment(name) {
@@ -514,19 +535,54 @@
   function renderReportConditions() {
     const root = detail.querySelector('[data-report-conditions]');
     if (!root) return;
-    root.innerHTML = reportState.conditions.length ? reportState.conditions.map((condition, index) => `<div class="mod-condition-card"><div class="mod-condition-head"><strong>If user has</strong><input type="number" min="1" value="${condition.count}"><span>active reports</span><button type="button" data-remove-condition="${index}">&times;</button></div><div class="mod-condition-sub">Execute when not marked as edited within <input type="text" value="${esc(condition.window)}"></div><div class="mod-actions-list">${condition.actions.map((action, actionIndex) => `<button type="button" class="mod-action-chip" data-edit-report-action="${index}:${actionIndex}">${esc(action.type)}</button>`).join('')}</div><button class="mod-secondary" type="button" data-add-condition-action="${index}">+ Add action</button></div>`).join('') : '<div class="mod-empty-inline">No advanced conditions added</div>';
-    root.querySelectorAll('[data-remove-condition]').forEach((button) => button.addEventListener('click', () => { reportState.conditions.splice(Number(button.dataset.removeCondition), 1); renderReportConditions(); markDirty(); }));
-    root.querySelectorAll('[data-add-condition-action]').forEach((button) => button.addEventListener('click', () => openActionMenu((action) => { reportState.conditions[Number(button.dataset.addConditionAction)].actions.push(action); renderReportConditions(); markDirty(); })));
+    const options = (list,current) => list.map(value => `<option value="${esc(value)}" ${value === current ? 'selected' : ''}>${esc(value)}</option>`).join('');
+    root.innerHTML = reportState.conditions.length ? reportState.conditions.map((condition, index) => `
+      <div class="mod-condition-card" data-report-condition="${index}">
+        <div class="mod-condition-head">
+          <strong>When reports received</strong>
+          <select aria-label="Report comparison" data-cond-prop="operator">${options(['=','>','<','≥','≤'],condition.operator || '≥')}</select>
+          <input aria-label="Number of reports" type="number" min="1" value="${Number(condition.count)||1}" data-cond-prop="count">
+          <span>within</span>
+          <input aria-label="Time period" type="number" min="1" value="${Number(condition.windowAmount)||7}" data-cond-prop="windowAmount">
+          <select aria-label="Time unit" data-cond-prop="windowUnit">${options(['minutes','hours','days','weeks'],condition.windowUnit || 'days')}</select>
+          <button type="button" data-remove-condition="${index}" aria-label="Remove condition">&times;</button>
+        </div>
+        <label class="mod-condition-sub"><input type="checkbox" data-cond-prop="allReportedUser" ${condition.allReportedUser ? 'checked' : ''}> Count all reports against a single reported user</label>
+        <label class="mod-condition-sub"><input type="checkbox" data-cond-prop="singleReporter" ${condition.singleReporter ? 'checked' : ''}> Include repeat reports from the same reporter</label>
+        <div class="mod-actions-list">${condition.actions.map((action, actionIndex) => `
+          <span class="mod-action-chip"><button class="mod-link-button" type="button" data-edit-report-action="${index}:${actionIndex}">${esc(action.type)}</button><button class="mod-action-remove" type="button" data-remove-report-action="${index}:${actionIndex}" aria-label="Remove ${esc(action.type)}">&times;</button></span>`).join('')}</div>
+        <button class="mod-secondary" type="button" data-add-condition-action="${index}">+ Add action</button>
+      </div>`).join('') : '<div class="mod-empty-inline">No advanced conditions added</div>';
+    root.querySelectorAll('[data-remove-condition]').forEach((button) => button.addEventListener('click', () => {
+      reportState.conditions.splice(Number(button.dataset.removeCondition), 1); saveReportState(); renderReportConditions(); markDirty();
+    }));
+    root.querySelectorAll('[data-add-condition-action]').forEach((button) => button.addEventListener('click', () => openActionMenu((action) => {
+      reportState.conditions[Number(button.dataset.addConditionAction)].actions.push(action);
+      saveReportState(); renderReportConditions(); markDirty();
+    }, actionLabels.filter(name => !['Delete messages','Add reactions'].includes(name)))));
+    root.querySelectorAll('[data-remove-report-action]').forEach(button => button.addEventListener('click', () => {
+      const [i,j] = button.dataset.removeReportAction.split(':').map(Number);
+      reportState.conditions[i]?.actions.splice(j,1);
+      saveReportState(); renderReportConditions(); markDirty();
+    }));
     root.querySelectorAll('[data-edit-report-action]').forEach((button) => button.addEventListener('click', () => {
       const [conditionIndex, actionIndex] = button.dataset.editReportAction.split(':').map(Number);
       const action = reportState.conditions[conditionIndex]?.actions[actionIndex];
       if (!action) return;
-      openActionEditor(action.type, () => { markDirty(); renderReportConditions(); });
+      openActionEditor(action.type, (updated) => {
+        reportState.conditions[conditionIndex].actions[actionIndex] = updated;
+        saveReportState(); markDirty(); renderReportConditions();
+      }, action);
     }));
     root.querySelectorAll('.mod-condition-card').forEach((card, index) => {
-      const inputs = card.querySelectorAll('input');
-      inputs[0]?.addEventListener('input', () => { reportState.conditions[index].count = Number(inputs[0].value) || 1; markDirty(); });
-      inputs[1]?.addEventListener('input', () => { reportState.conditions[index].window = inputs[1].value; markDirty(); });
+      card.querySelectorAll('[data-cond-prop]').forEach(input => {
+        const update = () => {
+          reportState.conditions[index][input.dataset.condProp] = input.type === 'checkbox' ? input.checked : input.type === 'number' ? Math.max(1,Number(input.value)||1) : input.value;
+          saveReportState(); markDirty();
+        };
+        input.addEventListener('input',update);
+        input.addEventListener('change',update);
+      });
     });
   }
 
@@ -536,9 +592,14 @@
       const types = new Set([...detail.querySelectorAll('[data-case-type]:checked')].map((input) => input.dataset.caseType));
       const states = new Set([...detail.querySelectorAll('[data-case-state]:checked')].map((input) => input.dataset.caseState));
       const created = detail.querySelector('[data-case-created]')?.value || 'all';
+      const from = detail.querySelector('[data-case-from]')?.value || '';
+      const to = detail.querySelector('[data-case-to]')?.value || '';
+      detail.querySelectorAll('[data-case-between]').forEach((field) => { field.hidden = created !== 'between'; });
       detail.querySelectorAll('[data-case-row]').forEach((row) => {
         const baseType = row.dataset.caseKind === 'Confession ban' ? 'Ban' : row.dataset.caseKind;
-        const withinCreatedRange = created === 'all' || Number(row.dataset.caseAge) <= Number(created);
+        const withinCreatedRange = created === 'all' || (created === 'between'
+          ? (!from || row.dataset.caseCreatedAt >= from) && (!to || row.dataset.caseCreatedAt <= to)
+          : Number(row.dataset.caseAge) <= Number(created));
         row.hidden = !types.has(baseType) || !states.has(row.dataset.caseStatus) || !withinCreatedRange || (!!q && !row.dataset.caseText.includes(q));
       });
     };
@@ -548,7 +609,8 @@
       if (output) output.textContent = `Selected ${count} case${count === 1 ? '' : 's'}`;
     };
     detail.querySelector('[data-case-search]')?.addEventListener('input', refresh);
-    detail.querySelectorAll('[data-case-type],[data-case-state],[data-case-created]').forEach((input) => input.addEventListener('change', refresh));
+    detail.querySelectorAll('[data-case-type],[data-case-state],[data-case-created],[data-case-from],[data-case-to]').forEach((input) => input.addEventListener('change', refresh));
+    refresh();
     detail.querySelectorAll('[data-case-select]').forEach((input) => input.addEventListener('change', syncCount));
     detail.querySelector('[data-select-page]')?.addEventListener('click', () => { detail.querySelectorAll('[data-case-row]:not([hidden]) [data-case-select]').forEach((input) => { input.checked = true; }); syncCount(); });
     detail.querySelector('[data-select-all]')?.addEventListener('click', () => { detail.querySelectorAll('[data-case-select]').forEach((input) => { input.checked = true; }); syncCount(); });
@@ -563,15 +625,69 @@
 
   function bindReports() {
     renderReportConditions();
-    detail.querySelector('[data-add-report-condition]')?.addEventListener('click', () => { reportState.conditions.push({ count: 3, window: '7 days', actions: [] }); renderReportConditions(); markDirty(); });
+    detail.querySelector('[data-add-report-condition]')?.addEventListener('click', () => {
+      reportState.conditions.push({ count: 3, operator: '≥', windowAmount: 7, windowUnit: 'days', allReportedUser: true, singleReporter: false, actions: [] });
+      saveReportState(); renderReportConditions(); markDirty();
+    });
     detail.querySelector('[data-add-report-reason]')?.addEventListener('click', () => {
       const input = detail.querySelector('[data-report-reason-input]');
       if (!input?.value.trim()) return;
       reportState.reasons.push(input.value.trim());
+      saveReportState();
       showRoute('user-reports', false);
       markDirty();
     });
-    detail.querySelectorAll('[data-remove-report-reason]').forEach((button) => button.addEventListener('click', () => { reportState.reasons.splice(Number(button.dataset.removeReportReason), 1); showRoute('user-reports', false); markDirty(); }));
+    detail.querySelectorAll('[data-remove-report-reason]').forEach((button) => button.addEventListener('click', () => {
+      reportState.reasons.splice(Number(button.dataset.removeReportReason), 1);
+      saveReportState(); showRoute('user-reports', false); markDirty();
+    }));
+    detail.querySelectorAll('[data-report-mode]').forEach(select => {
+      const key = select.dataset.reportMode;
+      select.value = reportState.settings[key] || 'Whitelist';
+      const section = select.closest('.mod-section');
+      const heading = section?.querySelector('h2');
+      const label = heading?.textContent || '';
+      const update = () => {
+        if (heading) heading.textContent = `${label} — ${select.value}`;
+        const pickerText = section?.querySelector('.mod-picker-empty');
+        if(pickerText) pickerText.lastChild.textContent = select.value === 'Whitelist' ? ' No whitelisted roles added' : ' No blacklisted roles added';
+      };
+      update();
+      select.addEventListener('change', () => {
+        reportState.settings[key] = select.value;
+        saveReportState(); markDirty();
+        update();
+      });
+    });
+    detail.querySelectorAll('[data-report-setting]').forEach(input => {
+      const key = input.dataset.reportSetting;
+      input.value = reportState.settings[key] ?? input.value;
+      input.addEventListener('input', () => {
+        reportState.settings[key] = input.value;
+        saveReportState(); markDirty();
+      });
+    });
+    // Keep the remaining report toggles and automated-action form fields
+    // consistent with the auto-saving condition editor in this frontend demo.
+    detail.querySelectorAll('.mod-section input,.mod-section select').forEach(input => {
+      if (input.closest('[data-report-conditions],[data-mod-picker]') ||
+        input.matches('[data-report-setting],[data-report-mode],[data-report-reason-input]')) return;
+      const parentSection = input.closest('.mod-section');
+      const sectionTitle = parentSection?.querySelector('h2')?.textContent.trim() || 'Report';
+      const label = input.closest('label')?.textContent.trim() || input.name || 'Field';
+      const index = [...parentSection.querySelectorAll('input,select')].indexOf(input);
+      const key = `form:${sectionTitle}:${label}:${index}`;
+      if (key in reportState.settings) {
+        if (input.type === 'checkbox') input.checked = !!reportState.settings[key];
+        else input.value = reportState.settings[key];
+      }
+      const update = () => {
+        reportState.settings[key] = input.type === 'checkbox' ? input.checked : input.value;
+        saveReportState();
+      };
+      input.addEventListener('input', update);
+      input.addEventListener('change', update);
+    });
     detail.querySelectorAll('[data-edit-template]').forEach((button) => button.addEventListener('click', () => openTemplateEditor(button.dataset.editTemplate)));
   }
 
@@ -840,7 +956,7 @@
     }));
     bindPickers(detail);
     detail.querySelectorAll('[data-punishment]').forEach((button) => button.addEventListener('click', () => openPunishment(button.dataset.punishment)));
-    detail.querySelectorAll('input,select,textarea').forEach((input) => { if (!input.matches('[data-case-select],[data-case-search],[data-case-type],[data-case-state],[data-case-created]')) input.addEventListener('change', markDirty); });
+    detail.querySelectorAll('input,select,textarea').forEach((input) => { if (!input.matches('[data-case-select],[data-case-search],[data-case-type],[data-case-state],[data-case-created],[data-case-from],[data-case-to]')) input.addEventListener('change', markDirty); });
     detail.querySelector('[data-mod-save]')?.addEventListener('click', () => { detail.querySelector('[data-mod-unsaved]').hidden = true; });
     detail.querySelector('[data-mod-reset]')?.addEventListener('click', () => showRoute(route, false));
     if (route === 'cases') bindCases();
