@@ -1,0 +1,89 @@
+.rp-page{max-width:1140px;padding:34px 0 65px;color:var(--ink)}
+.rp-page button,.rp-page input,.rp-page select{font-family:inherit}
+.rp-heading{display:flex;align-items:center;gap:18px;margin-bottom:24px}
+.rp-heading-icon{width:56px;height:56px;flex:0 0 56px;display:grid;place-items:center;border:1px solid #446a50;border-radius:12px;background:#1c3b2a;color:#86deb0}
+.rp-heading-icon svg{width:32px;height:34px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.rp-eyebrow{display:block;margin-bottom:5px;color:#7ccd9b;font-size:10px;letter-spacing:.12em;font-weight:800}
+.rp-heading h1{margin:0;color:#f2f7f3;font:800 30px/1.15 Manrope,"Segoe UI",sans-serif}
+.rp-heading p{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
+.rp-preview{display:flex;gap:12px;padding:13px 16px;border:1px solid #47553d;border-radius:8px;background:#25291e;margin-bottom:28px}
+.rp-preview-dot{flex:0 0 9px;width:9px;height:9px;margin-top:4px;border-radius:50%;background:#ecc470;box-shadow:0 0 0 4px #ecc47019}
+.rp-preview strong{display:block;color:#f3e2b8;font-size:12px}
+.rp-preview p{margin:4px 0 0;color:#cabf9d;font-size:12px;line-height:1.55}
+.rp-overview-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:13px}
+.rp-overview-head h2{margin:0;font:800 21px Manrope,"Segoe UI",sans-serif}
+.rp-overview-head p{margin:5px 0 0;color:var(--muted);font-size:12px}
+.rp-setup-count{font-size:11px;color:#b6c8ba;border:1px solid #3c5144;border-radius:30px;padding:6px 10px;background:#1c2c21;white-space:nowrap}
+.rp-module-list{overflow:hidden;border:1px solid #3a453e;border-radius:10px;background:#171c19}
+.rp-module+.rp-module{border-top:1px solid #303a32}
+.rp-module-row{min-height:80px;display:flex;align-items:center;gap:15px;padding:14px 18px}
+.rp-module-row:hover{background:#1c241e}
+.rp-module-icon{display:grid;place-items:center;width:43px;height:43px;flex:0 0 43px;border-radius:10px}
+.rp-module-icon svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.rp-module-icon-amber{background:#563e21;color:#ffd17a}
+.rp-module-icon-green{background:#205238;color:#8ae5ac}
+.rp-module-icon-red{background:#5a2c31;color:#f5a7a1}
+.rp-module-icon-blue{background:#244456;color:#a4dced}
+.rp-module-copy{min-width:0;flex:1}
+.rp-module-copy h3{margin:0;font:800 15px Manrope,"Segoe UI",sans-serif}
+.rp-module-copy p{margin:4px 0 0;color:#9baea1;font-size:12px;line-height:1.4}
+.rp-status{padding:5px 9px;border-radius:5px;background:#282e2a;color:#bdc5bf;font-size:11px;font-weight:750}
+.rp-status.on{background:#1c4930;color:#9be3b5}
+.rp-edit{flex:none;min-width:65px;min-height:34px;padding:0 12px;border:1px solid #48564d;border-radius:5px;background:#29302b;color:#edf3ee;font-size:12px;font-weight:800;cursor:pointer}
+.rp-edit:hover,.rp-edit[aria-expanded="true"]{border-color:#599770;background:#2d4d38}
+.rp-editor{padding:20px 20px 22px 76px;border-top:1px solid #334339;background:#1d251f}
+.rp-editor[hidden],.rp-commit-bar[hidden],.rp-simulation-result[hidden]{display:none}
+.rp-editor-intro{display:flex;align-items:start;justify-content:space-between;gap:16px;margin-bottom:19px}
+.rp-editor-intro h4{margin:0;font:800 16px Manrope,"Segoe UI",sans-serif}
+.rp-editor-intro p{max-width:620px;margin:6px 0 0;color:var(--muted);font-size:12px;line-height:1.55}
+.rp-switch{display:flex;align-items:center;gap:10px;white-space:nowrap;color:#cfe0d4;font-size:12px;cursor:pointer}
+.rp-switch input{appearance:none;margin:0;position:relative;width:40px;height:23px;border:1px solid #536056;border-radius:30px;background:#3d4840;cursor:pointer;transition:background .15s}
+.rp-switch input:before{content:"";position:absolute;top:3px;left:3px;width:15px;height:15px;border-radius:50%;background:#e8efea;transition:transform .15s}
+.rp-switch input:checked{border-color:#39b878;background:#228d5a}
+.rp-switch input:checked:before{transform:translateX(17px)}
+.rp-field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.rp-field{min-width:0;display:flex;flex-direction:column;gap:7px;margin-bottom:13px}
+.rp-field>span{color:#e1ebe4;font-size:12px;font-weight:750}
+.rp-field input,.rp-field select{width:100%;min-width:0;min-height:39px;padding:8px 10px;border:1px solid #435448;border-radius:6px;background:#141c16;color:#f3f7f4;font-size:13px}
+.rp-field input::placeholder{color:#829389}
+.rp-field small{color:#9eaea3;font-size:11px;line-height:1.5}
+.rp-with-suffix{display:flex;align-items:center;border:1px solid #435448;border-radius:6px;background:#141c16}
+.rp-with-suffix input{border:0;background:transparent}
+.rp-with-suffix span{padding:0 11px;color:#a3b3a7;font-size:12px}
+.rp-setting-line{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:13px 0;border-top:1px solid #354137;cursor:pointer}
+.rp-setting-line span{display:grid;gap:4px}
+.rp-setting-line strong{font-size:12px}
+.rp-setting-line small{color:#9daea1;font-size:11px}
+.rp-setting-line input,.rp-response-choice input{width:17px;height:17px;accent-color:var(--green-bright)}
+.rp-response-choice{border:0;margin:0 0 14px;padding:0}
+.rp-response-choice legend{margin-bottom:8px;color:#e1ebe4;font-size:12px;font-weight:750}
+.rp-response-choice label{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid #38483d;border-radius:6px;background:#172019;cursor:pointer}
+.rp-response-choice label+label{margin-top:7px}
+.rp-response-choice label:has(input:checked){border-color:#4c8662;background:#203426}
+.rp-response-choice label span{display:grid;gap:3px}
+.rp-response-choice strong{font-size:12px}
+.rp-response-choice small{font-size:11px;color:#a6b6aa;line-height:1.45}
+.rp-external{display:inline-flex;gap:7px;align-items:center;color:#81dda7;font-size:12px;font-weight:700;text-decoration:none}
+.rp-external:hover{text-decoration:underline}
+.rp-commit-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:16px;padding:12px 15px;border:1px solid #4e7059;border-radius:8px;background:#1b2c20;box-shadow:0 10px 25px #0004}
+.rp-commit-bar>span{font-size:12px;font-weight:700}
+.rp-commit-bar>div{display:flex;gap:7px}
+.rp-commit-bar button,.rp-secondary{padding:9px 14px;border:1px solid #46574a;border-radius:6px;background:#2b332d;color:#eef4ef;font-size:12px;font-weight:750;cursor:pointer}
+.rp-commit-bar button:hover,.rp-secondary:hover{background:#354437}
+.rp-commit-bar .rp-primary{background:var(--green);border-color:var(--green);color:#0c1c12}
+.rp-commit-bar .rp-primary:hover{background:var(--green-bright)}
+.rp-lower-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:25px}
+.rp-panel{min-width:0;padding:20px;border:1px solid var(--line);border-radius:9px;background:var(--surface)}
+.rp-panel-title{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.rp-panel-title h2{margin:0;font:800 16px Manrope,"Segoe UI",sans-serif}
+.rp-panel>p{margin:9px 0 18px;color:var(--muted);font-size:12px;line-height:1.5}
+.rp-tag{padding:4px 7px;border-radius:4px;background:#29382e;color:#93c7a4;font-size:10px;font-weight:750;white-space:nowrap}
+.rp-simulation-result{margin-top:13px;padding:12px;border:1px solid #3f6249;border-radius:6px;background:#21382a;color:#dbf4e4;font-size:12px;line-height:1.5}
+.rp-simulation-result.warn{border-color:#6f4a32;background:#38281e;color:#f5cca5}
+.rp-empty{padding:29px 15px;text-align:center}
+.rp-empty>span{display:block;margin-bottom:6px;color:#5f9574;font-size:26px}
+.rp-empty strong{font-size:13px}
+.rp-empty p{max-width:330px;margin:7px auto 0;color:var(--muted);font-size:12px;line-height:1.5}
+.rp-page :is(input,select,button):focus-visible{outline:2px solid #8be3b1;outline-offset:2px}
+@media(max-width:900px){.rp-page{padding-top:24px}.rp-editor{padding:18px}.rp-lower-grid{grid-template-columns:1fr}}
+@media(max-width:580px){.rp-heading{gap:10px}.rp-heading-icon{width:44px;height:44px;flex-basis:44px}.rp-heading h1{font-size:23px}.rp-overview-head{align-items:start;flex-direction:column}.rp-module-row{padding:12px 10px;gap:9px}.rp-module-icon{width:34px;height:34px;flex-basis:34px}.rp-module-copy h3{font-size:13px}.rp-module-copy p{font-size:11px}.rp-status{display:none}.rp-edit{min-width:48px;padding:0 9px}.rp-field-grid{grid-template-columns:1fr;gap:0}.rp-editor-intro{flex-direction:column}.rp-commit-bar{align-items:stretch;flex-direction:column}.rp-commit-bar>div{justify-content:flex-end}}

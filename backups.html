@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173c31">
+  <title>Backups | Next Step</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="backups.css?v=1">
+  <script src="script.js" defer></script>
+  <script src="backups.js?v=2" defer></script>
+</head>
+<body class="dashboard-page" data-feature-page="Backups">
+  <header class="topbar">
+    <a class="brand" href="home.html" aria-label="Next Step home"><span class="brand-mark" aria-hidden="true">NS</span><span class="brand-name">Next Step</span></a>
+    <div class="account-area">
+      <button class="account-button" id="account-button" type="button" aria-label="Select Discord account" aria-expanded="false" aria-controls="account-menu"><span class="account-avatar" aria-hidden="true">?</span><span>Select Discord account</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+      <div class="account-menu" id="account-menu" hidden><p>No Discord account connected.</p><a href="index.html">Go to sign in</a></div>
+    </div>
+  </header>
+  <div class="app-layout">
+    <aside class="sidebar" aria-label="Dashboard navigation">
+      <div class="sidebar-heading"><div><span class="eyebrow">CONTROL PANEL</span><h2>Workspace</h2></div></div>
+      <label class="search-box" for="feature-search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="m13.2 13.2 4 4"/></svg><input id="feature-search" type="search" placeholder="Search settings" autocomplete="off"><kbd>/</kbd></label>
+      <p class="search-hint">Search categories, tabs, and functions</p>
+      <nav class="feature-navigation" id="feature-navigation" aria-label="Features"></nav>
+      <div class="sidebar-footer"><span class="footer-dot"></span>Next Step control panel</div>
+    </aside>
+    <main class="main-content">
+      <section class="page-view bu-page" aria-labelledby="bu-title">
+        <div class="bu-heading">
+          <span class="bu-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="4" y="7" width="24" height="19" rx="3"/><path d="M4 13h24M12 19h8m-4-4v8"/></svg></span>
+          <div><span class="bu-eyebrow">DATA & RECOVERY</span><h1 id="bu-title">Backups</h1><p>Create and organize local dashboard setting backups, with space for future server recovery tools.</p></div>
+        </div>
+        <div class="bu-overview">
+          <section class="bu-metric"><span class="bu-metric-label">Local settings backups</span><strong id="bu-count">0</strong><small>Saved in this browser</small></section>
+          <section class="bu-metric"><span class="bu-metric-label">Latest local backup</span><strong class="bu-last-backup" id="bu-last">None yet</strong><small>Includes imported backup files</small></section>
+          <section class="bu-metric"><span class="bu-metric-label">Server backups</span><strong class="bu-unavailable">Not connected</strong><small>Requires bot integration</small></section>
+        </div>
+        <section class="bu-panel">
+          <div class="bu-panel-head">
+            <div><span class="bu-section-kicker">AVAILABLE NOW</span><h2>Dashboard settings backups</h2><p>Save a copy of the dashboard preferences handled by General Settings. These are browser-only backups, not Discord server snapshots.</p></div>
+            <span class="bu-pill bu-pill-ready">Local</span>
+          </div>
+          <div class="bu-action-row">
+            <button type="button" class="bu-primary" id="bu-create"><span aria-hidden="true">＋</span> Create local backup</button>
+            <button type="button" class="bu-secondary" id="bu-export">Export current settings</button>
+            <label class="bu-secondary bu-import-label" for="bu-import">Import JSON file</label>
+            <input type="file" accept=".json,application/json" id="bu-import" class="bu-visually-hidden">
+          </div>
+          <p class="bu-note">Only supported General Settings fields are included. Local backups are stored in your current browser until exported; they are not synced to the bot.</p>
+        </section>
+
+        <section class="bu-panel">
+          <div class="bu-panel-head">
+            <div><h2>Local backup history</h2><p>Includes backups previously created in General Settings. Importing a file adds it to the list without replacing your current settings.</p></div>
+            <span class="bu-list-count" id="bu-history-count">0 backups</span>
+          </div>
+          <div class="bu-history" id="bu-history" aria-live="polite">
+            <div class="bu-empty"><span aria-hidden="true">◎</span><strong>No local backups yet</strong><p>Create a settings backup or import a compatible JSON file to see it here.</p></div>
+          </div>
+        </section>
+
+        <section class="bu-panel">
+          <div class="bu-panel-head">
+            <div><span class="bu-section-kicker">BACKEND INTEGRATION REQUIRED</span><h2>Server backup preferences</h2><p>Prepare the options for a future bot-driven server backup. Saving these preferences does not schedule or run backup jobs.</p></div>
+            <span class="bu-pill">Preview</span>
+          </div>
+          <div class="bu-server-warning"><span aria-hidden="true">!</span><div><strong>Server backup service is not connected</strong><p>No live server data can be captured, restored, or scheduled from this static dashboard. The controls below only save preferences in the browser.</p></div></div>
+          <div class="bu-preferences">
+            <label class="bu-field bu-interval"><span>Desired backup interval</span><select id="bu-interval"><option value="15m">Every 15 minutes</option><option value="1h">Every hour</option><option value="6h">Every 6 hours</option><option value="12h">Every 12 hours</option><option value="24h">Every 24 hours</option><option value="manual">Manual only</option></select></label>
+            <fieldset class="bu-checks"><legend>Include when server backups become available</legend>
+              <label><input type="checkbox" data-bu-part="bot"> Bot settings</label>
+              <label><input type="checkbox" data-bu-part="server"> Server settings</label>
+              <label><input type="checkbox" data-bu-part="channels"> Channels</label>
+              <label><input type="checkbox" data-bu-part="roles"> Roles</label>
+            </fieldset>
+          </div>
+          <div class="bu-preference-actions"><p id="bu-preference-state">These settings do not activate a backup schedule.</p><button type="button" class="bu-secondary" id="bu-save-preferences">Save preference locally</button></div>
+        </section>
+        <section class="bu-panel bu-server-history">
+          <div class="bu-panel-head"><div><h2>Server backup history</h2><p>When integrated, this section can show server snapshots, their contents and restore options.</p></div><span class="bu-pill">Bot required</span></div>
+          <div class="bu-empty"><span aria-hidden="true">▤</span><strong>No server backup data available</strong><p>Server snapshots and restore actions require an authenticated bot connection. Nothing here will change Discord.</p></div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <dialog class="bu-dialog" id="bu-dialog" aria-labelledby="bu-dialog-title">
+    <form method="dialog">
+      <div class="bu-dialog-top"><h2 id="bu-dialog-title">Backup details</h2><button type="button" class="bu-dialog-close" id="bu-dialog-close" aria-label="Close dialog">×</button></div>
+      <div id="bu-dialog-content"></div>
+      <div class="bu-dialog-actions"><button type="button" class="bu-secondary" id="bu-dialog-cancel">Cancel</button><button type="button" class="bu-primary" id="bu-dialog-confirm">Confirm</button></div>
+    </form>
+  </dialog>
+</body>
+</html>

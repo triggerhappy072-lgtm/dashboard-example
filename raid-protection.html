@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173c31">
+  <title>Raid protection | Next Step</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="raid-protection.css?v=1">
+  <script src="script.js" defer></script>
+  <script src="raid-protection.js?v=1" defer></script>
+</head>
+<body class="dashboard-page" data-feature-page="Raid protection">
+  <header class="topbar">
+    <a class="brand" href="home.html" aria-label="Next Step home"><span class="brand-mark" aria-hidden="true">NS</span><span class="brand-name">Next Step</span></a>
+    <div class="account-area">
+      <button class="account-button" id="account-button" type="button" aria-label="Select Discord account" aria-expanded="false" aria-controls="account-menu"><span class="account-avatar" aria-hidden="true">?</span><span>Select Discord account</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+      <div class="account-menu" id="account-menu" hidden><p>No Discord account connected.</p><a href="index.html">Go to sign in</a></div>
+    </div>
+  </header>
+  <div class="app-layout">
+    <aside class="sidebar" aria-label="Dashboard navigation">
+      <div class="sidebar-heading"><div><span class="eyebrow">CONTROL PANEL</span><h2>Workspace</h2></div></div>
+      <label class="search-box" for="feature-search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="m13.2 13.2 4 4"/></svg><input id="feature-search" type="search" placeholder="Search settings" autocomplete="off"><kbd>/</kbd></label>
+      <p class="search-hint">Search categories, tabs, and functions</p>
+      <nav class="feature-navigation" id="feature-navigation" aria-label="Features"></nav>
+      <div class="sidebar-footer"><span class="footer-dot"></span>Next Step control panel</div>
+    </aside>
+    <main class="main-content">
+      <section class="page-view rp-page" aria-labelledby="rp-title">
+        <div class="rp-heading">
+          <div class="rp-heading-icon" aria-hidden="true"><svg viewBox="0 0 28 32"><path d="M14 2 25 6v8c0 7-3.9 12.4-11 16-7.1-3.6-11-9-11-16V6L14 2Z"/><path d="M14 10v9m0 4h.01"/></svg></div>
+          <div><span class="rp-eyebrow">SERVER SAFETY</span><h1 id="rp-title">Raid Protection</h1><p>Set up safeguards for sudden join waves, suspicious new members, and emergency situations.</p></div>
+        </div>
+        <div class="rp-preview" role="note"><span class="rp-preview-dot" aria-hidden="true"></span><div><strong>Frontend configuration preview</strong><p>Settings are saved in this browser only. Raid detection, CAPTCHA, restrictions, and alerts require the Next Step bot to be connected.</p></div></div>
+        <div class="rp-overview-head"><div><h2>Safety setup</h2><p>Inspired by Discord's Safety Setup: review each protection and edit its configuration.</p></div><span class="rp-setup-count" id="rp-enabled-count">0 of 4 configured</span></div>
+
+        <div class="rp-module-list">
+          <section class="rp-module" data-rp-module="detection">
+            <div class="rp-module-row">
+              <span class="rp-module-icon rp-module-icon-amber" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 8 4v5c0 4.8-2.9 7.7-8 9-5.1-1.3-8-4.2-8-9V7l8-4Z"/><path d="M12 7v6m0 3h.01"/></svg></span>
+              <div class="rp-module-copy"><h3>Raid detection</h3><p class="rp-module-summary" data-rp-summary="detection">Off · Detect unusually fast member joins</p></div>
+              <span class="rp-status" data-rp-status="detection">Off</span>
+              <button class="rp-edit" type="button" data-rp-open="detection" aria-expanded="false" aria-controls="rp-panel-detection">Edit</button>
+            </div>
+            <div class="rp-editor" id="rp-panel-detection" hidden>
+              <div class="rp-editor-intro"><div><h4>Join wave detection</h4><p>Define what qualifies as a suspicious wave of joins.</p></div><label class="rp-switch"><input type="checkbox" data-rp-field="detectEnabled"><span></span><b>Enabled</b></label></div>
+              <div class="rp-field-grid">
+                <label class="rp-field"><span>Member joins</span><input type="number" min="2" max="1000" step="1" data-rp-field="joinCount"><small>Number of new members in one window.</small></label>
+                <label class="rp-field"><span>Within</span><select data-rp-field="joinWindow"><option value="10">10 seconds</option><option value="30">30 seconds</option><option value="60">1 minute</option><option value="120">2 minutes</option><option value="300">5 minutes</option><option value="600">10 minutes</option></select><small>The monitoring window for joined accounts.</small></label>
+              </div>
+              <label class="rp-setting-line"><span><strong>Ignore trusted members</strong><small>Keep previously verified accounts out of the join-wave estimate.</small></span><input type="checkbox" data-rp-field="ignoreTrusted"></label>
+            </div>
+          </section>
+          <section class="rp-module" data-rp-module="verification">
+            <div class="rp-module-row">
+              <span class="rp-module-icon rp-module-icon-green" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v3"/></svg></span>
+              <div class="rp-module-copy"><h3>New member verification</h3><p class="rp-module-summary" data-rp-summary="verification">Off · Optional account and CAPTCHA checks</p></div>
+              <span class="rp-status" data-rp-status="verification">Off</span>
+              <button class="rp-edit" type="button" data-rp-open="verification" aria-expanded="false" aria-controls="rp-panel-verification">Edit</button>
+            </div>
+            <div class="rp-editor" id="rp-panel-verification" hidden>
+              <div class="rp-editor-intro"><div><h4>Verification checks</h4><p>Prepare additional checks for recent or suspicious accounts. A bot-side verification flow is required.</p></div><label class="rp-switch"><input type="checkbox" data-rp-field="verifyEnabled"><span></span><b>Enabled</b></label></div>
+              <div class="rp-field-grid">
+                <label class="rp-field"><span>Minimum account age</span><div class="rp-with-suffix"><input type="number" min="0" max="3650" step="1" data-rp-field="minimumAge"><span>days</span></div><small>Accounts younger than this can be flagged.</small></label>
+                <label class="rp-field"><span>Verification response</span><select data-rp-field="verificationAction"><option value="review">Flag for moderator review</option><option value="captcha">Require CAPTCHA (bot needed)</option><option value="restrict">Restrict until verified (bot needed)</option></select><small>Frontend preference; no member is affected here.</small></label>
+              </div>
+              <label class="rp-setting-line"><span><strong>Apply checks during a suspected raid</strong><small>Only run additional checks when join-wave detection triggers.</small></span><input type="checkbox" data-rp-field="verifyOnlyRaid"></label>
+              <a class="rp-external" href="auto-moderation.html">Configure separate Join Guard settings <span aria-hidden="true">↗</span></a>
+            </div>
+          </section>
+          <section class="rp-module" data-rp-module="response">
+            <div class="rp-module-row">
+              <span class="rp-module-icon rp-module-icon-red" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 9v5m0 3h.01"/></svg></span>
+              <div class="rp-module-copy"><h3>Emergency response</h3><p class="rp-module-summary" data-rp-summary="response">Alert moderators · No automatic restrictions</p></div>
+              <span class="rp-status" data-rp-status="response">Review</span>
+              <button class="rp-edit" type="button" data-rp-open="response" aria-expanded="false" aria-controls="rp-panel-response">Edit</button>
+            </div>
+            <div class="rp-editor" id="rp-panel-response" hidden>
+              <div class="rp-editor-intro"><div><h4>When a raid is detected</h4><p>Choose the planned response. Automatic moderation actions require the bot service.</p></div></div>
+              <fieldset class="rp-response-choice"><legend>Response</legend>
+                <label><input type="radio" name="rp-response" value="alert"><span><strong>Notify moderators only</strong><small>Record an alert without restricting members.</small></span></label>
+                <label><input type="radio" name="rp-response" value="lockdown"><span><strong>Temporarily lock down joining</strong><small>Requires bot permissions to apply and later remove restrictions.</small></span></label>
+                <label><input type="radio" name="rp-response" value="restrict"><span><strong>Restrict new member activity</strong><small>Requires bot-managed roles or channel permissions.</small></span></label>
+              </fieldset>
+              <div class="rp-field-grid">
+                <label class="rp-field"><span>Restriction duration</span><select data-rp-field="lockdownDuration"><option value="5">5 minutes</option><option value="15">15 minutes</option><option value="30">30 minutes</option><option value="60">1 hour</option><option value="120">2 hours</option></select></label>
+                <label class="rp-field"><span>Cooldown after detection</span><select data-rp-field="cooldown"><option value="1">1 minute</option><option value="5">5 minutes</option><option value="10">10 minutes</option><option value="30">30 minutes</option></select></label>
+              </div>
+            </div>
+          </section>
+          <section class="rp-module" data-rp-module="alerts">
+            <div class="rp-module-row">
+              <span class="rp-module-icon rp-module-icon-blue" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"/></svg></span>
+              <div class="rp-module-copy"><h3>Alerts and exemptions</h3><p class="rp-module-summary" data-rp-summary="alerts">Choose a moderation channel and trusted roles</p></div>
+              <span class="rp-status" data-rp-status="alerts">Review</span>
+              <button class="rp-edit" type="button" data-rp-open="alerts" aria-expanded="false" aria-controls="rp-panel-alerts">Edit</button>
+            </div>
+            <div class="rp-editor" id="rp-panel-alerts" hidden>
+              <div class="rp-editor-intro"><div><h4>Where should alerts go?</h4><p>Use actual channel and role IDs after the bot is integrated. For now these fields store local configuration text.</p></div></div>
+              <div class="rp-field-grid">
+                <label class="rp-field"><span>Alert channel</span><input type="text" maxlength="100" placeholder="#moderation" data-rp-field="alertChannel"><small>Channel name or ID for the future integration.</small></label>
+                <label class="rp-field"><span>Mention role (optional)</span><input type="text" maxlength="100" placeholder="@moderators" data-rp-field="mentionRole"><small>Role to notify about suspected raids.</small></label>
+              </div>
+              <label class="rp-field"><span>Exempt roles (comma-separated)</span><input type="text" maxlength="400" placeholder="Trusted, Staff, Verified" data-rp-field="exemptRoles"><small>These are local labels, not live server roles.</small></label>
+            </div>
+          </section>
+        </div>
+
+        <div class="rp-commit-bar" id="rp-unsaved" hidden><span>Unsaved changes to raid protection settings</span><div><button type="button" id="rp-discard">Discard</button><button type="button" class="rp-primary" id="rp-save">Save settings</button></div></div>
+        <div class="rp-lower-grid">
+          <section class="rp-panel"><div class="rp-panel-title"><h2>Try a join-wave scenario</h2><span class="rp-tag">Simulation</span></div><p>Check whether your chosen detection threshold would flag an example. No Discord events are sent.</p>
+            <div class="rp-field-grid"><label class="rp-field"><span>Example joins</span><input id="rp-try-joins" type="number" min="0" max="10000" value="12"></label><label class="rp-field"><span>Time taken (seconds)</span><input id="rp-try-seconds" type="number" min="1" max="3600" value="45"></label></div><button class="rp-secondary" type="button" id="rp-run-simulation">Check scenario</button><div class="rp-simulation-result" id="rp-simulation-result" role="status" aria-live="polite" hidden></div>
+          </section>
+          <section class="rp-panel"><div class="rp-panel-title"><h2>Raid incident history</h2><span class="rp-tag">Bot required</span></div><div class="rp-empty"><span aria-hidden="true">◎</span><strong>No incidents available</strong><p>Real incident history, applied restrictions, and moderator actions will appear here once the backend provides them.</p></div></section>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
