@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173c31">
+  <title>Social Notifications | Next Step</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="social-notifications.css?v=6">
+  <script src="script.js" defer></script>
+  <script src="social-notifications.js?v=5" defer></script>
+</head>
+<body class="dashboard-page" data-feature-page="Social Notifications">
+  <header class="topbar">
+    <a class="brand" href="home.html" aria-label="Next Step home"><span class="brand-mark" aria-hidden="true">NS</span><span class="brand-name">Next Step</span></a>
+    <div class="account-area">
+      <button class="account-button" id="account-button" type="button" aria-label="Select Discord account" aria-expanded="false" aria-controls="account-menu"><span class="account-avatar" aria-hidden="true">?</span><span>Select Discord account</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+      <div class="account-menu" id="account-menu" hidden><p>No Discord account connected.</p><a href="index.html">Go to sign in</a></div>
+    </div>
+  </header>
+  <div class="app-layout">
+    <aside class="sidebar" aria-label="Dashboard navigation">
+      <div class="sidebar-heading"><div><span class="eyebrow">CONTROL PANEL</span><h2>Workspace</h2></div></div>
+      <label class="search-box" for="feature-search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="m13.2 13.2 4 4"/></svg><input id="feature-search" type="search" placeholder="Search settings" autocomplete="off"><kbd>/</kbd></label>
+      <p class="search-hint">Search categories, tabs, and functions</p>
+      <nav class="feature-navigation" id="feature-navigation" aria-label="Features"></nav>
+      <div class="sidebar-footer"><span class="footer-dot"></span>Next Step control panel</div>
+    </aside>
+    <main class="main-content">
+      <section class="page-view sn-page" aria-labelledby="sn-title">
+        <div class="sn-page-head">
+          <span class="sn-main-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"/></svg></span>
+          <h1 id="sn-title">Social Notifications</h1>
+        </div>
+        <div class="sn-provider-list">
+          <section class="sn-provider" data-provider="youtube" aria-labelledby="sn-youtube-heading">
+            <div class="sn-provider-head">
+              <span class="sn-service-icon sn-youtube-icon" aria-hidden="true"><img src="social-icons/youtube.png" alt=""></span>
+              <div class="sn-provider-heading"><h2 id="sn-youtube-heading">YouTube</h2><p>Notifications for published YouTube videos.</p></div>
+              <button type="button" class="sn-primary" data-add-provider="youtube">Set up</button>
+            </div>
+            <div class="sn-entries" data-provider-entries="youtube" hidden></div>
+          </section>
+          <section class="sn-provider" data-provider="twitch" aria-labelledby="sn-twitch-heading">
+            <div class="sn-provider-head">
+              <span class="sn-service-icon sn-twitch-icon" aria-hidden="true"><img src="social-icons/twitch.png" alt=""></span>
+              <div class="sn-provider-heading"><h2 id="sn-twitch-heading">Twitch</h2><p>Live-updating notifications for Twitch streams.</p></div>
+              <button type="button" class="sn-primary" data-add-provider="twitch">Set up</button>
+            </div>
+            <div class="sn-entries" data-provider-entries="twitch" hidden></div>
+          </section>
+          <section class="sn-provider" data-provider="tiktok" aria-labelledby="sn-tiktok-heading">
+            <div class="sn-provider-head">
+              <span class="sn-service-icon sn-tiktok-icon" aria-hidden="true"><img src="social-icons/tiktok.png" alt=""></span>
+              <div class="sn-provider-heading"><h2 id="sn-tiktok-heading">TikTok</h2><p>Notifications for published TikTok videos.</p></div>
+              <button type="button" class="sn-primary" data-add-provider="tiktok">Set up</button>
+            </div>
+            <div class="sn-entries" data-provider-entries="tiktok" hidden></div>
+          </section>
+        </div>
+        <div class="sn-save-bar" id="sn-save-bar" hidden role="region" aria-label="Unsaved changes"><strong>Careful — you have unsaved changes!</strong><div class="sn-actions"><button class="sn-secondary" type="button" id="sn-reset">Reset</button><button class="sn-primary" type="button" id="sn-save">Save changes</button></div></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="sn-setup-dialog" class="sn-dialog" aria-labelledby="sn-setup-title">
+    <div class="sn-dialog-header"><span class="sn-dialog-icon" id="sn-setup-icon" aria-hidden="true"><img src="social-icons/youtube.png" alt=""></span><h2 id="sn-setup-title">Add channel</h2><button type="button" class="sn-close" data-sn-close="setup" aria-label="Close setup">×</button></div>
+    <div class="sn-modal-stage" id="sn-setup-creator-stage">
+      <p class="sn-dialog-copy" id="sn-setup-creator-copy">Enter the creator's name.</p>
+      <label class="sn-field sn-creator-field"><span id="sn-creator-label" class="sn-visually-hidden">Creator username</span><input type="text" id="sn-creator-input" maxlength="120" autocomplete="off" spellcheck="false" placeholder="username"></label>
+      <div class="sn-dialog-actions"><button class="sn-secondary" type="button" data-sn-close="setup">Cancel</button><button class="sn-primary" type="button" id="sn-creator-next">Continue</button></div>
+    </div>
+    <div class="sn-modal-stage" id="sn-setup-destination-stage" hidden>
+      <p class="sn-dialog-copy">Set a Discord channel into which the notifications should be sent.</p>
+      <label class="sn-field"><span>Notification channel or webhook</span><input id="sn-destination-input" type="text" maxlength="250" autocomplete="off" spellcheck="false" placeholder="Channel name/ID or webhook URL"></label>
+      <div class="sn-dialog-actions"><button class="sn-secondary" type="button" id="sn-destination-back">Cancel</button><button class="sn-primary" type="button" id="sn-destination-finish">Continue</button></div>
+    </div>
+    <div class="sn-modal-stage" id="sn-setup-success-stage" hidden>
+      <p class="sn-dialog-copy" id="sn-setup-success-copy"></p>
+      <div class="sn-dialog-actions"><button type="button" class="sn-secondary" data-sn-close="setup">Close</button><button type="button" class="sn-primary" id="sn-open-added-settings">Open additional settings</button></div>
+    </div>
+  </dialog>
+
+  <dialog id="sn-settings-dialog" class="sn-dialog sn-settings-dialog" aria-labelledby="sn-settings-title">
+    <div class="sn-dialog-header"><span class="sn-dialog-icon" id="sn-settings-icon" aria-hidden="true"><img src="social-icons/youtube.png" alt=""></span><h2 id="sn-settings-title">Channel settings</h2><button type="button" class="sn-close" data-sn-close="settings" aria-label="Close settings">×</button></div>
+    <div class="sn-settings-scroll">
+      <div id="sn-settings-creator" class="sn-selected-creator"></div>
+      <label class="sn-field"><span>Channel or webhook</span><div class="sn-inline-input"><input id="sn-settings-destination" type="text" maxlength="250" spellcheck="false"><button class="sn-secondary" type="button" id="sn-update-destination">Update</button></div></label>
+      <div class="sn-field"><span>Ping roles</span><div id="sn-role-chips" class="sn-role-chips"></div><div class="sn-inline-input"><input id="sn-role-input" type="text" maxlength="100" placeholder="Role" aria-label="Role to mention"><button class="sn-secondary" type="button" id="sn-add-role">+</button></div></div>
+      <h3 class="sn-section-label">Options</h3>
+      <label class="sn-toggle-row"><span><strong>Auto publish (when news channel)</strong></span><input type="checkbox" id="sn-auto-publish"></label>
+      <label class="sn-toggle-row"><span><strong>Use custom message (overwrite default)</strong></span><input type="checkbox" id="sn-use-custom"></label>
+      <div id="sn-custom-messages" class="sn-messages-section" hidden><h3 class="sn-section-label">Custom message</h3><div id="sn-message-list"></div></div>
+      <div class="sn-dialog-actions"><button class="sn-secondary" type="button" id="sn-add-message">Add another message</button><button class="sn-primary" type="button" id="sn-confirm-settings">Confirm</button></div>
+    </div>
+  </dialog>
+
+  <dialog id="sn-message-dialog" class="sn-dialog sn-message-dialog" aria-labelledby="sn-message-title">
+    <h2 id="sn-message-title" class="sn-visually-hidden">Message editor</h2>
+    <div class="sn-editor-top"><div class="sn-editor-mode-tabs" role="tablist" aria-label="Editor preview"><button type="button" role="tab" aria-selected="true" data-sn-editor-mode="edit">Edit</button><button type="button" role="tab" aria-selected="false" data-sn-editor-mode="preview">Preview</button></div><button type="button" class="sn-close" data-close-editor aria-label="Close editor">×</button></div>
+    <div id="sn-editor-edit">
+      <div class="sn-editor-tabs" role="tablist" aria-label="Editor modes"><button type="button" role="tab" aria-selected="true" data-sn-editor-tab="visual">Visual</button><button type="button" role="tab" aria-selected="false" data-sn-editor-tab="raw">Raw</button><button type="button" role="tab" aria-selected="false" data-sn-editor-tab="variables">Variables</button></div>
+      <div class="sn-editor-content">
+      <section data-sn-editor-view="visual">
+        <div class="sn-editor-bot"><span class="sn-avatar" aria-hidden="true">NS</span><strong>Next Step <small>BOT</small></strong></div>
+        <label class="sn-field"><span>Message content</span><textarea rows="3" maxlength="1800" id="sn-message-content" placeholder="A new video is available!"></textarea></label>
+        <div class="sn-embed-fields" id="sn-editor-embed-fields"><div class="sn-field-grid"><label class="sn-field"><span>Author name</span><input id="sn-embed-author" maxlength="240" type="text" placeholder="${channelname}"></label><label class="sn-field"><span>Title</span><input id="sn-embed-title" maxlength="256" type="text" placeholder="${title}"></label></div><label class="sn-field"><span>Description</span><textarea id="sn-embed-description" rows="3" maxlength="1900"></textarea></label><div class="sn-field-grid"><label class="sn-field"><span>Field 1 name</span><input id="sn-embed-field-name" maxlength="256" type="text" placeholder="Field 1 name"></label><label class="sn-field"><span>Field 1 value</span><input id="sn-embed-field-value" maxlength="700" type="text" placeholder="Field 1 value"></label></div><label class="sn-field"><span>Footer text</span><input id="sn-embed-footer" maxlength="240" type="text" placeholder="Published"></label></div>
+      </section>
+      <section data-sn-editor-view="raw" hidden><label class="sn-field"><span>Raw JSON</span><textarea id="sn-raw-message" rows="15" spellcheck="false" class="sn-raw-editor" aria-label="Raw message JSON"></textarea></label></section>
+      <section data-sn-editor-view="variables" hidden><div id="sn-variable-list" class="sn-variable-list"></div></section>
+      <div class="sn-editor-toolbar"><button type="button" class="sn-primary" id="sn-editor-add-embed">+ Embed</button><button type="button" class="sn-primary" id="sn-editor-action-row">+ Action Row</button><button type="button" class="sn-primary" id="sn-editor-load">Load</button><button type="button" class="sn-danger" id="sn-editor-reset">Reset</button><input type="file" id="sn-editor-import" accept=".json,application/json" hidden></div>
+      </div>
+    </div>
+    <div class="sn-message-live-preview" id="sn-editor-preview" hidden><div class="sn-discord-card"><span class="sn-avatar" aria-hidden="true">NS</span><div><strong>Next Step <small>BOT</small></strong><p id="sn-message-preview-text"></p><div class="sn-embed-preview"><strong id="sn-message-preview-author"></strong><h4 id="sn-message-preview-title"></h4><p id="sn-message-preview-description"></p><div id="sn-message-preview-field"></div><small id="sn-message-preview-footer"></small></div><div id="sn-message-preview-action" hidden class="sn-preview-action"><button type="button" disabled>Button</button></div></div></div></div>
+  </dialog>
+</body>
+</html>
