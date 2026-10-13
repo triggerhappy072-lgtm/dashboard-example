@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173c31">
+  <title>Appearance | Next Step</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="appearance.css?v=1">
+  <script src="script.js" defer></script>
+  <script src="appearance.js?v=1" defer></script>
+</head>
+<body class="dashboard-page" data-feature-page="Appearance">
+  <header class="topbar">
+    <a class="brand" href="home.html" aria-label="Next Step home"><span class="brand-mark" aria-hidden="true">NS</span><span class="brand-name">Next Step</span></a>
+    <div class="account-area"><button class="account-button" id="account-button" type="button" aria-label="Select Discord account" aria-expanded="false" aria-controls="account-menu"><span class="account-avatar" aria-hidden="true">?</span><span>Select Discord account</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button><div class="account-menu" id="account-menu" hidden><p>No Discord account connected.</p><a href="index.html">Go to sign in</a></div></div>
+  </header>
+  <div class="app-layout">
+    <aside class="sidebar" aria-label="Dashboard navigation">
+      <div class="sidebar-heading"><div><span class="eyebrow">CONTROL PANEL</span><h2>Workspace</h2></div></div>
+      <label class="search-box" for="feature-search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="m13.2 13.2 4 4"/></svg><input id="feature-search" type="search" placeholder="Search settings" autocomplete="off"><kbd>/</kbd></label>
+      <p class="search-hint">Search categories, tabs, and functions</p>
+      <nav class="feature-navigation" id="feature-navigation" aria-label="Features"></nav>
+      <div class="sidebar-footer"><span class="footer-dot"></span>Next Step control panel</div>
+    </aside>
+    <main class="main-content">
+      <section class="page-view ap-page" aria-labelledby="ap-heading">
+        <header class="ap-pagehead">
+          <div class="ap-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3c-5.2 0-9 3.7-9 8.5C3 16.7 7.1 21 12 21h1.3a2.6 2.6 0 0 0 1.6-4.7 1.8 1.8 0 0 1 .9-3.3H18c2.2 0 3.7-1.5 3.7-3.5C21.7 5.8 17.4 3 12 3Z"/><circle cx="7.5" cy="11.3" r="1"/><circle cx="11.3" cy="7.7" r="1"/><circle cx="16.4" cy="8.1" r="1"/></svg></div>
+          <div><h1 id="ap-heading">Appearance</h1><p>Customize your bot's Discord profile. Select any highlighted area to edit it.</p></div>
+        </header>
+        <div class="ap-workspace">
+          <div class="ap-preview-column">
+            <div class="ap-section-label"><h2>Profile preview</h2><span class="ap-live-dot" aria-hidden="true"></span><span>Live</span></div>
+            <article class="ap-profile" aria-label="Editable bot profile preview">
+              <button class="ap-edit-surface ap-banner" data-ap-edit="banner" type="button" aria-label="Edit profile banner" title="Edit banner">
+                <img id="ap-banner-img" alt="" hidden>
+                <span class="ap-banner-design" id="ap-banner-design" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="ap-edit-indicator">✎ Edit banner</span>
+              </button>
+              <div class="ap-avatar-row">
+                <button class="ap-edit-surface ap-avatar" data-ap-edit="avatar" type="button" aria-label="Edit avatar" title="Edit avatar">
+                  <img id="ap-avatar-img" alt="" hidden>
+                  <span id="ap-avatar-initials" aria-hidden="true">NS</span>
+                  <span class="ap-edit-indicator">✎</span>
+                </button>
+                <button class="ap-edit-surface ap-status-bubble" data-ap-edit="customStatus" type="button" aria-label="Edit custom status">
+                  <span class="ap-status-bubble-icon" aria-hidden="true">✦</span>
+                  <span id="ap-status-bubble-text">Ready for what's next.</span>
+                  <span class="ap-edit-indicator">✎</span>
+                </button>
+              </div>
+              <div class="ap-profile-identity">
+                <button class="ap-edit-surface ap-profile-name" data-ap-edit="name" type="button" aria-label="Edit bot name"><span id="ap-name-text">Next Step</span><span class="ap-edit-indicator">✎</span></button>
+                <div class="ap-username-line"><span id="ap-handle-text">nextstep</span><span class="ap-bot-badge">BOT</span></div>
+              </div>
+              <button class="ap-edit-profile-btn" type="button" data-ap-edit="name"><span aria-hidden="true">✎</span> Edit Profile</button>
+              <div class="ap-profile-tabs"><span class="ap-profile-tab-active">Profile</span></div>
+              <div class="ap-profile-sections">
+                <div class="ap-profile-label">STATUS</div>
+                <button type="button" class="ap-edit-surface ap-status-line" data-ap-edit="status" aria-label="Edit online status"><span class="ap-presence-dot" id="ap-presence-dot"></span><span id="ap-status-text">Online</span><span class="ap-edit-indicator">✎</span></button>
+                <div class="ap-profile-label">ACTIVITY</div>
+                <button type="button" class="ap-edit-surface ap-activity-card" data-ap-edit="activity" aria-label="Edit bot activity"><span class="ap-activity-icon" aria-hidden="true">✦</span><span class="ap-activity-copy"><strong id="ap-activity-kind">Playing</strong><small id="ap-activity-text">Helping your server grow</small></span><span class="ap-edit-indicator">✎</span></button>
+                <div class="ap-profile-label">ABOUT ME</div>
+                <button type="button" class="ap-edit-surface ap-about" data-ap-edit="about" aria-label="Edit About Me"><span id="ap-about-text">Helping communities take the next step.</span><span class="ap-edit-indicator">✎</span></button>
+              </div>
+            </article>
+            <p class="ap-preview-tip"><span aria-hidden="true">✦</span> Hover over or select a profile element to change it.</p>
+          </div>
+          <section class="ap-editor" aria-labelledby="ap-editor-heading">
+            <div class="ap-editor-heading"><span class="ap-editor-kicker">PROFILE EDITOR</span><h2 id="ap-editor-heading">Bot name</h2><p id="ap-editor-description">Set the display name shown on your bot's profile.</p></div>
+            <div class="ap-current"><span>Current value</span><strong id="ap-current-value">Next Step</strong></div>
+            <form id="ap-form" novalidate>
+              <div id="ap-fields"></div>
+              <div class="ap-editor-actions"><button type="submit" class="ap-primary">Apply to preview</button><button type="button" class="ap-secondary" id="ap-field-reset">Reset field</button></div>
+            </form>
+            <div class="ap-quick-nav"><h3>Edit another field</h3><div class="ap-quick-grid" id="ap-quick-grid">
+              <button type="button" data-ap-edit="name">Name</button><button type="button" data-ap-edit="avatar">Avatar</button>
+              <button type="button" data-ap-edit="banner">Banner</button><button type="button" data-ap-edit="status">Status</button>
+              <button type="button" data-ap-edit="customStatus">Custom status</button><button type="button" data-ap-edit="activity">Activity</button>
+              <button type="button" data-ap-edit="about">About Me</button>
+            </div></div>
+          </section>
+        </div>
+        <div class="ap-savebar" id="ap-savebar" hidden><span><strong>Unsaved changes</strong><small>Save to keep your profile updates.</small></span><div><button type="button" class="ap-secondary" id="ap-reset">Discard changes</button><button type="button" class="ap-primary" id="ap-save">Save appearance</button></div></div>
+      </section>
+    </main>
+  </div>
+  <div id="ap-toast" role="status" aria-live="polite" class="ap-toast" hidden></div>
+</body>
+</html>

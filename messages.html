@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#173c31">
+<title>Messages | Next Step</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="messages.css?v=1">
+<script src="script.js" defer></script><script src="messages.js?v=1" defer></script></head>
+<body class="dashboard-page" data-feature-page="Messages">
+<header class="topbar"><a class="brand" href="home.html" aria-label="Next Step home"><span class="brand-mark" aria-hidden="true">NS</span><span class="brand-name">Next Step</span></a><div class="account-area"><button class="account-button" id="account-button" type="button" aria-label="Select Discord account" aria-expanded="false" aria-controls="account-menu"><span class="account-avatar" aria-hidden="true">?</span><span>Select Discord account</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button><div class="account-menu" id="account-menu" hidden><p>No Discord account connected.</p><a href="index.html">Go to sign in</a></div></div></header>
+<div class="app-layout"><aside class="sidebar" aria-label="Dashboard navigation"><div class="sidebar-heading"><div><span class="eyebrow">CONTROL PANEL</span><h2>Workspace</h2></div></div><label class="search-box" for="feature-search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/></svg><input id="feature-search" type="search" placeholder="Search settings" autocomplete="off"><kbd>/</kbd></label><p class="search-hint">Search categories, tabs, and functions</p><nav class="feature-navigation" id="feature-navigation" aria-label="Features"></nav><div class="sidebar-footer"><span class="footer-dot"></span>Next Step control panel</div></aside>
+<main class="main-content"><section class="page-view ms-page" aria-labelledby="ms-title">
+<header class="ms-head"><span class="ms-head-icon" aria-hidden="true">▤</span><div><h1 id="ms-title">Messages</h1><p>Create, customize, organize, and schedule messages for your server.</p></div></header>
+<nav id="ms-tabs" class="ms-tabs" role="tablist" aria-label="Message management"></nav>
+<div id="ms-content"></div>
+<div id="ms-savebar" class="ms-savebar" hidden><span><strong>Unsaved changes</strong><small>Save to keep your message configuration.</small></span><div class="ms-actions"><button type="button" class="ms-secondary" id="ms-reset">Reset</button><button type="button" class="ms-primary" id="ms-save">Save changes</button></div></div>
+</section></main></div>
+<dialog class="ms-dialog" id="ms-dialog" aria-labelledby="ms-dialog-title"><header class="ms-dialog-title"><h2 id="ms-dialog-title">Edit message</h2><button type="button" id="ms-close" aria-label="Close editor">×</button></header><form id="ms-dialog-form"><div id="ms-dialog-content"></div><div class="ms-dialog-buttons"><button type="button" class="ms-secondary" id="ms-cancel">Cancel</button><button type="submit" class="ms-primary">Save</button></div></form></dialog>
+<dialog class="ms-dialog ms-template-dialog" id="ms-template-dialog" aria-labelledby="ms-template-title"><header class="ms-dialog-title"><h2 id="ms-template-title">Message template</h2><button type="button" id="ms-template-close" aria-label="Close template editor">×</button></header>
+<form id="ms-template-form">
+<div class="ms-form-grid"><label class="ms-field"><span>Template name</span><input name="name" maxlength="90" required></label><label class="ms-field"><span>Folder</span><select name="folder" id="ms-editor-folder"></select></label></div>
+<div class="ms-editor-tabs" role="group" aria-label="Editor mode"><button type="button" class="ms-tab-active" data-ms-mode="visual">Visual editor</button><button type="button" data-ms-mode="raw">Raw editor</button><button type="button" data-ms-mode="automation">Automation</button><button type="button" data-ms-mode="sticky">Sticky messages</button></div>
+<div id="ms-template-editor"></div>
+<div class="ms-dialog-buttons"><button type="button" class="ms-secondary" id="ms-template-cancel">Cancel</button><button type="submit" class="ms-primary">Save template</button></div>
+</form></dialog>
+<div id="ms-toast" class="ms-toast" role="status" aria-live="polite" hidden></div>
+</body></html>

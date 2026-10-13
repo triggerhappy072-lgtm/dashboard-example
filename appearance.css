@@ -1,0 +1,93 @@
+.ap-page{max-width:1120px;padding:24px 0 88px;color:#f0f5f1}
+.ap-page :is(button,input,textarea,select){font-family:inherit}
+.ap-pagehead{display:flex;align-items:center;gap:15px;margin:0 0 29px}
+.ap-heading-icon{width:52px;height:52px;flex:0 0 52px;display:grid;place-items:center;border:1px solid #436c51;background:#203c2a;border-radius:11px;color:#98e1af}
+.ap-heading-icon svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ap-pagehead h1{margin:0;font:800 30px/1.2 Manrope,"Segoe UI",sans-serif}
+.ap-pagehead p{margin:6px 0 0;font-size:12px;line-height:1.6;color:#abbcaf}
+.ap-workspace{display:grid;grid-template-columns:minmax(370px,1.14fr) minmax(300px,.86fr);gap:19px;align-items:start}
+.ap-preview-column{min-width:0}
+.ap-section-label{display:flex;align-items:center;gap:7px;margin-bottom:13px;font-size:11px;color:#8fc9a2}
+.ap-section-label h2{font:800 16px Manrope,"Segoe UI",sans-serif;color:#ecf4ee;margin:0 auto 0 0}
+.ap-live-dot{width:7px;height:7px;background:#45d18e;border-radius:50%}
+.ap-profile{border:1px solid #425348;border-radius:15px;background:#101c15;overflow:hidden;box-shadow:0 18px 38px #0004}
+.ap-page .ap-edit-surface{position:relative;display:flex;align-items:center;text-align:left;cursor:pointer;border:1px solid transparent;color:inherit;outline-offset:-2px;transition:background .16s ease,outline-color .16s ease}
+.ap-page .ap-edit-surface:hover,.ap-page .ap-edit-surface:focus-visible,.ap-page .ap-edit-surface.ap-selected{outline:2px solid #71dc94;outline-offset:-2px;background-color:rgba(77,207,127,.12)}
+.ap-edit-surface .ap-edit-indicator{position:absolute;right:12px;top:50%;transform:translateY(-50%);padding:5px 8px;border:1px solid #6cc891;border-radius:6px;background:#143424e8;font-size:10px;font-weight:800;color:#d9ffe1;white-space:nowrap;opacity:0;pointer-events:none}
+.ap-edit-surface:hover .ap-edit-indicator,.ap-edit-surface:focus-visible .ap-edit-indicator,.ap-edit-surface.ap-selected .ap-edit-indicator{opacity:1}
+.ap-page .ap-banner{width:100%;height:205px;border:0;border-radius:0;padding:0;background:#123622;overflow:hidden}
+.ap-banner>img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.ap-banner-design{position:absolute;inset:0;background:radial-gradient(ellipse at 72% 80%,#2e8b54 0,transparent 42%),radial-gradient(circle at 12% 0%,#59b37d85 0,transparent 44%),linear-gradient(120deg,#111815,#0e3523 40%,#13231a 90%);overflow:hidden}
+.ap-banner-design i{display:block;position:absolute;border:2px solid #81d5a735;border-radius:50%;transform:rotate(-23deg)}
+.ap-banner-design i:nth-child(1){width:360px;height:360px;left:-130px;top:-182px}
+.ap-banner-design i:nth-child(2){width:420px;height:420px;right:-150px;bottom:-315px}
+.ap-banner-design i:nth-child(3){width:110px;height:110px;right:16%;top:25px;border-width:9px;filter:blur(18px);opacity:.4}
+.ap-banner .ap-edit-indicator{top:19px;right:17px;transform:none}
+.ap-avatar-row{display:flex;align-items:center;gap:13px;margin:-45px 17px 15px;position:relative;z-index:1}
+.ap-page .ap-avatar{width:99px;height:99px;flex:0 0 99px;border:5px solid #101c15;border-radius:50%;background:#42bc80;display:grid;place-items:center;overflow:hidden;padding:0;outline-offset:2px}
+.ap-avatar img{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;object-fit:cover}
+.ap-avatar>span#ap-avatar-initials{font:800 30px Manrope,"Segoe UI",sans-serif;color:#0e2c1a}
+.ap-avatar .ap-edit-indicator{position:absolute;inset:0;transform:none;display:grid;place-items:center;border-radius:50%;background:#112b1acf;font-size:22px;border:0;padding:0}
+.ap-page .ap-status-bubble{align-self:end;min-height:45px;max-width:calc(100% - 105px);margin-bottom:5px;gap:9px;padding:9px 32px 9px 12px;border-radius:24px;border:1px solid #536e5b;background:#253429;color:#eaf8ed}
+.ap-status-bubble-icon{color:#b5eac2;font-size:17px}
+.ap-status-bubble #ap-status-bubble-text{font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ap-status-bubble .ap-edit-indicator{right:7px}
+.ap-profile-identity{margin:0 21px 16px}
+.ap-page .ap-profile-name{display:inline-flex;align-items:center;max-width:100%;padding:5px 7px 5px 0;background:transparent;border-radius:6px;margin-left:-1px}
+.ap-profile-name span:first-child{font:800 25px/1.2 Manrope,"Segoe UI",sans-serif;overflow-wrap:anywhere}
+.ap-profile-name .ap-edit-indicator{position:static;transform:none;margin-left:12px}
+.ap-username-line{display:flex;align-items:center;gap:9px;color:#b5c6ba;font-size:13px;margin-top:3px}
+.ap-bot-badge{color:#f7fff9;font-size:10px;font-weight:900;background:#3b945c;padding:3px 6px;border-radius:4px;letter-spacing:.05em}
+.ap-edit-profile-btn{width:calc(100% - 42px);min-height:43px;margin:0 21px 20px;background:#2d4735;border:1px solid #446f51;border-radius:6px;color:#e2f6e8;font-weight:800;font-size:13px;cursor:pointer}
+.ap-edit-profile-btn:hover{background:#365e41}
+.ap-edit-profile-btn span{margin-right:5px}
+.ap-profile-tabs{display:flex;align-items:center;justify-content:center;border-bottom:1px solid #304639;padding:0 21px;height:40px}
+.ap-profile-tab-active{font-size:13px;font-weight:800;padding:0 20px 13px;border-bottom:3px solid #b4efc5}
+.ap-profile-sections{padding:18px 21px 24px;display:grid;gap:10px}
+.ap-profile-label{font-size:11px;font-weight:800;letter-spacing:.07em;color:#d5e4d7;margin-top:13px}
+.ap-page .ap-status-line{min-height:42px;gap:10px;padding:8px 9px;border-radius:7px;background:#15271b;font-size:12px;color:#d5eedb}
+.ap-presence-dot{width:12px;height:12px;flex:0 0 12px;border:3px solid #12271a;border-radius:50%;background:#43d58c;box-shadow:0 0 0 1px #74a688}
+.ap-presence-dot.idle{background:#eebd66}
+.ap-presence-dot.dnd{background:#e57571}
+.ap-presence-dot.invisible{background:#778c7c}
+.ap-page .ap-activity-card{width:100%;gap:12px;min-height:69px;border-radius:8px;padding:12px;background:#1e3827;border-color:#3f674b}
+.ap-activity-icon{display:grid;place-items:center;width:39px;height:39px;flex:0 0 39px;background:#2d7145;border-radius:9px;color:#d6ffe2;font-size:21px}
+.ap-activity-copy{display:grid;gap:5px;min-width:0}
+.ap-activity-copy strong{font-size:12px}
+.ap-activity-copy small{font-size:12px;overflow-wrap:anywhere;color:#b8dac2}
+.ap-page .ap-about{width:100%;min-height:65px;align-items:flex-start;padding:12px;border-radius:7px;background:#15271b;color:#d7eadd;font-size:12px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+.ap-preview-tip{display:flex;align-items:center;gap:9px;margin:13px 0;color:#90ad99;font-size:11px}
+.ap-editor{position:sticky;top:14px;min-width:0;border:1px solid #3c5142;border-radius:10px;background:#1b231e;padding:21px}
+.ap-editor-kicker{font-size:10px;font-weight:900;letter-spacing:.11em;color:#77d79a}
+.ap-editor-heading h2{font:800 21px Manrope,"Segoe UI",sans-serif;margin:8px 0 5px}
+.ap-editor-heading p{margin:0;color:#a8b9ae;font-size:12px;line-height:1.6}
+.ap-current{display:grid;gap:5px;margin:18px 0;padding:13px;background:#131d16;border:1px solid #38533f;border-radius:7px}
+.ap-current span{font-size:10px;letter-spacing:.04em;color:#9ec0a6;font-weight:800}
+.ap-current strong{font-size:12px;color:#f0f8f1;white-space:pre-wrap;overflow-wrap:anywhere;font-weight:700;max-height:90px;overflow:auto}
+.ap-field{display:grid;gap:8px;margin-bottom:17px;color:#e1efe5;font-size:12px;font-weight:750}
+.ap-field small{line-height:1.55;font-size:11px;color:#97b19e;font-weight:400}
+.ap-field input,.ap-field textarea,.ap-field select{width:100%;min-height:41px;padding:10px 12px;border:1px solid #496d54;border-radius:6px;background:#121c15;color:#effbf2;font-size:12px;font-weight:500}
+.ap-field textarea{min-height:100px;resize:vertical;line-height:1.6}
+.ap-field input::placeholder,.ap-field textarea::placeholder{color:#829d89}
+.ap-field input[type=file]{padding:8px;background:#18261d}
+.ap-editor-actions{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 20px}
+.ap-primary,.ap-secondary{display:inline-flex;justify-content:center;align-items:center;min-height:37px;padding:8px 13px;border:1px solid #496650;border-radius:6px;cursor:pointer;font-size:12px;font-weight:800}
+.ap-primary{background:#39b878;border-color:#39b878;color:#0b2414}
+.ap-primary:hover{background:#59d998}
+.ap-secondary{background:#293d2e;color:#dcf3e3}
+.ap-secondary:hover{background:#355840}
+.ap-quick-nav{padding-top:20px;border-top:1px solid #395040}
+.ap-quick-nav h3{font:800 12px Manrope,"Segoe UI",sans-serif;margin:0 0 12px;color:#bcdcc5}
+.ap-quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.ap-quick-grid button{border:1px solid #45644d;background:#223428;padding:10px 8px;color:#d3e9d8;border-radius:6px;font-size:11px;font-weight:750;cursor:pointer}
+.ap-quick-grid button:hover,.ap-quick-grid button[aria-pressed=true]{background:#2d573a;border-color:#6bc88c;color:#fff}
+.ap-savebar{display:flex;justify-content:space-between;align-items:center;gap:13px;position:sticky;z-index:8;bottom:14px;margin-top:17px;padding:13px 17px;background:#203e2a;border:1px solid #528f63;box-shadow:0 14px 28px #0008;border-radius:9px}
+.ap-savebar>span{display:grid;gap:4px}
+.ap-savebar>span strong{font-size:12px}
+.ap-savebar>span small{font-size:11px;color:#acdeb9}
+.ap-savebar>div{display:flex;gap:8px;flex-wrap:wrap}
+.ap-toast{position:fixed;right:22px;bottom:22px;z-index:20;background:#1e3827;border:1px solid #61a875;border-radius:8px;padding:12px 18px;font-size:12px;color:#dcffe5;box-shadow:0 10px 32px #0008}
+.ap-page [hidden],.ap-toast[hidden]{display:none!important}
+.ap-page :is(button,input,select,textarea):focus-visible{outline:2px solid #a1f4bb;outline-offset:2px}
+@media(max-width:1050px){.ap-workspace{grid-template-columns:minmax(0,1fr)}.ap-editor{position:static}.ap-profile{max-width:620px}.ap-section-label{max-width:620px}}
+@media(max-width:680px){.ap-page{padding-top:16px}.ap-pagehead h1{font-size:23px}.ap-heading-icon{width:43px;height:43px;flex-basis:43px}.ap-banner{height:165px!important}.ap-profile{border-radius:11px}.ap-avatar-row{margin-left:11px;margin-right:11px}.ap-page .ap-avatar{width:81px;height:81px;flex-basis:81px}.ap-page .ap-status-bubble{max-width:calc(100% - 85px)}.ap-editor{padding:16px}.ap-savebar{flex-wrap:wrap}.ap-savebar>div{width:100%}.ap-savebar button{flex:1}}
