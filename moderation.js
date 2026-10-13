@@ -314,7 +314,7 @@
 
     tickets: () => ticketsScreen(),
 
-    'deletion-log': () => header('Deletion log') + `<div class="mod-empty-state"><strong>No deletion log entries</strong><p>The commission includes a Deletion Log, but no additional details were provided for this section.</p></div>`,
+    'deletion-log': () => header('Deletion log') + window.NextStepDeletionLog.render(),
 
     'punish-settings': () => header('Punish settings') + `<div class="mod-list-stack">${['Ban|Default reason and duration, actions and more','Kick|Default reason and duration, actions and more','Mute|Default reason and duration, actions, timeouts and more','Warn|Default reason and duration, actions and more','Risk|Default reason and duration, actions and more'].map((item) => { const [name, copy] = item.split('|'); return `<button class="mod-nav-row" type="button" data-punishment="${name.toLowerCase()}"><span><strong>${name}</strong><small>${copy}</small></span><b>&rsaquo;</b></button>`; }).join('')}</div><div class="mod-settings-list">${toggle('Reply to message to punish', true)}${toggle('Confirm punishment when recent case exists', true)}<label class="mod-inline-setting">Confirm when case created within the last <input type="number" value="5" min="1"> minutes</label>${toggle('Log expired punishments if user is not in guild', true, false)}${toggle('Cache deleted messages', false)}</div>${dirtyBar()}`,
 
@@ -962,6 +962,7 @@
     if (route === 'cases') bindCases();
     if (route === 'user-reports') bindReports();
     if (route === 'tickets') bindTickets();
+    if (route === 'deletion-log') window.NextStepDeletionLog.bind(detail);
     detail.querySelector('[data-add-limitation]')?.addEventListener('click', openLimitationEditor);
     detail.querySelectorAll('[data-permission-member]').forEach((button) => button.addEventListener('click', () => openPermissionOverview(button.dataset.permissionMember)));
     detail.querySelectorAll('[data-edit-pending]').forEach((button) => button.addEventListener('click', () => {

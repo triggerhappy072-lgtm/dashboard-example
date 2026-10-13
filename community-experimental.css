@@ -1,0 +1,83 @@
+.cx-page{max-width:1130px;padding:22px 0 90px;color:#f0f3f1}
+.cx-pagehead{display:flex;align-items:center;gap:17px;margin:0 0 25px}
+.cx-page-icon{width:52px;height:52px;flex:0 0 52px;display:grid;place-items:center;background:#203b2a;border:1px solid #426b50;border-radius:10px;color:#a5edbd;font-size:26px;font-weight:800}
+.cx-pagehead h1{margin:0;font:800 29px/1.25 Manrope,"Segoe UI",sans-serif}
+.cx-pagehead p{margin:5px 0 0;font-size:13px;color:#adbcb0;line-height:1.6}
+.cx-tabs{display:flex;flex-wrap:wrap;gap:4px;padding:5px;margin-bottom:21px;background:#171d19;border:1px solid #36473b;border-radius:9px}
+.cx-tabs button{flex:1 1 auto;min-height:41px;padding:9px 13px;border:0;background:transparent;color:#b4c4ba;border-radius:6px;cursor:pointer;font-size:12px;font-weight:800;white-space:nowrap}
+.cx-tabs button:hover{background:#273b2e;color:#fff}
+.cx-tabs button[aria-selected=true]{background:#2c6545;color:#fff}
+.cx-content{display:grid;gap:17px}
+.cx-section{padding:21px;border:1px solid #36463b;border-radius:9px;background:#1b201d;min-width:0}
+.cx-section-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.cx-section h2{margin:0;font:800 18px/1.3 Manrope,"Segoe UI",sans-serif}
+.cx-section h3{margin:0 0 13px;font:750 14px Manrope,"Segoe UI",sans-serif}
+.cx-section p{color:#aabdaf;font-size:12px;line-height:1.55;margin:6px 0 0}
+.cx-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.cx-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.cx-field{display:flex;flex-direction:column;gap:7px;min-width:0;font-size:12px;font-weight:750;color:#dae9de;margin-bottom:15px}
+.cx-field small{font-size:11px;color:#97b1a0;font-weight:400;line-height:1.5}
+.cx-field :is(input,select,textarea){width:100%;min-height:40px;border:1px solid #47604e;border-radius:6px;padding:9px 11px;color:#f3faf4;background:#141c16;font-size:12px;font-weight:500}
+.cx-field textarea{min-height:96px;resize:vertical;line-height:1.55}
+.cx-field :is(input,textarea)::placeholder{color:#829e8b}
+.cx-switch{display:flex;align-items:center;justify-content:space-between;gap:15px;min-height:49px;padding:12px 14px;background:#18271d;border:1px solid #385744;border-radius:7px;margin-bottom:12px;cursor:pointer}
+.cx-switch>span{display:grid;gap:4px;font-size:12px;font-weight:750}
+.cx-switch small{color:#a0b4a5;font-size:11px;font-weight:400;line-height:1.45}
+.cx-switch input{appearance:none;position:relative;width:42px;height:23px;flex:0 0 42px;border-radius:15px;border:1px solid #567262;background:#46574a;cursor:pointer}
+.cx-switch input:before{content:"";position:absolute;width:15px;height:15px;border-radius:50%;top:3px;left:3px;background:#f5fff8;transition:transform .15s}
+.cx-switch input:checked{background:#29965d;border-color:#57c48c}
+.cx-switch input:checked:before{transform:translateX(19px)}
+.cx-primary,.cx-secondary,.cx-danger,.cx-textbutton{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:36px;padding:8px 14px;border-radius:6px;border:1px solid #4c6953;cursor:pointer;font-size:12px;font-weight:800;text-decoration:none}
+.cx-primary{background:#39b878;border-color:#39b878;color:#0c2114}
+.cx-primary:hover{background:#5bd795}
+.cx-secondary{background:#283a2d;color:#d9f0df}
+.cx-secondary:hover{background:#334c39}
+.cx-danger{background:#3b2829;border-color:#694448;color:#ffd5d1}
+.cx-danger:hover{background:#573033}
+.cx-textbutton{background:transparent;border:0;color:#a6e8bc;padding:6px 3px}
+.cx-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.cx-card-list{display:grid;gap:10px}
+.cx-card{border:1px solid #395142;border-radius:8px;background:#18261c;padding:16px;min-width:0}
+.cx-card-head{display:flex;align-items:start;justify-content:space-between;gap:14px}
+.cx-card-title{font-size:14px;font-weight:800;color:#ecf7ef}
+.cx-card-subtitle{margin-top:5px;font-size:11px;line-height:1.5;color:#aac0b0;white-space:pre-wrap;overflow-wrap:anywhere}
+.cx-card-actions{display:flex;align-items:center;flex-wrap:wrap;gap:6px;flex:none}
+.cx-card-actions button{min-height:29px;padding:5px 9px;font-size:11px}
+.cx-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.cx-chip{display:inline-flex;align-items:center;gap:4px;border:1px solid #3f604a;border-radius:20px;background:#23382a;color:#c3efce;padding:5px 9px;font-size:10px;font-weight:750}
+.cx-chip.amber{border-color:#675c3c;background:#393321;color:#f3d791}
+.cx-pill{display:inline-flex;align-items:center;padding:5px 9px;border:1px solid #41644a;border-radius:15px;background:#24422f;color:#b2edc4;font-size:10px;font-weight:750}
+.cx-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.cx-kpi{border:1px solid #354a3b;background:#1c281f;border-radius:8px;padding:18px;display:grid;gap:7px}
+.cx-kpi span{color:#9fbaa8;font-size:11px;font-weight:750}
+.cx-kpi strong{font:800 25px Manrope,"Segoe UI",sans-serif}
+.cx-empty{border:1px dashed #496650;border-radius:8px;padding:37px 20px;text-align:center;color:#9fb2a5;font-size:12px;line-height:1.5}
+.cx-message-preview{white-space:pre-wrap;border:1px solid #324b39;border-radius:7px;background:#131a16;padding:17px;color:#dceee1;font-size:13px;line-height:1.6;overflow-wrap:anywhere}
+.cx-template-tools{padding-top:15px;border-top:1px solid #3c5442;margin:6px 0 0}
+.cx-template-tools h3{font:800 12px Manrope,"Segoe UI",sans-serif;margin:10px 0;color:#c9e9d2}
+.cx-variables{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.cx-variables button{border:1px solid #426749;background:#284333;border-radius:5px;padding:7px 10px;color:#b9f0c8;font-size:11px;cursor:pointer}
+.cx-variables button:hover{background:#345c40}
+.cx-embed-preview{border-left:3px solid #4dcb81;padding:9px 12px;margin:9px 0 0;background:#1b2d20;display:grid;gap:5px}
+.cx-embed-preview strong{font-size:13px;color:#f1fff5}
+.cx-embed-preview p{margin:0;font-size:12px;white-space:pre-wrap;color:#d6ebda}
+.cx-embed-preview small{font-size:10px;color:#9bc3a7}
+.cx-action-preview{display:inline-block;border:1px solid #4c7560;border-radius:5px;background:#284a34;color:#d4fae0;padding:7px 12px;margin:10px 0 0;font-size:11px}
+.cx-note{border-left:3px solid #4ebd7e;background:#1d3023;padding:12px 15px;color:#cbeed5;font-size:12px;line-height:1.65;border-radius:3px}
+.cx-table{width:100%;border-collapse:collapse;font-size:12px}
+.cx-table th{text-align:left;color:#94b49f;font-weight:800;border-bottom:1px solid #395041;padding:11px 10px}
+.cx-table td{color:#dce9df;border-bottom:1px solid #2f4033;padding:12px 10px}
+.cx-savebar{position:sticky;bottom:15px;z-index:3;margin-top:5px;border:1px solid #457352;border-radius:9px;background:#1c3827;box-shadow:0 14px 35px #0008;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.cx-savebar strong{font-size:12px;color:#deffe7}
+.cx-savebar[hidden],.cx-dialog [hidden]{display:none!important}
+.cx-dialog{width:min(640px,calc(100vw - 28px));max-height:calc(100vh - 35px);overflow-y:auto;padding:23px;border:1px solid #41664b;border-radius:11px;background:#1c2820;color:#f0f7f1;box-shadow:0 28px 80px #000a}
+.cx-dialog::backdrop{background:#030b05cd}
+.cx-dialog-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:19px}
+.cx-dialog-head h2{font:800 21px Manrope,"Segoe UI",sans-serif;margin:0}
+.cx-close{border:0;background:none;color:#d0e3d4;font-size:27px;cursor:pointer}
+.cx-dialog-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:13px}
+.cx-toast{position:fixed;z-index:50;bottom:24px;right:24px;border:1px solid #4ba068;border-radius:8px;background:#183d27;color:#e8ffee;box-shadow:0 10px 30px #0008;padding:13px 17px;font-size:12px}
+.cx-toast[hidden]{display:none}
+.cx-page :is(button,input,select,textarea):focus-visible,.cx-dialog :is(button,input,select,textarea):focus-visible{outline:2px solid #95efb6;outline-offset:2px}
+@media(max-width:960px){.cx-two{grid-template-columns:1fr}.cx-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){.cx-page{padding:18px 0 90px}.cx-pagehead h1{font-size:23px}.cx-page-icon{width:43px;height:43px;flex-basis:43px}.cx-section{padding:16px}.cx-card-head{flex-wrap:wrap}.cx-three,.cx-kpis{grid-template-columns:1fr}.cx-tabs button{flex:1 1 40%}.cx-savebar{flex-wrap:wrap}.cx-dialog{padding:16px}}
