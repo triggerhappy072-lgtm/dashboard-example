@@ -1,0 +1,88 @@
+.br-page{max-width:1150px;padding:20px 0 75px}
+.br-page :is(button,input,select,textarea){font-family:inherit}
+.br-heading{display:flex;gap:17px;align-items:center;margin-bottom:25px}
+.br-heading-icon{width:54px;height:54px;flex:0 0 54px;display:grid;place-items:center;border:1px solid #3b7955;border-radius:11px;background:#203c2b;color:#9be4b5}
+.br-heading-icon svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.br-heading h1{margin:0;color:#f0f3f1;font:800 30px/1.22 Manrope,"Segoe UI",sans-serif}
+.br-heading p{margin:5px 0 0;color:#a9b1ac;font-size:13px;line-height:1.5}
+.br-heading .br-eyebrow{margin:0 0 5px;color:#65d89b;font-size:10px;font-weight:800;letter-spacing:.1em}
+.br-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:0 0 16px}
+.br-stat{min-width:0;min-height:122px;display:flex;flex-direction:column;gap:6px;padding:19px 20px;border:1px solid #353f37;border-radius:9px;background:#1a201c}
+.br-stat-label{font-size:11px;font-weight:800;color:#94b29e;letter-spacing:.04em}
+.br-stat strong{font:800 22px/1.25 Manrope,"Segoe UI",sans-serif;color:#f3faf4;overflow-wrap:anywhere}
+.br-stat strong.br-ready{color:#86e8ad}
+.br-stat small{color:#9cafa0;font-size:11px;line-height:1.5}
+.br-columns{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(350px,.95fr);gap:15px;align-items:start}
+.br-column{display:grid;gap:15px;min-width:0}
+.br-panel{min-width:0;padding:22px;border:1px solid #354037;border-radius:9px;background:#1b201d}
+.br-panel-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:21px}
+.br-panel-header h2{margin:0;color:#f0f3f1;font:800 19px/1.3 Manrope,"Segoe UI",sans-serif}
+.br-panel-header p{margin:5px 0 0;color:#a6b8aa;line-height:1.5;font-size:12px}
+.br-tag{display:inline-flex;align-items:center;justify-content:center;flex:none;min-height:25px;padding:5px 9px;border-radius:15px;border:1px solid #43694e;background:#244331;color:#a6e4b7;font-size:10px;font-weight:800;white-space:nowrap}
+.br-tag.br-dirty{border-color:#705b31;background:#3c3423;color:#f0d195}
+.br-toggle{display:flex;justify-content:space-between;gap:15px;align-items:center;padding:15px;margin-bottom:22px;border:1px solid #405847;border-radius:7px;background:#192920;cursor:pointer}
+.br-toggle>span{display:grid;gap:6px;min-width:0}
+.br-toggle strong{font-size:13px;color:#e6f1e8}
+.br-toggle small{font-size:11px;color:#acc1b1}
+.br-toggle input{appearance:none;flex:0 0 43px;width:43px;height:24px;margin:0;border-radius:30px;border:1px solid #51665a;background:#3e5245;cursor:pointer;position:relative;transition:background .15s}
+.br-toggle input::before{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#f3faf4;transition:transform .15s}
+.br-toggle input:checked{background:#2fa96e;border-color:#52c98c}
+.br-toggle input:checked::before{transform:translateX(19px)}
+.br-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:14px;row-gap:2px}
+.br-field{display:flex;flex-direction:column;min-width:0;gap:8px;margin-bottom:17px}
+.br-field>span{color:#dfebe1;font-size:12px;font-weight:750}
+.br-field :is(input,select,textarea){min-width:0;width:100%;min-height:40px;padding:9px 11px;border:1px solid #46594b;border-radius:6px;background:#131b15;color:#eaf6ed;font-size:12px}
+.br-field :is(input,textarea)::placeholder{color:#809a88}
+.br-field select{cursor:pointer}
+.br-field textarea{min-height:120px;line-height:1.6;resize:vertical}
+.br-divider{height:1px;background:#38483c;margin:5px 0 21px}
+.br-section-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px}
+.br-section-heading h3{margin:0;font:800 15px Manrope,"Segoe UI",sans-serif}
+.br-character-count{font-size:11px;color:#93ab9b}
+.br-message-field{margin-bottom:10px}
+.br-variables{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:23px}
+.br-variables button{padding:7px 9px;border:1px solid #436e50;border-radius:5px;background:#203929;color:#b1ecc4;cursor:pointer;font-size:11px}
+.br-variables button:hover{background:#2b4e38}
+.br-form-actions,.br-cycle-actions{display:flex;align-items:center;flex-wrap:wrap;gap:9px}
+.br-form-actions #br-dirty-text{font-size:11px;color:#d9bd83;margin-left:auto}
+.br-primary,.br-secondary,.br-text-button{min-height:37px;display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid #526756;border-radius:6px;padding:8px 14px;cursor:pointer;font-size:12px;font-weight:800;text-align:center}
+.br-primary{background:#39b878;border-color:#39b878;color:#0c2315}
+.br-primary:hover{background:#57d696}
+.br-secondary{background:#2a362e;border-color:#4a6050;color:#e6f1e9}
+.br-secondary:hover{background:#354b3c}
+.br-text-button{background:transparent;border:none;min-height:28px;padding:3px 0;color:#a7d9b6;font-size:11px}
+.br-text-button:hover{text-decoration:underline;color:#d0ffe0}
+.br-discord{display:flex;gap:12px;padding:17px;border-radius:7px;border:1px solid #313b33;background:#141a16}
+.br-avatar{flex:0 0 38px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#27613f;color:#d3ffe3;font:800 12px Manrope,"Segoe UI",sans-serif}
+.br-discord-copy{flex:1;min-width:0}
+.br-discord-copy>strong{display:flex;align-items:center;gap:6px;color:#f5f8f6;font-size:13px}
+.br-discord-copy strong small{background:#5865f2;color:#fff;padding:2px 4px;border-radius:3px;font-size:9px}
+.br-discord-copy p{white-space:pre-wrap;overflow-wrap:anywhere;color:#dae5dd;font-size:12px;line-height:1.65;margin:8px 0 0}
+.br-cycle-meter{margin:2px 0 21px}
+.br-cycle-meter-label{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:11px;font-size:12px}
+.br-cycle-meter-label strong{color:#d3efdd;font-weight:800}
+.br-cycle-meter-label span{color:#8ce3aa;font-size:11px;font-weight:800}
+.br-track{height:9px;border-radius:15px;overflow:hidden;background:#101912;border:1px solid #3e5646}
+.br-track>span{display:block;width:0;height:100%;background:linear-gradient(90deg,#24874f,#4cd18a);transition:width .2s ease}
+.br-cycle-dates{display:flex;justify-content:space-between;gap:12px;margin-top:10px;color:#91a998;font-size:10px;line-height:1.5}
+.br-cycle-dates span:last-child{text-align:right}
+.br-cycle-actions{margin-bottom:0}
+#br-time-form{padding:17px;margin-top:16px;border:1px solid #3c5545;border-radius:7px;background:#18251c}
+#br-time-form .br-field{margin-bottom:5px}
+#br-time-form .br-form-actions{margin-top:14px}
+.br-history{list-style:none;padding:0;margin:0}
+.br-history li{display:flex;align-items:center;gap:12px;min-height:52px;padding:9px 0;color:#e5f1e7}
+.br-history li+li{border-top:1px solid #354338}
+.br-history .br-empty{justify-content:center;color:#9daea2;padding:28px 10px;font-size:12px;text-align:center;border:1px dashed #3d5544;border-radius:7px}
+.br-history-icon{width:30px;height:30px;flex:0 0 30px;border-radius:7px;background:#234b34;display:grid;place-items:center;color:#8ae0ab;font-weight:800}
+.br-history-copy{flex:1;min-width:0;display:grid;gap:4px}
+.br-history-copy strong{font-size:12px;font-weight:750}
+.br-history-copy small{font-size:11px;color:#94af9d}
+.br-history-remove{border:1px solid #53483e;border-radius:5px;background:#322a27;color:#eec5b9;padding:5px 9px;cursor:pointer;font-size:11px}
+.br-history-remove:hover{background:#51382e}
+.br-toast{position:fixed;right:26px;bottom:25px;z-index:50;background:#1e3829;border:1px solid #4d9d67;border-radius:8px;padding:13px 18px;color:#d7ffe3;box-shadow:0 15px 30px #0008;font-size:12px}
+.br-page [hidden]{display:none!important}
+.br-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.br-page :is(button,input,textarea,select):focus-visible{outline:2px solid #91e4b3;outline-offset:2px}
+@media(max-width:1050px){.br-columns{grid-template-columns:1fr}.br-page{padding-top:15px}}
+@media(max-width:700px){.br-heading h1{font-size:24px}.br-heading-icon{width:42px;height:42px;flex-basis:42px}.br-heading-icon svg{width:24px;height:24px}.br-stats{grid-template-columns:1fr;gap:9px}.br-stat{min-height:0;padding:14px 17px}.br-columns{gap:11px}.br-panel{padding:17px}.br-panel-header{flex-wrap:wrap}.br-form-grid{grid-template-columns:1fr}.br-cycle-dates{flex-wrap:wrap}.br-form-actions #br-dirty-text{margin:0;flex-basis:100%}}

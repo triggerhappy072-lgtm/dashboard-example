@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173c31">
+  <title>Bump Reminders | Next Step</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="bump-reminders.css?v=1">
+  <script src="script.js" defer></script>
+  <script src="bump-reminders.js?v=1" defer></script>
+</head>
+<body class="dashboard-page" data-feature-page="Bump Reminders">
+  <header class="topbar"><a class="brand" href="home.html" aria-label="Next Step home"><span class="brand-mark" aria-hidden="true">NS</span><span class="brand-name">Next Step</span></a><div class="account-area"><button class="account-button" id="account-button" type="button" aria-label="Select Discord account" aria-expanded="false" aria-controls="account-menu"><span class="account-avatar" aria-hidden="true">?</span><span>Select Discord account</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button><div class="account-menu" id="account-menu" hidden><p>No Discord account connected.</p><a href="index.html">Go to sign in</a></div></div></header>
+  <div class="app-layout">
+    <aside class="sidebar" aria-label="Dashboard navigation"><div class="sidebar-heading"><div><span class="eyebrow">CONTROL PANEL</span><h2>Workspace</h2></div></div><label class="search-box" for="feature-search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="m13.2 13.2 4 4"/></svg><input id="feature-search" type="search" placeholder="Search settings" autocomplete="off"><kbd>/</kbd></label><p class="search-hint">Search categories, tabs, and functions</p><nav class="feature-navigation" id="feature-navigation" aria-label="Features"></nav><div class="sidebar-footer"><span class="footer-dot"></span>Next Step control panel</div></aside>
+    <main class="main-content">
+      <section class="page-view br-page" id="br-page" aria-labelledby="br-title">
+        <div class="br-heading">
+          <div class="br-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 18V4m0 0-5 5m5-5 5 5M5 14v6h14v-6"/></svg></div>
+          <div><h1 id="br-title">Bump Reminders</h1><p>Keep your server's bump cycle on track.</p></div>
+        </div>
+        <div class="br-stats" aria-label="Bump reminder overview">
+          <div class="br-stat"><span class="br-stat-label">Reminders</span><strong id="br-status">Paused</strong><small id="br-status-detail">Turn on reminders to get started</small></div>
+          <div class="br-stat"><span class="br-stat-label">Next bump</span><strong id="br-next-time">Not recorded</strong><small id="br-next-detail">Record a bump to start tracking</small></div>
+          <div class="br-stat"><span class="br-stat-label">Bump activity</span><strong id="br-total">0</strong><small>Recorded bumps</small></div>
+        </div>
+        <div class="br-columns">
+          <div class="br-column">
+            <section class="br-panel" aria-labelledby="br-settings-title">
+              <div class="br-panel-header"><div><h2 id="br-settings-title">Reminder settings</h2><p>Choose where reminders appear and when they're due.</p></div><span class="br-tag" id="br-saved-label">Saved</span></div>
+              <form id="br-form" autocomplete="off">
+                <label class="br-toggle"><span><strong>Enable bump reminders</strong><small>Manage the server's reminder cycle</small></span><input type="checkbox" name="enabled" role="switch"></label>
+                <div class="br-form-grid">
+                  <label class="br-field"><span>Bump service</span><select name="service"><option value="DISBOARD">DISBOARD</option><option value="Discadia">Discadia</option><option value="Custom">Other service</option></select></label>
+                  <label class="br-field"><span>Bump command</span><input name="command" maxlength="80" placeholder="/bump" required></label>
+                  <label class="br-field"><span>Reminder channel</span><input name="channel" maxlength="100" placeholder="#bump" spellcheck="false"></label>
+                  <label class="br-field"><span>Mention role</span><input name="role" maxlength="100" placeholder="@bump-team (optional)" spellcheck="false"></label>
+                  <label class="br-field"><span>Cooldown</span><select name="interval"><option value="60">1 hour</option><option value="90">1 hour 30 minutes</option><option value="120">2 hours</option><option value="180">3 hours</option><option value="240">4 hours</option><option value="360">6 hours</option></select></label>
+                  <label class="br-field"><span>Reminder frequency</span><select name="mode"><option value="once">Once per bump</option><option value="repeat">Repeat until next bump</option></select></label>
+                  <label class="br-field" id="br-repeat-field" hidden><span>Repeat every</span><select name="repeatInterval"><option value="15">15 minutes</option><option value="30">30 minutes</option><option value="60">1 hour</option><option value="120">2 hours</option></select></label>
+                </div>
+                <div class="br-divider"></div>
+                <div class="br-section-heading"><h3>Reminder message</h3><span class="br-character-count" id="br-message-length">0 / 1500</span></div>
+                <label class="br-field br-message-field"><span class="br-sr-only">Reminder message</span><textarea name="message" rows="5" maxlength="1500" required spellcheck="true"></textarea></label>
+                <div class="br-variables" id="br-variables" aria-label="Insert message variables">
+                  <button type="button" data-br-variable="role">{role}</button><button type="button" data-br-variable="server">{server}</button><button type="button" data-br-variable="minutes">{minutes}</button><button type="button" data-br-variable="command">{command}</button><button type="button" data-br-variable="channel">{channel}</button>
+                </div>
+                <div class="br-form-actions"><button class="br-primary" type="submit" id="br-save">Save changes</button><button class="br-secondary" type="button" id="br-reset">Reset</button><span id="br-dirty-text" role="status" aria-live="polite"></span></div>
+              </form>
+            </section>
+          </div>
+          <div class="br-column">
+            <section class="br-panel" aria-labelledby="br-preview-title">
+              <div class="br-panel-header"><div><h2 id="br-preview-title">Message preview</h2><p id="br-preview-location">#bump</p></div><span class="br-tag">Live preview</span></div>
+              <div class="br-discord"><div class="br-avatar" aria-hidden="true">NS</div><div class="br-discord-copy"><strong>Next Step <small>BOT</small></strong><p id="br-preview-text" aria-live="polite"></p></div></div>
+            </section>
+            <section class="br-panel" aria-labelledby="br-cycle-title">
+              <div class="br-panel-header"><div><h2 id="br-cycle-title">Bump cycle</h2><p>Track when the next bump becomes available.</p></div></div>
+              <div class="br-cycle-meter"><div class="br-cycle-meter-label"><strong id="br-cycle-state">No bump recorded</strong><span id="br-cycle-percent">0%</span></div><div class="br-track" aria-hidden="true"><span id="br-progress"></span></div><div class="br-cycle-dates"><span id="br-cycle-start">Last bump —</span><span id="br-cycle-end">Next bump —</span></div></div>
+              <div class="br-cycle-actions"><button type="button" class="br-primary" id="br-record">Record bump now</button><button type="button" class="br-secondary" id="br-set-time">Choose a time</button></div>
+              <form id="br-time-form" hidden><label class="br-field"><span>Bump date and time</span><input type="datetime-local" id="br-bump-time" required></label><div class="br-form-actions"><button class="br-primary" type="submit">Record bump</button><button class="br-secondary" type="button" id="br-cancel-time">Cancel</button></div></form>
+            </section>
+            <section class="br-panel" aria-labelledby="br-history-title">
+              <div class="br-panel-header"><div><h2 id="br-history-title">Recent bumps</h2><p>Your latest recorded bump activity.</p></div><button class="br-text-button" id="br-clear-history" type="button" hidden>Clear history</button></div>
+              <ol class="br-history" id="br-history"><li class="br-empty">No bumps recorded yet.</li></ol>
+            </section>
+          </div>
+        </div>
+        <div id="br-toast" class="br-toast" role="status" aria-live="polite" hidden></div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
